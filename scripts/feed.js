@@ -74,17 +74,18 @@ function carrega_feed(){
         if(res.err){
             alert("Erro na busca do feed")
         }else{
+            console.log(res.ideias)
             let ideias = res.ideias.reverse()
-            let nm_ideia, ds_ideia, id_ideia, comentarios, curtidas, tecnologias, membros, idealizador
+            let nm_ideia, ds_ideia, id_ideia, qtcomentarios, curtidas, tecnologias, membros, idealizador
             let verificacao_interesse, id_icone_interesse_feed, id_icone_curtida_feed, id_texto_curtida_feed, id_texto_comentario_feed
             for(let i = 0; i < ideias.length; i++){
                 id_ideia = ideias[i].id_ideia
                 nm_ideia = ideias[i].nm_ideia
                 ds_ideia = ideias[i].ds_ideia
                 if(ideias[i].comentarios.length == []){
-                    comentarios = 0
+                    qtcomentarios = 0
                 }else{
-                    comentarios = ideias[i].comentarios[0].quantidade_comentario
+                    qtcomentarios = ideias[i].comentarios.length
                 }
                 
                 curtidas = ideias[i].curtidas.length
@@ -123,7 +124,7 @@ function carrega_feed(){
                 }
 
                 
-                content += "<h5>"+nm_ideia+"<label> - "+idealizador.nm_usuario+"</label></h5><div class='divider'></div><div class='divider'></div><br>"
+                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - "+idealizador.nm_usuario+"</label></h5><div class='divider'></div><div class='divider'></div><br>"
                 
                 for(let i2 = 0; i2 < tecnologias.length; i2++){
                     content += "<div class='chip'>"+tecnologias[i2].nm_tecnologia+"</div>"
@@ -151,25 +152,33 @@ function carrega_feed(){
                 id_texto_curtida_feed = "id_texto_curtida_feed" + id_ideia
                 if(teste_curtida == 0){
                     // nao curtiu
-                    content += "<i class='material-icons' id='"+id_icone_curtida_feed+"' onclick='curtir("+id_icone_curtida_feed+", "+id_texto_curtida_feed+", "+id_ideia+")' value='0' name='"+curtidas+"'>favorite</i><text id='"+id_texto_curtida_feed+"'>"+curtidas+"</text> &nbsp&nbsp&nbsp&nbsp<i class='material-icons'>mode_comment</i><text id='"+id_texto_comentario_feed+"'>"+comentarios+"</text></p>"
+                    content += "<i class='material-icons' id='"+id_icone_curtida_feed+"' onclick='curtir("+id_icone_curtida_feed+", "+id_texto_curtida_feed+", "+id_ideia+")' value='0' name='"+curtidas+"'>favorite</i><text id='"+id_texto_curtida_feed+"'>"+curtidas+"</text> &nbsp&nbsp&nbsp&nbsp<i class='material-icons'>mode_comment</i><text id='"+id_texto_comentario_feed+"'>"+qtcomentarios+"</text></p>"
                 }else{
                     // curtiu
-                    content += "<i class='material-icons red-text' id='"+id_icone_curtida_feed+"' onclick='curtir("+id_icone_curtida_feed+", "+id_texto_curtida_feed+", "+id_ideia+")' value='1' name='"+curtidas+"'>favorite</i><text id='"+id_texto_curtida_feed+"'>"+curtidas+"</text> &nbsp&nbsp&nbsp&nbsp<i class='material-icons'>mode_comment</i><text id='"+id_texto_comentario_feed+"'>"+comentarios+"</text></p>"
+                    content += "<i class='material-icons red-text' id='"+id_icone_curtida_feed+"' onclick='curtir("+id_icone_curtida_feed+", "+id_texto_curtida_feed+", "+id_ideia+")' value='1' name='"+curtidas+"'>favorite</i><text id='"+id_texto_curtida_feed+"'>"+curtidas+"</text> &nbsp&nbsp&nbsp&nbsp<i class='material-icons'>mode_comment</i><text id='"+id_texto_comentario_feed+"'>"+qtcomentarios+"</text></p>"
                 }
                 
                 let icone_comentario = "icone_comentario" + id_ideia
                 let id_comentario = "id_comentario_enviado" + id_ideia
                 content += "<div class='row' style='margin-bottom:-1%;padding:2%;border-radius:10px; background-color:#aec1df2d;'>"
                 content += "<h6>Comentários</h6>"
-                content += "<div style='line-height:110%;'>"
-                content += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
-                content += "<a style='font-family:'bree-serif';';>Nome do ser humano</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ipsum vehicula, gravida lacus ut, tincidunt turpis. Sed consectetur, dolor vitae vestibulum dapibus, leoturpis ornare risus, eget scelerisque arcu massa eget mauris</p></div>"
-                content += "<div class='divider'></div>"
-                content += "<div style='line-height:100%;'>"
-                content += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
-                content += "<a style='font-family:'bree-serif';'>Nome do ser humano</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ipsum vehicula, gravida lacus ut, tincidunt turpis. Sed consectetur, dolor vitae vestibulum dapibus, leoturpis ornare risus, eget scelerisque arcu massa eget mauris</p></div>"
-               content +="</div>"
-                content += "<div class='row' style='margin-top:-1%; margin-left:-2%;'><div class='input-field col s12' id='feed_comentario'><textarea id='"+id_comentario+"' class='materialize-textarea' onfocusout='mudaIcone2("+icone_comentario+")'  onfocus='mudaIcone1("+icone_comentario+")' ></textarea><label for='"+id_comentario+"'>Comente</label><i class='material-icons right icone_comentario' id='"+icone_comentario+"' onclick='envia_comentario("+id_comentario+", "+id_ideia+", "+id_texto_comentario_feed+")'>mode_comment</i></div></div>"
+                
+                let nm_id_comentario = "bloco_comentarios_ideia" + id_ideia
+                content += `<div  id="${nm_id_comentario}">`
+                ideias[i].comentarios.reverse()
+                for(let i2 = 1; i2 >= 0; i2--){
+                    if(ideias[i].comentarios[i2]){
+                        content += `<div style='line-height:110%;'>`
+                        content += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
+                        content += `<a style='font-family:'bree-serif';';>${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}</p></div>`
+                        content += "<div class='divider'></div>"
+                    }
+
+                    
+                }
+
+                content +="</div></div>"
+                content += "<div class='row' style='margin-top:-1%; margin-left:-2%;'><div class='input-field col s12' id='feed_comentario'><textarea id='"+id_comentario+"' class='materialize-textarea' onfocusout='mudaIcone2("+icone_comentario+")'  onfocus='mudaIcone1("+icone_comentario+")' ></textarea><label for='"+id_comentario+"'>Comente</label><i class='material-icons right icone_comentario' id='"+icone_comentario+"' onclick='envia_comentario("+id_comentario+", "+id_ideia+", "+id_texto_comentario_feed+", "+`${nm_id_comentario}`+")'>mode_comment</i></div></div>"
                 
                 content += "</div></div>"
                 $("#feed").append(content)

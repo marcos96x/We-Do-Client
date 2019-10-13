@@ -9,7 +9,8 @@
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
-    <script src="js/ideia_chat.js"></script>
+    <script src="scripts/ideia_chat.js"></script>
+    <script src="scripts/ideia.js"></script>
     <script>
 
     </script>
@@ -31,9 +32,9 @@
 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
-                        <a href="feed.html">                        <i class="material-icons">
-                            home
-                        </i></a>
+                        <a href="feed.html"> <i class="material-icons">
+                                home
+                            </i></a>
 
 
                     </li>
@@ -59,7 +60,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="collapsible.html">Sair</a>
+                        <a onclick="sair()">Sair</a>
                     </li>
 
 
@@ -74,18 +75,11 @@
 
                     <div class="col s4" id="search_tec">
                         <div class="input-field col s12">
-                            <select>
-                                <option value="" disabled selected>Pesquise por tecnologia</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                            <select multiple id='todas_tecnologias'>
+                                <option value="" disabled>Pesquise por tecnologia</option>
                             </select>
-
                         </div>
                     </div>
-
-
-
                     <div class="col s1">
                         <i class="material-icons">
                             search
@@ -184,7 +178,7 @@
                 </i>Ajuda</a>
         </li>
         <li>
-            <a href="collapsible.html">
+            <a onclick="sair()">
                 <i class="material-icons">
                     power_settings_new
                 </i>Sair</a>
@@ -333,24 +327,11 @@
                 style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                 <h5> Comentários</h5>
                 <div class="divider"></div>
-                <div style="line-height:100%;">
+                <div id="comentarios">
 
-                    <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                        <label>24 de dezembro de 2019</label>
-                        <br>
-                        <a style="font-family:'bree-serif';" ;>Nome do ser humano</a> Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Vestibulum vel ipsum
-                        vehicula, gravida lacus ut, tincidunt turpis. Sed consectetur, dolor vitae vestibulum dapibus,
-                        leo
-                        turpis ornare risus, eget scelerisque arcu massa eget mauris</p>
-                    <i class="material-icons red-text" id='exclui_coment' style='margin-left:96%; padding-top:-25%;'
-                        id="iconezinho">delete</i>
-
-
-
+    
                 </div>
-                <div class="divider"></div>
-
+                
 
             </div>
         </div>
@@ -383,35 +364,32 @@
         <div class="modal-content">
             <h4>Adicionar uma ideia</h4>
             <div class="row">
-                <form class="col s12" onchange="mostrar_interesses();">
+                <form class="col s12" id="alt_dados">
                     <div class="row">
                         <div class="input-field col s12 black-text">
-                            <input id="nm_ideia" type="text">
-                            <label for="nm_ideia">Titulo da ideia</label>
+                            <input id="titulo_ideia" type="text">
+                            <label for="titulo_ideia">Titulo da ideia</label>
                         </div>
                         <div class="input-field col s12">
                             <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
                             <label for="textarea2">Descrição da ideia</label>
                         </div>
-                        <div class="input-field col s12 m6 l12 " onchange="mostrar_interesses();">
+                        <div class="input-field col s12 m6 l12 ">
                             <select multiple id='todas_tecnologias'>
                                 <option value="" disabled>Adicione as tecnologias necessárias </option>
-                                <option name='interesses' value="1">Option 1</option>
-                                <option name='interesses' value="2">Option 2</option>
-                                <option name='interesses' value="3">Option 3</option>
                             </select>
 
                         </div>
-
-
                     </div>
 
-                    <div class=" col s12 m6 l12 center-align" id="lista_interesses">
+                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
 
                     </div>
             </div>
             <div class="row center">
-                <a class="btn">Prontinho</a>
+                <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                
+              <a class="btn modal-close" id="cancela">Cancela</a>
             </div>
             </form>
         </div>

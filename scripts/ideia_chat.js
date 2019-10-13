@@ -9,6 +9,7 @@ let id = localStorage.getItem("id_we_do")
 var tecnologias = []
 
 $(document).ready(function () {
+    abre_tecnologias_ideiaChat()
     /** conta carcateres da descrição da ideia em criação de ideia*/
     $('input#input_text, textarea#textarea2').characterCounter();
     /**esconde primeiramente o select de tecnologias em add tecnologias a ideia */
@@ -16,7 +17,7 @@ $(document).ready(function () {
     $("#enviar_nm_ideia").hide();
     $("#alterar_desc_ideia").hide()
     /**função que esconde opções qnd o usuario é simples */
-    var user = 0;
+    var user = 1;
     if (user == 0) {
         $("#edita_nome, #exclui_tec, #btn_add_tecnologia, #edita_desc,#excluir_part,#exclui_coment").show();
         console.log('valor1');
@@ -43,6 +44,27 @@ $(document).ready(function () {
 
 })
 
+function abre_tecnologias_ideiaChat(){
+    
+    $.ajax({
+        url: "http://localhost:3000/tecnologia",
+        type: "GET",
+        contentType: 'application/json'
+    }).done(function (res) {
+        let id_tecnologia, nm_tecnologia
+        let select_ideia = document.getElementsByTagName("ul")[8]
+        let select_tecnologias = document.getElementsByTagName("ul")[3]
+        for (let i = 0; i < res.tecnologias.length; i++) {
+            id_tecnologia = res.tecnologias[i].id_tecnologia
+            nm_tecnologia = "" + res.tecnologias[i].nm_tecnologia + ""
+            select_tecnologias.innerHTML += "<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='radio' name='tecnologias_pesquisa' value='" + id_tecnologia + "'  ><span onClick='seleciona_tecnologias_pesquisa("+ id_tecnologia + ", \""+nm_tecnologia+"\" )'>" + nm_tecnologia + "</span></label></span></li>"
+            select_ideia.innerHTML += "<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='checkbox'  ><span onClick='insere_tecnologias_criacao_ideia("+ id_tecnologia + ", \""+nm_tecnologia+"\" )'>" + nm_tecnologia + "</span></label></span></li>"
+            
+        }
+    })
+    
+}
+
 function mostra_ideia(id_ideia) {
     let url = "http://localhost:3000/ideia/" + id_ideia + "&" + id
     $.ajax({
@@ -55,8 +77,8 @@ function mostra_ideia(id_ideia) {
         } else {
             console.log(res)
             let nm_idealizador
-            for(let i = 0; i < res.ideia.membros.length; i++){
-                if(res.ideia.membros[i].idealizador == 1){
+            for (let i = 0; i < res.ideia.membros.length; i++) {
+                if (res.ideia.membros[i].idealizador == 1) {
                     nm_idealizador = res.ideia.membros[i].nm_usuario
                 }
             }
@@ -92,15 +114,13 @@ function mostra_ideia(id_ideia) {
             <div class='col s12'>
             `)
 
-            for(let i = 0; i < res.ideia.tecnologia.length; i++){
+            for (let i = 0; i < res.ideia.tecnologia.length; i++) {
                 $("#campo_ideia").append(`<div class='chip'>
                     ${res.ideia.tecnologia[i].nm_tecnologia}
                     <i class='close material-icons modal-trigger' id='exclui_tec${i}' href='#confirma_exclusao_ideia'>close</i>
                 </div>`)
             }
-            // KKKKP ARO AQ
 
-        
             $("#campo_ideia").append(`
                 
 
@@ -111,7 +131,7 @@ function mostra_ideia(id_ideia) {
                     <div class='col s11'>
                         <div class='input-field col s12 m6 l12 '>
 
-                            <select multiple>
+                            <select multiple id='tecnologias_select'>
                                 <option value='' disabled>Adicione as tecnologias necessárias </option>
                                 <option value='1'>Option 1</option>
                                 <option value='2'>Option 2</option>
@@ -138,9 +158,8 @@ function mostra_ideia(id_ideia) {
                     <a class='btn-floating waves-light  btn-small ' onclick='alt_desc_ideia()' value='0' id='edita_desc' style='margin-right:3% ;'>
                         <i class='material-icons white-text' id='iconezinho5' onclick='aparece_opcao_editar()' value='0'>edit</i>
                     </a>Descrição</h5>
-                <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
+                ${res.ideia.ds_ideia}
                 </blockquote>
 
                 <div id='alterar_desc_ideia'>
@@ -166,21 +185,62 @@ function mostra_ideia(id_ideia) {
 
         <h5>Integrantes</h5>
         <div class='divider'></div>
-        <h6>
 
-            <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->Nome do Participante
-            <a class='btn-floating red btn-small' id='excluir_part' style='margin-left:65.4%;'>
-                <i class='material-icons white-text'>clear</i>
-            </a>
-        </h6>
-        <blockquote style='font-family: Arial, Helvetica, sans-serif;text-align: justify;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard
-            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it tomake
-            a type specimen book.aaaaaaaaaaaa</blockquote>
-        <div class='divider'></div>`)
+
+
+        `)
+
+        // membros
+        for(let i = 0; i < res.ideia.membros.length; i++){
+            $("#campo_ideia").append(`
+            <h6>
+                <div class="row">
+                    <div class="col s12 m11 l11">
+                        <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
+                        ${res.ideia.membros[i].nm_usuario}
+                    </div>
+                    <div class="col s12 m1 l1">
+                        <a class='btn-floating red btn-small right' onclick="remove_usuario(${res.ideia.membros[i].id_usuario})" id='excluir_part' style='margin-left:65.4%;'>
+                            <i class='material-icons white-text'>clear</i>
+                        </a>
+                    </div>
+                </div>
+            </h6>
+
+
+            <div class='divider'></div>
+            
+            
+            
+            `)
+        }
+
+            // comentarios
+            for(let i = 0; i < res.ideia.comentarios.length; i++){
+                $("#comentarios").append(`
+                    <div style="line-height:100%;">
+
+                        <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                            <label>24 de dezembro de 2019</label>
+                            <br>
+                            <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
+                        <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
+                            id="iconezinho">delete</i>
+                    </div>
+                    <div class="divider"></div>
+                `)
+            }
         }
     })
 }
 
+function deleta_comentario(id_mensagem){
+    alert(id_mensagem)
+}
+
+function remove_usuario(id){
+    alert(id)
+}
 
 
 function mostra_chat(id_ideia) {
@@ -196,7 +256,7 @@ function mostra_chat(id_ideia) {
         contentType: "application/json"
     }).done(function (res) {
         if (res.err) {
-            alert("Erro na busca do char")
+            alert("Erro na busca do chat")
         } else {
             let mensagens = res.chat[0]
             console.log(mensagens)
@@ -284,9 +344,21 @@ document.addEventListener('DOMContentLoaded', function () {
     /**sidenav */
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems)
-    /**modal */
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
+    $('.modal').modal({
+
+        dismissible: false, // Modal cannot be closed by clicking anywhere outside
+
+    }
+
+    );
+
+
+
+    $("#cancela").click(function () {
+        /* Single line Reset function executes on click of Reset Button */
+        $("#alt_dados")[0].reset();
+        document.getElementById("lista_tecnologias").innerHTML = " "
+    });
     /**botão fixo add ideia --  mostra apenas no mobile */
     var elems = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(elems);
@@ -296,5 +368,12 @@ document.addEventListener('DOMContentLoaded', function () {
     /** colapsible do menu lateral - projetos atuais */
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
+        /**select */
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
 
 });
+function sair(){
+    localStorage.clear()
+    window.location.href = "index.html"
+}

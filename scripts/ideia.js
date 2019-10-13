@@ -1,4 +1,21 @@
 
+$(document).ready(()=>{
+
+})
+
+function cria_ideia(){
+    let nm_ideia = document.getElementById("titulo_ideia").value
+    let desc = $("#textarea2").val()
+    let tecnologias = []
+    for(let i = 0; i < tecnologias_insere_ideia.length; i+= 2){
+        tecnologias.push(tecnologias_insere_ideia[i])
+    }
+    /**
+     * Faltando apenas colocar a parte de inserir tags
+     */
+}
+
+
 function insere_tecnologias_criacao_ideia(id, nm) {   
     let verificador = 0
 
@@ -20,6 +37,6 @@ function insere_tecnologias_criacao_ideia(id, nm) {
         document.getElementById("lista_tecnologias").innerHTML += "<div class='chip' > " + tecnologias_insere_ideia[i] + " </div>";
         
 
-    }
-    
+    }    
 }
+
