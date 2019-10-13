@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="js/materialize.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Trends</title>
+</head>
+
+<body style='background-color: white; background-image: none;'>
+	<div class="navbar-fixed ">
+		<nav>
+			<div class="nav-wrapper container ">
+				<a href="#" data-target="slide-out" class="sidenav-trigger ">
+					<i class="material-icons">menu</i>
+				</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li>
+						<span class="new badge red white-text">4</span>
+						<a href="#!" class="dropdown-trigger" data-target="notifications">
+							<i class="material-icons">
+								notifications
+							</i>
+						</a>
+					</li>
+					<li>
+						<span class="new badge red white-text">4</span>
+						<a href="#!" class="dropdown-trigger" data-target="msgs">
+							<i class="material-icons">
+								chat_bubble
+							</i>
+						</a>
+					</li>
+					<li>
+						<a class="btn-floating waves-effect waves-light white modal-trigger" href="#add_ideia">
+							<i class="material-icons black-text">add</i>
+						</a>
+					</li>
+					<li>
+						<a href="collapsible.html">Sair</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<ul id="slide-out" class="sidenav ">
+		<li>
+			<div class="user-view ">
+				<div class="background">
+					<img src="img/fund.jpg">
+				</div>
+				<a href="#user">
+					<img class="circle" src="img/perfil.jpg">
+				</a>
+				<a href="#name">
+					<span class="name black-text">John Doe</span>
+				</a>
+				<a href="#email">
+					<span class=" email black-text">jdandturk@gmail.com</span>
+				</a>
+			</div>
+		</li>
+		<ul class="collapsible ">
+			<li>
+				<a href='#!'>
+					<i class="material-icons">code</i>
+					<div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
+					<div class="collapsible-body">
+						<a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<li>
+			<a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+				<i class="material-icons">
+					notifications
+				</i>Notificações
+				<span class="new badge red white-text">4</span>
+			</a>
+		</li>
+		<li>
+			<a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
+				<i class="material-icons">
+					chat_bubble
+				</i>Mensagens
+				<span class="new badge red white-text">4</span>
+			</a>
+		</li>
+		<li>
+			<a href="#!">
+				<i class="material-icons">
+					menu_book
+				</i>Portfólio</a>
+		</li>
+		<li>
+			<a class="waves-effect" href="#!">
+				<i class="material-icons">
+					emoji_events
+				</i>Trends</a>
+		</li>
+		<li>
+			<div class="divider"></div>
+		</li>
+		<li>
+			<a class="waves-effect" href="#!">
+				<i class="material-icons">
+					settings_applications
+				</i>Configurações</a>
+		</li>
+		<li>
+			<a class="waves-effect" href="#!">
+				<i class="material-icons">
+					help
+				</i>Ajuda</a>
+		</li>
+		<li>
+			<a href="collapsible.html">
+				<i class="material-icons">
+					power_settings_new
+				</i>Sair</a>
+		</li>
+	</ul>
+
+	<!--ESTRUTURA DAS NOTIFICAÇÕES e msgs-->
+
+	<ul id="notifications" class="dropdown-content ">
+
+		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+			<br>
+			<label>há 44min.</label>
+		</li>
+		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+			<br>
+			<label>há 44min.</label>
+		</li>
+
+	</ul>
+	</ul>
+	<ul id="notifications_menu_lateral" class="dropdown-content ">
+		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+			<br>
+			<label>há 44min.</label>
+		</li>
+		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+			<br>
+			<label>há 44min.</label>
+		</li>
+
+	</ul>
+	<ul id="msgs" class="dropdown-content">
+		<li>
+			<a href="#!" class="black-text">
+				<div class="row">
+					<div class="col s3">
+						<img class="circle" src="img/perfil.jpg" width="100%">
+					</div>
+
+					<div class="col s9">
+						Nome da pessoa
+						<br>
+						<label> mensagem lalala sçclçsçlsçfç;\..</label>
+						<label>25min.</label>
+					</div>
+
+				</div>
+			</a>
+
+		</li>
+	</ul>
+	<ul id="msgs_menu_lateral" class="dropdown-content">
+
+		<li>
+			<a href="#!" class="black-text">
+				<div class="row">
+					<div class="col s3">
+						<img class="circle" src="img/perfil.jpg" width="100%">
+					</div>
+
+					<div class="col s9">
+						Nome da pessoa
+						<br>
+						<label> mensagem lalala sçclçsçlsçfç;\..</label>
+						<label>25min.</label>
+					</div>
+
+				</div>
+			</a>
+
+		</li>
+	</ul>
+	<br>
+	<!-- Foi retirado o id = trends	-->
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m12 l12 z-depth-1" style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+				<h5># Trends</h5>
+				<div class="divider"></div>
+				<h6>Nome da ideia
+					<br>
+					<label> Nome do criador</label>
+					<br>
+					<br>
+					<div class="chip">C++</div>
+					<div class="chip">Ruby</div>
+					<div class="chip">Java</div>
+					<br>
+					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+						book. It has survived not only five centuries,</blockquote> 
+					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
+					<a class="btn" id="btnInterrese">Interesse</a>
+					<br>
+				</h6>
+				<div id="curtida-coment" class='left'>
+					<i class='material-icons'>favorite</i>3000
+					<i class="material-icons">
+						mode_comment
+					</i> 2.500
+				</div>&nbsp&nbsp &nbsp&nbsp
+				<br>
+				<br>
+				<div class='divider'></div>
+				<h6>Nome da ideia
+					<br>
+					<label> Nome do criador</label>
+					<br>
+					<br>
+					<div class="chip">C</div>
+					<div class="chip">Cobol</div>
+					<div class="chip">Arduino</div>
+					<br>
+					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+						book. It has survived not only five centuries,</blockquote> 
+					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
+					<a class="btn" id="btnInterrese">Interesse</a>
+					<br>
+				</h6>
+				<div id="curtida-coment" class='left'>
+					<i class='material-icons'>favorite</i>3000
+					<i class="material-icons">
+						mode_comment
+					</i> 2.500
+				</div>&nbsp&nbsp &nbsp&nbsp
+				<br>
+				<br>
+				<div class='divider'></div>
+				<h6>Nome da ideia
+					<br>
+					<label> Nome do criador</label>
+					<br>
+					<br>
+					<div class="chip">C++</div>
+					<div class="chip">Python</div>
+					<div class="chip">Ruby</div>
+					<br>
+					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+						book. It has survived not only five centuries,</blockquote> 
+					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
+					<a class="btn" id="btnInterrese">Interesse</a>
+					<br>
+
+				</h6>
+
+				<div id="curtida-coment" class='left'>
+					<i class='material-icons'>favorite</i>3000
+					<i class="material-icons">
+						mode_comment
+					</i> 2.500
+				</div>&nbsp&nbsp &nbsp&nbsp
+				<br>
+				<br>
+				<div class='divider'></div>
+				<div class='divider'></div>
+				<h6>Nome da ideia
+					<br>
+					<label> Nome do criador</label>
+					<br>
+					<br>
+					<div class="chip">C++</div>
+					<div class="chip">Python</div>
+					<div class="chip">Ruby</div>
+					<br>
+					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+						book. It has survived not only five centuries,</blockquote> 
+					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
+					<a class="btn" id="btnInterrese">Interesse</a>
+					<br>
+
+				</h6>
+
+				<div id="curtida-coment" class='left'>
+					<i class='material-icons'>favorite</i>3000
+					<i class="material-icons">
+						mode_comment
+					</i> 2.500
+				</div>&nbsp&nbsp &nbsp&nbsp
+				<br>
+				<br>
+				<div class='divider'></div>
+				<h6>Nome da ideia
+					<br>
+					<label> Nome do criador</label>
+					<br>
+					<br>
+					<div class="chip">C++</div>
+					<div class="chip">Python</div>
+					<div class="chip">Ruby</div>
+					<br>
+					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+						book. It has survived not only five centuries,</blockquote> 
+					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
+					<a class="btn" id="btnInterrese">Interesse</a>
+					<br>
+
+				</h6>
+
+				<div id="curtida-coment" class='left'>
+					<i class='material-icons'>favorite</i>3000
+					<i class="material-icons">
+						mode_comment
+					</i> 2.500
+				</div>&nbsp&nbsp &nbsp&nbsp
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body style='background-color: white; background-image: none;'>
+
+    <div class="navbar-fixed ">
+
+        <nav>
+
+            <div class="nav-wrapper container ">
+
+                <a href="#" data-target="slide-out" class="sidenav-trigger ">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                    <li>
+                        <span class="new badge red white-text">4</span>
+                        <a href="#!" class="dropdown-trigger" data-target="notifications">
+                            <i class="material-icons">
+                                notifications
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <span class="new badge red white-text">4</span>
+                        <a href="#!" class="dropdown-trigger" data-target="msgs">
+                            <i class="material-icons">
+                                chat_bubble
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-floating waves-effect waves-light white modal-trigger" href="#add_ideia">
+                            <i class="material-icons black-text">add</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="collapsible.html">Sair</a>
+                    </li>
+
+
+                </ul>
+                <div class="row" id="search_ideia">
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <input placeholder="Pesquisa por ideia" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="col s4" id="search_tec">
+                        <div class="input-field col s12">
+                            <select>
+                                <option value="" disabled selected>Pesquise por tecnologia</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col s1">
+                        <i class="material-icons">
+                            search
+                        </i>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    </nav>
+    </div>
+
+
+    <ul id="slide-out" class="sidenav ">
+        <li>
+            <div class="user-view ">
+                <div class="background">
+                    <img src="img/fund.jpg">
+                </div>
+                <a href="#user">
+                    <img class="circle" src="img/perfil.jpg">
+                </a>
+                <a href="#name">
+                    <span class="name black-text">John Doe</span>
+                </a>
+                <a href="#email">
+                    <span class=" email black-text">jdandturk@gmail.com</span>
+                </a>
+            </div>
+        </li>
+        <ul class="collapsible ">
+
+            <li>
+                <a href='#!'>
+                    <i class="material-icons">code</i>
+                    <div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
+
+                    <div class="collapsible-body">
+                        <a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+                    </div>
+
+
+                </a>
+            </li>
+
+        </ul>
+
+        <li>
+            <a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+                <i class="material-icons">
+                    notifications
+                </i>Notificações
+                <span class="new badge red white-text">4</span>
+            </a>
+        </li>
+        <li>
+            <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
+                <i class="material-icons">
+                    chat_bubble
+                </i>Mensagens
+                <span class="new badge red white-text">4</span>
+            </a>
+        </li>
+
+
+
+
+
+        <li>
+            <a href="#!">
+                <i class="material-icons">
+                    menu_book
+                </i>Portfólio</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">
+                    emoji_events
+                </i>Trends</a>
+        </li>
+
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">
+                    settings_applications
+                </i>Configurações</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">
+                    help
+                </i>Ajuda</a>
+        </li>
+        <li>
+            <a href="collapsible.html">
+                <i class="material-icons">
+                    power_settings_new
+                </i>Sair</a>
+        </li>
+    </ul>
+
+    <!--ESTRUTURA DAS NOTIFICAÇÕES e msgs-->
+
+    <ul id="notifications" class="dropdown-content ">
+
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+            <br>
+            <label>há 44min.</label>
+        </li>
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+            <br>
+            <label>há 44min.</label>
+        </li>
+
+    </ul>
+    </ul>
+    <ul id="notifications_menu_lateral" class="dropdown-content ">
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+            <br>
+            <label>há 44min.</label>
+        </li>
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+            <br>
+            <label>há 44min.</label>
+        </li>
+
+    </ul>
+    <ul id="msgs" class="dropdown-content">
+
+        <li>
+            <a href="#!" class="black-text">
+                <div class="row" style='margin-bottom: -1%;'>
+                    <div class="col s3">
+                        <!-- <img class="circle" src="img/perfil.jpg" width="100%"> -->
+                    </div>
+
+                    <div class="col s9">
+                        Nome do grupo
+                        <br>
+                        <label> mensagem lalala sçclçsçlsçfç;\..</label>
+                        <label>25min.</label>
+                    </div>
+
+                </div>
+            </a>
+
+        </li>
+    </ul>
+    <ul id="msgs_menu_lateral" class="dropdown-content">
+
+        <li>
+            <a href="#!" class="black-text">
+                <div class="row" style='margin-bottom: -1%;'>
+
+
+                    <div class="col s12">
+                        Nome do grupo
+                        <br>
+                        <label> mensagem lalala sçclçsçlsçfç;\..</label>
+                        <label>25min.</label>
+                    </div>
+
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <br>
+
+
+    <!--/////-->
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12 m8 l8">
+
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+                    <div class="col s2" style="margin-top: 2%;">
+
+                        <img src="img/perfil.jpg" width="100%" alt="" class="circle responsive-img">
+                    </div>
+
+                    <div class="col s10">
+                        <div class="row" style="margin-top: 2%;">
+                            <h5>Paula Cavalcante de Oliveira</h5>
+                        </div>
+                        <div class="row" style="margin-top: -3%;">
+                            <div class="chip">
+                                Java
+
+                            </div>
+                            <div class="chip">
+                                Java
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s11">
+                            <blockquote class='black-text'
+                                style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the
+                                industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                                galley of
+                                type and scrambled it to make a type specimen book. It has survived not only five
+                                centuries,</blockquote>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col s12 m6 l4">
+
+
+                <div class="col s12  z-depth-1  " id='trends'
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+                    <h5>
+                        # Trends</h5>
+
+                    <div class="divider"></div>
+
+                    <h6>Nome da ideia
+
+                        <a class="btn" id="btn_add_tecnologia2" onclick="mostra_interesse2()" value="1"
+                            style='margin-left:43%;'>
+                            <i class="material-icons white-text" id="iconezinho2"></i>Interesse</a>
+                        <br>
+
+                        <label> Nome do criador</label>
+
+                    </h6>
+
+
+
+
+                    <div id="curtida-coment" class='left'>
+                        <i class='material-icons'>favorite</i>3000
+                        <i class="material-icons">
+                            mode_comment
+                        </i> 2.500
+                    </div>&nbsp&nbsp &nbsp&nbsp
+
+                    <br>
+                    <br>
+                    <div class='divider'></div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col s8">
+                <ul class="collapsible collection with-header" id='projetos_atuais'>
+                    <li class="collection-header">
+                        <h5>
+                            <div class="material-icons">code</div> Projetos Atuais
+                        </h5>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">Nome da ideia</div>
+                        <div class="collapsible-body">
+
+                            <div class="chip">java</div>
+                            <div class="chip">java</div>
+                            <div class="chip">java</div>
+                            </a>
+                            <a class="btn" id="btn_add_tecnologia2" onclick="mostra_interesse2()" value="1"
+                            style='margin-left:63%;margin-right:-3%;'>
+                            <i class="material-icons white-text" id="iconezinho2"></i>Interesse</a>
+                            <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem
+                                Ipsum is simply
+                                dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                                and scrambled it
+                                to
+                                make a type specimen book. It has survived not only five centuries,</blockquote>
+
+                            <p>
+                                <labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3.
+                                <br>
+                                <div id="curtida-coment" class='left'>
+                                    <i class='material-icons'>favorite</i>3000
+                                    <i class="material-icons">
+                                        mode_comment
+                                    </i> 2.500
+                                </div>&nbsp&nbsp &nbsp&nbsp
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col s8">
+                <ul class="collapsible collection with-header" id='portfolio'>
+                    <li class="collection-header">
+                        <h5>
+                            <div class="material-icons">menu_book</div> Portfólio
+                        </h5>
+                    </li>
+                    <li>
+                        <div class="collapsible-header">Nome da ideia</div>
+                        <div class="collapsible-body">
+
+                            <div class="chip">java</div>
+                            <div class="chip">java</div>
+                            <div class="chip">java</div>
+                            </a>
+
+                            <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem
+                                Ipsum is simply
+                                dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                                and scrambled it
+                                to
+                                make a type specimen book. It has survived not only five centuries,</blockquote>
+
+                            <p>
+                                <labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3.
+                                <br>
+                                <div id="curtida-coment" class='left'>
+                                    <i class='material-icons'>favorite</i>3000
+                                    <i class="material-icons">
+                                        mode_comment
+                                    </i> 2.500
+                                </div>&nbsp&nbsp &nbsp&nbsp
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="add_ideia" class="modal">
+        <div class="modal-content">
+            <h4>Adicionar uma ideia</h4>
+            <div class="row">
+                <form class="col s12" onchange="mostrar_interesses();">
+                    <div class="row">
+                        <div class="input-field col s12 black-text">
+                            <input id="nm_ideia" type="text">
+                            <label for="nm_ideia">Titulo da ideia</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                            <label for="textarea2">Descrição da ideia</label>
+                        </div>
+                        <div class="input-field col s12 m6 l12 " onchange="mostrar_interesses();">
+                            <select multiple id='todas_tecnologias'>
+                                <option value="" disabled>Adicione as tecnologias necessárias </option>
+                                <option name='interesses' value="1">Option 1</option>
+                                <option name='interesses' value="2">Option 2</option>
+                                <option name='interesses' value="3">Option 3</option>
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class=" col s12 m6 l12 center-align" id="lista_interesses">
+
+                    </div>
+            </div>
+            <div class="row center">
+                <a class="btn">Prontinho</a>
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body style='background-color: white; background-image: none;'>
+
+
+
+
+    <!--/////-->
+    <div id="resultado_pesquisas">
+            <div class="container">
+
+                    <div class="row">
+                        <div class="col s12 m8 l8">
+            
+                            <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+            
+                                <h5>
+                                    <i class="material-icons">search</i> Resultados para "nome da pesquisa" </h5>
+                                <div class="divider"></div>
+                                <div class="row">
+                                    <div class="col s10">
+                                        <h6 class="modal-trigger" href="#mostrar_ideia">Nome da ideia</h6>
+                                    </div>
+                                    <div class="col s2" style="margin-top:1%;">
+                                        <a class="btn" id="btn_add_tecnologia2" onclick="mostra_interesse2()" value="1">
+                                            <i class="material-icons white-text" id="iconezinho2"></i>Interesse</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 " style="margin-top:-4%;">
+                                        <label> Nome do criador</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s9" style="margin-top:-3%;">
+                                        <div class="chip">java</div>
+                                        <div class="chip">java</div>
+                                        <div class="chip">java</div>
+                                    </div>
+                                    <div class="col s3" id="curtida-coment" style="margin-top:-3%; padding-left:8%  ">
+                                        <i class='material-icons'>favorite</i>3000
+                                        <i class="material-icons">mode_comment</i> 2.500
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mostrar_ideia" class="modal">
+                    <div class="modal-content">
+            
+                        <div class="row">
+                            <div class="col s10">
+                                <h6 class="modal-trigger" href="#mostrar_ideia">Nome da ideia</h6>
+                            </div>
+                            <div class="col s2" style="margin-top:1%;">
+                                <a class="btn" id="btn_add_tecnologia2" onclick="mostra_interesse2()" value="1">
+                                    <i class="material-icons white-text" id="iconezinho2"></i>Interesse</a>
+                            </div>
+                        </div>
+                        <div class="row" style='margin-bottom:0%;'>
+                            <div class="col s12 " style="margin-top:-4%;  ">
+                                <label> Nome do criador</label>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div class="col s9" style="margin-top:1%;">
+                                <div class="chip">java</div>
+                                <div class="chip">java</div>
+                                <div class="chip">java</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12" style="margin-top:-3%;">
+            
+                                <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+                                    it to make a type specimen book. It has survived not only five centuries,</blockquote>
+                            </div>
+                        </div>
+                        <div class="row" style='margin-top: -15%;'>
+                            <div class="col s12">
+                                <labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3.
+                            </div>
+                        </div>
+                        <div class="row">
+            
+                            <div class="col s12" id="curtida-coment" style="margin-top:-1%;  ">
+                                <i class='material-icons'>favorite</i>3000
+                                <i class="material-icons">mode_comment</i> 2.500
+                            </div>
+                        </div>
+                    </div>
+            
+            
+                </div>
+    </div>
+    
+</body>
+
+</html>

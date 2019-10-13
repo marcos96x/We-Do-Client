@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script src="js/ideia_chat.js"></script>
+    <script>
+
+    </script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body style='background-color: white; background-image: none;'>
+
+    <div class="navbar-fixed ">
+
+        <nav>
+
+            <div class="nav-wrapper container ">
+
+                <a href="#" data-target="slide-out" class="sidenav-trigger ">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a href="feed.html">                        <i class="material-icons">
+                            home
+                        </i></a>
+
+
+                    </li>
+                    <li>
+                        <span class="new badge red white-text">4</span>
+                        <a href="#!" class="dropdown-trigger" data-target="notifications">
+                            <i class="material-icons">
+                                notifications
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <span class="new badge red white-text">4</span>
+                        <a href="#!" class="dropdown-trigger" data-target="msgs">
+                            <i class="material-icons">
+                                chat_bubble
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn-floating waves-effect waves-light white modal-trigger" href="#add_ideia">
+                            <i class="material-icons black-text">add</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="collapsible.html">Sair</a>
+                    </li>
+
+
+                </ul>
+                <div class="row" id="search_ideia">
+                    <div class="col s4">
+
+                        <div class="input-field col s12">
+                            <input placeholder="Pesquisa por ideia" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="col s4" id="search_tec">
+                        <div class="input-field col s12">
+                            <select>
+                                <option value="" disabled selected>Pesquise por tecnologia</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col s1">
+                        <i class="material-icons">
+                            search
+                        </i>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    </nav>
+    </div>
+
+
+    <ul id="slide-out" class="sidenav ">
+        <li>
+            <div class="user-view ">
+                <div class="background">
+                    <img src="img/fund.jpg">
+                </div>
+                <a href="#user">
+                    <img class="circle" src="img/perfil.jpg">
+                </a>
+                <a href="#name">
+                    <span class="name black-text">John Doe</span>
+                </a>
+                <a href="#email">
+                    <span class=" email black-text">jdandturk@gmail.com</span>
+                </a>
+            </div>
+        </li>
+        <ul class="collapsible ">
+
+            <li>
+                <a href='#!'>
+                    <i class="material-icons">code</i>
+                    <div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
+
+                    <div class="collapsible-body">
+                        <a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+                    </div>
+
+
+                </a>
+            </li>
+
+        </ul>
+
+        <li>
+            <a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+                <i class="material-icons">
+                    notifications
+                </i>Notificações
+                <span class="new badge red white-text">4</span>
+            </a>
+        </li>
+        <li>
+            <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
+                <i class="material-icons">
+                    chat_bubble
+                </i>Mensagens
+                <span class="new badge red white-text">4</span>
+            </a>
+        </li>
+
+
+
+
+
+        <li>
+            <a href="#!">
+                <i class="material-icons">
+                    menu_book
+                </i>Portfólio</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">
+                    emoji_events
+                </i>Trends</a>
+        </li>
+
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">
+                    settings_applications
+                </i>Configurações</a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">
+                    help
+                </i>Ajuda</a>
+        </li>
+        <li>
+            <a href="collapsible.html">
+                <i class="material-icons">
+                    power_settings_new
+                </i>Sair</a>
+        </li>
+    </ul>
+
+    <!--ESTRUTURA DAS NOTIFICAÇÕES e msgs-->
+
+    <ul id="notifications" class="dropdown-content ">
+
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+            <br>
+            <label>há 44min.</label>
+        </li>
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+            <br>
+            <label>há 44min.</label>
+        </li>
+
+    </ul>
+    </ul>
+    <ul id="notifications_menu_lateral" class="dropdown-content ">
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+            <br>
+            <label>há 44min.</label>
+        </li>
+        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+            <br>
+            <label>há 44min.</label>
+        </li>
+
+    </ul>
+    <ul id="msgs" class="dropdown-content">
+
+        <li>
+            <a href="#!" class="black-text">
+                <div class="row" style='margin-bottom: -1%;'>
+                    <div class="col s3">
+                        <!-- <img class="circle" src="img/perfil.jpg" width="100%"> -->
+                    </div>
+
+                    <div class="col s9">
+                        Nome do grupo
+                        <br>
+                        <label> mensagem lalala sçclçsçlsçfç;\..</label>
+                        <label>25min.</label>
+                    </div>
+
+                </div>
+            </a>
+
+        </li>
+    </ul>
+    <ul id="msgs_menu_lateral" class="dropdown-content">
+
+        <li>
+            <a href="#!" class="black-text">
+                <div class="row" style='margin-bottom: -1%;'>
+
+
+                    <div class="col s12">
+                        Nome do grupo
+                        <br>
+                        <label> mensagem lalala sçclçsçlsçfç;\..</label>
+                        <label>25min.</label>
+                    </div>
+
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <br>
+
+
+    <!--/////-->
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l6  z-depth-1"
+                style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;"
+                id="campo_ideia">
+
+                <!-- <img class="circle" src="img/perfil.jpg" width="10%" align='center' style='margin-right:3%'> -->
+
+                <!-- <label style="margin-left:10% ;" >
+                        <i class='material-icons'>favorite</i>3000 &nbsp&nbsp &nbsp&nbsp
+                        <i class="material-icons">mode_comment</i> 2.500</label>
+                </h5>
+             -->
+
+
+
+
+
+
+            </div>
+
+
+
+            <div class="col s12 m12 l6" style='position: fixed;width: 40%;margin-left: 43%;'>
+                <div class="col s12 m12 l12  z-depth-1"
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
+                    <div class="row z-depth-1">
+                        <div class="col s12 white-text" style="background-color: #404f65;">
+                            <h6>Nome da ideia</h6>
+                            <label style="margin-top:0%;">Com Javã, Gabriel e +3.</label>
+                        </div>
+                    </div>
+
+
+                    <!--  ISSO AQUI NAO FAZ PARTE DO SISTEMA  -->
+                    <div id="chat">
+
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col s11 chat"
+                                style='padding-left:5%;padding-right:5%;padding-top:-5%;border-color:rgb(209, 203, 203);border-style: solid; border-width: 1px; border-radius:30px ;'>
+
+                                <input id="msg" type="text">
+
+                            </div>
+                            <div class="col s1" style='margin-top:1%' ;>
+                                <button class="btn btn-floating">
+                                    <i class="material-icons">
+                                        send
+                                    </i>
+                                </button>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l6  z-depth-1"
+                style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
+                <h5> Comentários</h5>
+                <div class="divider"></div>
+                <div style="line-height:100%;">
+
+                    <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                        <label>24 de dezembro de 2019</label>
+                        <br>
+                        <a style="font-family:'bree-serif';" ;>Nome do ser humano</a> Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit. Vestibulum vel ipsum
+                        vehicula, gravida lacus ut, tincidunt turpis. Sed consectetur, dolor vitae vestibulum dapibus,
+                        leo
+                        turpis ornare risus, eget scelerisque arcu massa eget mauris</p>
+                    <i class="material-icons red-text" id='exclui_coment' style='margin-left:96%; padding-top:-25%;'
+                        id="iconezinho">delete</i>
+
+
+
+                </div>
+                <div class="divider"></div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Structure -->
+    <div class="row">
+        <div class="col s12 m12 l4 ">
+            <div id="confirma_exclusao_ideia" class="modal">
+                <div class="modal-content">
+                    <h4>Confirma exclusão?</h4>
+                    <p>Você está excluindo uma tecnologia da sua ideia. Tenha certeza que seus colaboradores sabem
+                        disso.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" style='margin-right: 25%;'
+                        class="modal-close waves-effect waves-green btn-flat green white-text">Sim</a>
+                    <a href="ideia_chat.html" style='margin-right: 25%;'
+                        class="modal-close waves-effect waves-green btn-flat red white-text">Não</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="add_ideia" class="modal">
+        <div class="modal-content">
+            <h4>Adicionar uma ideia</h4>
+            <div class="row">
+                <form class="col s12" onchange="mostrar_interesses();">
+                    <div class="row">
+                        <div class="input-field col s12 black-text">
+                            <input id="nm_ideia" type="text">
+                            <label for="nm_ideia">Titulo da ideia</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                            <label for="textarea2">Descrição da ideia</label>
+                        </div>
+                        <div class="input-field col s12 m6 l12 " onchange="mostrar_interesses();">
+                            <select multiple id='todas_tecnologias'>
+                                <option value="" disabled>Adicione as tecnologias necessárias </option>
+                                <option name='interesses' value="1">Option 1</option>
+                                <option name='interesses' value="2">Option 2</option>
+                                <option name='interesses' value="3">Option 3</option>
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class=" col s12 m6 l12 center-align" id="lista_interesses">
+
+                    </div>
+            </div>
+            <div class="row center">
+                <a class="btn">Prontinho</a>
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    </div>
+</body>
+
+</html>
