@@ -21,6 +21,7 @@ function determina_visualizacao(tipo_usuario){
 
 }
 
+
 $(document).ready(function () {
     abre_tecnologias_ideiaChat()
     /** conta carcateres da descrição da ideia em criação de ideia*/
@@ -94,8 +95,9 @@ function mostra_ideia(id_ideia) {
             }
 
             $("#campo_ideia").append(` 
-        <div class='col s1'  style='margin-top:5%; margin-right:-3%; '>
 
+        <div class='col s1'  style='margin-top:5%; margin-right:-3%; '>
+            
             <a class='btn-floating waves-light  btn-small' id='edita_nome' onclick='edita_nome_ideia()' style='margin-right:2%; '>
                 <i class='material-icons white-text' value='1'  id='iconezinho4'>edit</i>
             </a>
@@ -181,17 +183,35 @@ function mostra_ideia(id_ideia) {
 
         // membros
         for(let i = 0; i < res.ideia.membros.length; i++){
-            $("#campo_ideia").append(`
+            if(res.ideia.membros[i].id_usuario != id){
+                $("#campo_ideia").append(`
+                <h6>
+                    <div class="row">
+                        <div class="col s12 m11 l11">
+                            <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
+                            ${res.ideia.membros[i].nm_usuario}
+                        </div>
+                        <div class="col s12 m1 l1">
+                            <a class='btn-floating red btn-small right' onclick="remove_usuario(${res.ideia.membros[i].id_usuario})" id='excluir_part' style='margin-left:65.4%;'>
+                                <i class='material-icons white-text'>clear</i>
+                            </a>
+                        </div>
+                    </div>
+                </h6>
+    
+    
+                <div class='divider'></div>
+                
+                
+                
+                `)
+            }else{
+                $("#campo_ideia").append(`
             <h6>
                 <div class="row">
                     <div class="col s12 m11 l11">
                         <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
                         ${res.ideia.membros[i].nm_usuario}
-                    </div>
-                    <div class="col s12 m1 l1">
-                        <a class='btn-floating red btn-small right' onclick="remove_usuario(${res.ideia.membros[i].id_usuario})" id='excluir_part' style='margin-left:65.4%;'>
-                            <i class='material-icons white-text'>clear</i>
-                        </a>
                     </div>
                 </div>
             </h6>
@@ -202,6 +222,8 @@ function mostra_ideia(id_ideia) {
             
             
             `)
+            }
+            
         }
 
             // comentarios

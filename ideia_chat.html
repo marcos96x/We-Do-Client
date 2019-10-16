@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/materialize.js"></script>
     <script src="scripts/ideia_chat.js"></script>
     <script src="scripts/ideia.js"></script>
+    <script src="scripts/buscas.js"></script>
     <script>
 
     </script>
@@ -73,7 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="col s4" id="search_tec">
+                    <div class="col s3" id="search_tec">
                         <div class="input-field col s12">
                             <select multiple id='todas_tecnologias'>
                                 <option value="" disabled>Pesquise por tecnologia</option>
@@ -81,9 +82,9 @@
                         </div>
                     </div>
                     <div class="col s1">
-                        <i class="material-icons">
-                            search
-                        </i>
+                            <button class="btn_pesquisa" onclick="pesquisa_ideias()">
+                              <i class="material-icons white-text">search </i>
+                            </button>
                     </div>
                 </div>
 
