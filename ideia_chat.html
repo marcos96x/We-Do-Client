@@ -329,9 +329,9 @@
                 <div class="divider"></div>
                 <div id="comentarios">
 
-    
+
                 </div>
-                
+
 
             </div>
         </div>
@@ -348,56 +348,86 @@
                         disso.
                     </p>
                 </div>
-                <div class="modal-footer">
-                    <a href="#!" style='margin-right: 25%;'
-                        class="modal-close waves-effect waves-green btn-flat green white-text">Sim</a>
-                    <a href="ideia_chat.html" style='margin-right: 25%;'
-                        class="modal-close waves-effect waves-green btn-flat red white-text">Não</a>
+                <div class="modal-footer" id="estrutura_deleta_tecnologia">
+
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- Modal Structure -->
-    <div id="add_ideia" class="modal">
+    <!-- Modal Structure de adicionar tecnologia-->
+    <div id="add_tecnologia_ideia" class="modal">
         <div class="modal-content">
-            <h4>Adicionar uma ideia</h4>
+            <h4>Adicione uma tecnologia à sua ideia!</h4>
             <div class="row">
-                <form class="col s12" id="alt_dados">
+                <form class="col s12" id="form_add_tecnologia">
                     <div class="row">
-                        <div class="input-field col s12 black-text">
-                            <input id="titulo_ideia" type="text">
-                            <label for="titulo_ideia">Titulo da ideia</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
-                            <label for="textarea2">Descrição da ideia</label>
-                        </div>
                         <div class="input-field col s12 m6 l12 ">
-                            <select multiple id='todas_tecnologias'>
+                            <select>
                                 <option value="" disabled>Adicione as tecnologias necessárias </option>
                             </select>
 
                         </div>
                     </div>
 
-                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias_add">
 
                     </div>
+
+                </form>
             </div>
-            <div class="row center">
-                <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
-                
-              <a class="btn modal-close" id="cancela">Cancela</a>
+            <br><br><br><br><br>
+            <div class="row center-align">
+                <a class="btn modal-close" onclick="adiciona_tecnologia_na_ideia()">Adicionar</a>
+
+                <a class="btn modal-close" id="cancela_tecnologia">cancelar</a>
             </div>
-            </form>
         </div>
-
     </div>
 
 
-    </div>
+
+
+        <!-- Modal Structure de ADICIONAR UMA IDEIA-->
+        <div id="add_ideia" class="modal">
+            <div class="modal-content">
+              <h4>Adicionar uma ideia</h4>
+              <div class="row">
+                <form class="col s12" id="alt_dados">
+                  <div class="row">
+                    <div class="input-field col s12 black-text">
+                      <input id="titulo_ideia" type="text">
+                      <label for="titulo_ideia">Titulo da ideia</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                      <label for="textarea2">Descrição da ideia</label>
+                    </div>
+                    <div class="input-field col s12 m6 l12 ">
+                      <select multiple id='tecnologias_select'>
+                        <option value="" disabled>Adicione as tecnologias necessárias </option>
+                      </select>
+      
+                    </div>
+      
+      
+                  </div>
+      
+                  <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+      
+                  </div>
+                  <div class="row center">
+                    <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                    <a class="btn modal-close" id="cancela">Cancela</a>
+                  </div>
+                </form>
+              </div>
+      
+            </div>
+      
+      
+          </div>
 </body>
 
 </html>
