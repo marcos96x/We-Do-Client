@@ -1,8 +1,4 @@
 
-$(document).ready(()=>{
-
-})
-
 function cria_ideia(){
     let nm_ideia = document.getElementById("titulo_ideia").value
     let desc = $("#textarea2").val()
@@ -125,6 +121,37 @@ function altera_dados_ideia(dado){
             M.toast({html: "Campo da nova descrição vazio!"})
         }else{
             alert("Altera descricao - " + ds_ideia_original + " Para: " + $("#desc_ideiaa").val())
+
+            let url = "http://localhost:3000/ideia"
+            
+            $.ajax({
+                url: url,
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "ideia": {
+                        "id_ideia": id_ideia_original,
+                        "nm_ideia": nm_ideia_original,
+                        "ds_ideia": $("#desc_ideiaa").val(),
+                        "status_ideia": status_ideia_original
+                    },
+                    "usuario": {
+                        "id_usuario": id
+                    }
+                })
+            }).done((res) => {
+                if(res.err){
+                    M.toast({html: res.err})
+                    return false
+                }else{
+                    if(res.msg == "OK"){
+                        window.location.reload()
+                    }else{
+                        M.toast({html: res.msg})
+                        return false
+                    }
+                }
+            })
         }
     }else if (dado == "CO"){
         // muda o status para concluída

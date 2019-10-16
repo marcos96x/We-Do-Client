@@ -17,6 +17,8 @@ function determina_visualizacao(tipo_usuario){
     // se tipo == 0, usuario comum, visitante
     // se tipo == 1, membro da ideia
     // se tipo == 2, idealizador
+
+
 }
 
 $(document).ready(function () {
@@ -24,6 +26,8 @@ $(document).ready(function () {
     /** conta carcateres da descrição da ideia em criação de ideia*/
     $('input#input_text, textarea#textarea2').characterCounter();
 
+
+    
     // verifica o id d a ideia passado no parametro
     var objDiv = document.getElementById("chat");
     objDiv.scrollTop = objDiv.scrollHeight;
@@ -89,10 +93,11 @@ function mostra_ideia(id_ideia) {
                 }
             }
 
-            $("#campo_ideia").append(` <div class='col s1' style='margin-top:5%; margin-right:-3%; '>
+            $("#campo_ideia").append(` 
+        <div class='col s1'  style='margin-top:5%; margin-right:-3%; '>
 
             <a class='btn-floating waves-light  btn-small' id='edita_nome' onclick='edita_nome_ideia()' style='margin-right:2%; '>
-                <i class='material-icons white-text' value='1' id='iconezinho4'>edit</i>
+                <i class='material-icons white-text' value='1'  id='iconezinho4'>edit</i>
             </a>
         </div>
         <div class='col s10'>
@@ -103,8 +108,8 @@ function mostra_ideia(id_ideia) {
             </div>
 
         </div>
-        <div class='col s1' style='margin-top:5%; margin-right:-3%;' id='enviar_nm_ideia'>
-            <a class='btn-floating btn-small' onclick="altera_dados_ideia('TI')">
+        <div class='col s1' style='margin-top:5%; margin-right:-3%;'hidden id='enviar_nm_ideia'>
+            <a class='btn-floating btn-small' id="btn_de_mudar_ideia" onclick="altera_dados_ideia('TI')">
                 <i class='material-icons'>send</i>
             </a>
         </div>
@@ -146,7 +151,7 @@ function mostra_ideia(id_ideia) {
                 ${res.ideia.ds_ideia}
                 </blockquote>
 
-                <div id='alterar_desc_ideia'>
+                <div id='alterar_desc_ideia' hidden>
                     <div class='col s12 m11 l11'>
                         <div class='input-field col s11'>
                             <textarea id='desc_ideiaa' class='materialize-textarea' data-length='500'></textarea>
@@ -298,19 +303,19 @@ function mostra_chat(id_ideia) {
 
 
 
-/*
+
 function aparece_opcao_editar() {
     if ($("#iconezinho5").attr("value") == 1) {
-        $("#alterar_desc_ideia").hide()
+        $("#alterar_desc_ideia").slideToggle()
         $("#iconezinho5").attr("value", "0")
     } else {
-        $("#alterar_desc_ideia").show()
+        $("#alterar_desc_ideia").slideDown()
         $("#iconezinho5").attr("value", "1")
     }
 
 
 }
-*/
+
 
 /** mostra o select de tecnologias qnd o criador clica no botao '+' transforma o botao em 'x' e vice-versa
 function mostra_tecnologias() {
@@ -337,14 +342,14 @@ function edita_nome_ideia() {
         $("#iconezinho4").attr('value', 0)
         $("#iconezinho4").html("close")
         $("#nm_ideia").attr('disabled', false)
-        $("#enviar_nm_ideia").show()
+        $("#enviar_nm_ideia").fadeIn()
     } else {
         $("#nm_ideia").attr('disabled', true)
         $("#iconezinho4").attr('value', 1)
         $("#iconezinho4").html("edit")
         $("#label_projeto").attr("class", " ")
         $("#nm_ideia").val(" ")
-        $("#enviar_nm_ideia").hide()
+        $("#enviar_nm_ideia").fadeOut()
     }
 }
 
