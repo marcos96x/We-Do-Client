@@ -20,7 +20,7 @@ function projetos_atuais(){
                 $("#projetos_atuais_lateral").append(`<a class='black-text' style='padding-left:10%;' href="ideia_chat.html?ideia=${res.ideias[i].id_ideia}">${res.ideias[i].nm_ideia}</a><br>`)
 
                $("#projetos_atuais").append(`<li class="collection-item tooltipped" data-position="top">
-               <div>${res.ideias[i].nm_ideia}
+               <div><a style="color: #404f65;" href="ideia_chat.html?ideia=${res.ideias[i].id_ideia}">${res.ideias[i].nm_ideia}</a>
                  <a href="ideia_chat.html?ideia=${res.ideias[i].id_ideia}" class="secondary-content">
                    <i class="material-icons black-text">arrow_forward_ios</i>
                  </a>
