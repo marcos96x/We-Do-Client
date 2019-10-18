@@ -38,6 +38,9 @@ function adiciona_tecnologia_na_ideia(){
                 "ideia": {
                     "id_ideia": id_ideia_pagina
                 },
+                "usuario": {
+                    "id_usuario": id
+                },
                 "tecnologia": {
                     "id_tecnologia": arrayDadosTecnologia[0]    
                 }
@@ -46,6 +49,10 @@ function adiciona_tecnologia_na_ideia(){
             if(res.err){
                 alert(res.err)
             }else{
+                if(res.msg){
+                    M.toast({html: res.msg})
+                    return false
+                }
                 window.location.reload()
             }
         })
