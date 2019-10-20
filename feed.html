@@ -71,23 +71,24 @@
 
         </ul>
         <div class="row" id="search_ideia">
-            <div class="col s4">
-              <div class="input-field col s12">
-                <input id="texto_pesquisa" placeholder="Pesquisa por ideia" type="text" class="validate" on="pesquisa_ideias()">
-              </div>
+          <div class="col s4">
+            <div class="input-field col s12">
+              <input id="texto_pesquisa" placeholder="Pesquisa por ideia" type="text" class="validate"
+                on="pesquisa_ideias()">
             </div>
-            <div class="col s4" id="search_tec">
-              <div class="input-field col s12">
-                <select multiple id='todas_tecnologias'>
-                  <option value="" disabled selected>Pesquise por tecnologia</option>
-                </select>
-              </div>
+          </div>
+          <div class="col s4" id="search_tec">
+            <div class="input-field col s12">
+              <select multiple id='todas_tecnologias'>
+                <option value="" disabled selected>Pesquise por tecnologia</option>
+              </select>
             </div>
-            <div class="col s1">
-              <button class="btn_pesquisa" onclick="pesquisa_ideias()">
-                <i class="material-icons white-text">search </i>
-              </button>
-            </div>
+          </div>
+          <div class="col s1">
+            <button class="btn_pesquisa" onclick="pesquisa_ideias()">
+              <i class="material-icons white-text">search </i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -263,7 +264,8 @@
 
       <!--coluna feed + ideias-->
       <div class="col s12 m12 l8">
-        <div id="div_adicionar_ideia" class="col s12 m6 l12 z-depth-1 add_ideia" style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;  ">
+        <div id="div_adicionar_ideia" class="col s12 m6 l12 z-depth-1 add_ideia"
+          style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;  ">
 
           <h5 style="color:darkgray;"> &nbsp
             <a class="btn-floating modal-trigger" href="#add_ideia">
@@ -294,7 +296,8 @@
 
 
         <!--coluna trends -->
-        <div class="col s12 m6 l4 z-depth-1  " id='trends' style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+        <div class="col s12 m6 l4 z-depth-1  " id='trends'
+          style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
           <h5>
             # Trends</h5>
 
@@ -302,7 +305,7 @@
           <div class='divider'></div>
           <!-- Aqui será carregado os trends -->
           <div>
-            
+
           </div>
         </div>
       </div>
@@ -330,6 +333,13 @@
                 </select>
 
               </div>
+              <div class="input-fields col s12 12 l12">
+                
+                  <h6>Tags (palavras-chaves) para sua ideia</h6>
+                  <div class="chips chips_tags">                    
+                      <input class="custom-class chips_tags">
+                  </div>
+              </div>
 
 
             </div>
@@ -356,33 +366,34 @@
     </div>
   </div>
 
-  
 
 
 
 
 
 
-<!-- Resultado das buscas -->
 
-<div id="pesquisas">  
+  <!-- Resultado das buscas -->
+
+  <div id="pesquisas" hidden>
     <div class="row">
-        <div class="col s12 m8 l8">
-            <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+      <div class="col s12 m8 l8">
+        <div class="col s12  z-depth-1 "
+          style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
 
-                <h5>
-                    <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"</h5>
-                <div class="divider"></div>
-                
-                <div id="resultado_pesquisas">                
-                    
-                                     
-                    
-                </div>                
-            </div>
+          <h5>
+            <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"</h5>
+          <div class="divider"></div>
+
+          <div id="resultado_pesquisas">
+
+
+
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
 </body>
 

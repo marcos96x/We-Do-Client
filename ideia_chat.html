@@ -7,11 +7,22 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
+    <script src="js/socket.js"></script>
+    <script>
+        // Client Side
+        var socket = io.connect('http://localhost:8080/');
+        socket.on('connect', function () {
+
+        });
+    </script>
     <script src="scripts/ideia_chat.js"></script>
     <script src="scripts/ideia.js"></script>
     <script src="scripts/buscas.js"></script>
+    <script src="scripts/envia_comentario.js"></script>
+    <script src="scripts/projetos_atuais.js"></script>
     <script>
 
     </script>
@@ -32,6 +43,11 @@
                 </a>
 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li hidden onclick="volta_busca()" id="botao_voltar_busca">
+                        <a> <i class="material-icons">
+                                reply
+                            </i></a>
+                    </li>
                     <li>
                         <a href="feed.html"> <i class="material-icons">
                                 home
@@ -70,7 +86,7 @@
                     <div class="col s4">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" type="text" class="validate">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate">
                         </div>
                     </div>
 
@@ -82,9 +98,9 @@
                         </div>
                     </div>
                     <div class="col s1">
-                            <button class="btn_pesquisa" onclick="pesquisa_ideias()">
-                              <i class="material-icons white-text">search </i>
-                            </button>
+                        <button class="btn_pesquisa" onclick="pesquisa_ideias()">
+                            <i class="material-icons white-text">search </i>
+                        </button>
                     </div>
                 </div>
 
@@ -119,8 +135,8 @@
                     <i class="material-icons">code</i>
                     <div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
 
-                    <div class="collapsible-body">
-                        <a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+                    <div class="collapsible-body" id="projetos_atuais_lateral">
+                            <a class='black-text' href='#!'></a>
                     </div>
 
 
@@ -279,7 +295,7 @@
 
 
 
-            <div class="col s12 m12 l6" style='position: fixed;width: 40%;margin-left: 43%;'>
+            <div class="col s12 m12 l6" style='position: fixed;width: 40%;margin-left: 43%;' id="div_do_chat" hidden>
                 <div class="col s12 m12 l12  z-depth-1"
                     style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                     <div class="row z-depth-1">
@@ -302,19 +318,17 @@
                             <div class="col s11 chat"
                                 style='padding-left:5%;padding-right:5%;padding-top:-5%;border-color:rgb(209, 203, 203);border-style: solid; border-width: 1px; border-radius:30px ;'>
 
-                                <input id="msg" type="text">
+                                <input id="campo_mensagem" type="text" on="envia_mensagem()">
 
                             </div>
-                            <div class="col s1" style='margin-top:1%' ;>
-                                <button class="btn btn-floating">
+                            <div class="col s1" style='margin-top:1%;'>
+                                <button type="submit" class="btn btn-floating" onclick="envia_mensagem()">
                                     <i class="material-icons">
                                         send
                                     </i>
                                 </button>
-
-
-
                             </div>
+
                         </div>
 
                     </div>
@@ -323,11 +337,16 @@
 
 
         </div>
-        <div class="row">
+        <div class="row" id="div_comentarios">
             <div class="col s12 m12 l6  z-depth-1"
                 style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                 <h5> Comentários</h5>
                 <div class="divider"></div>
+                <div class='row' style='margin-top:-1%; margin-left:-2%;'>
+                    <div class='input-field col s12' id='feed_comentario'>
+                        <textarea id='texto_comentario' class='materialize-textarea' onfocusout='mudaIcone2()'  onfocus='mudaIcone1()' ></textarea>
+                        <label for='"+id_comentario+"'>Comente</label>
+                        <i class='material-icons right icone_comentario' id='icone_comentario' onclick='envia_comentario_ideia()'>mode_comment</i></div></div>
                 <div id="comentarios">
 
 
@@ -390,45 +409,67 @@
 
 
 
-        <!-- Modal Structure de ADICIONAR UMA IDEIA-->
-        <div id="add_ideia" class="modal">
-            <div class="modal-content">
-              <h4>Adicionar uma ideia</h4>
-              <div class="row">
+    <!-- Modal Structure de ADICIONAR UMA IDEIA-->
+    <div id="add_ideia" class="modal">
+        <div class="modal-content">
+            <h4>Adicionar uma ideia</h4>
+            <div class="row">
                 <form class="col s12" id="alt_dados">
-                  <div class="row">
-                    <div class="input-field col s12 black-text">
-                      <input id="titulo_ideia" type="text">
-                      <label for="titulo_ideia">Titulo da ideia</label>
+                    <div class="row">
+                        <div class="input-field col s12 black-text">
+                            <input id="titulo_ideia" type="text">
+                            <label for="titulo_ideia">Titulo da ideia</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                            <label for="textarea2">Descrição da ideia</label>
+                        </div>
+                        <div class="input-field col s12 m6 l12 ">
+                            <select multiple id='tecnologias_select'>
+                                <option value="" disabled>Adicione as tecnologias necessárias </option>
+                            </select>
+
+                        </div>
+
+
                     </div>
-                    <div class="input-field col s12">
-                      <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
-                      <label for="textarea2">Descrição da ideia</label>
+
+                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+
                     </div>
-                    <div class="input-field col s12 m6 l12 ">
-                      <select multiple id='tecnologias_select'>
-                        <option value="" disabled>Adicione as tecnologias necessárias </option>
-                      </select>
-      
+                    <div class="row center">
+                        <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                        <a class="btn modal-close" id="cancela">Cancela</a>
                     </div>
-      
-      
-                  </div>
-      
-                  <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
-      
-                  </div>
-                  <div class="row center">
-                    <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
-                    <a class="btn modal-close" id="cancela">Cancela</a>
-                  </div>
                 </form>
-              </div>
-      
             </div>
-      
-      
-          </div>
+
+        </div>
+
+
+    </div>
+    <!-- Resultado das buscas -->
+
+    <div id="pesquisas" hidden>
+        <div class="row">
+            <div class="col s12 m8 l8">
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+                    <h5>
+                        <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"
+                    </h5>
+                    <div class="divider"></div>
+
+                    <div id="resultado_pesquisas">
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

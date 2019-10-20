@@ -12,6 +12,10 @@ function pesquisa_por_ambos(texto, tecnologia){
         }else{            
             $("#feed").hide()
             $("#div_adicionar_ideia").hide()
+
+            $("#div_do_chat").hide()
+            $("#campo_ideia").hide()
+            $("#div_comentarios").hide()
             $("#pesquisas").show()
             let buscas = res.ideias
             for(let i = 0; i < buscas.length; i++){ 
@@ -52,6 +56,10 @@ function pesquisa_por_texto(texto){
         }else{            
             $("#feed").hide()
             $("#div_adicionar_ideia").hide()
+
+            $("#div_do_chat").hide()
+            $("#campo_ideia").hide()
+            $("#div_comentarios").hide()
             $("#pesquisas").show()
             let buscas = res.ideias
             for(let i = 0; i < buscas.length; i++){ 
@@ -78,6 +86,10 @@ function pesquisa_por_texto(texto){
     return false
 }
 
+function volta_busca(){
+    window.location.reload()
+}
+
 function pesquisa_por_tecnologia(id, nm){
     $("#texto_resultado_busca").text(nm)
     $("#resultado_pesquisas").html("")
@@ -92,6 +104,10 @@ function pesquisa_por_tecnologia(id, nm){
         }else{            
             $("#feed").hide()
             $("#div_adicionar_ideia").hide()
+            $("#div_do_chat").hide()
+            $("#campo_ideia").hide()
+
+            $("#div_comentarios").hide()
             $("#pesquisas").show()
             let buscas = res.ideias
             for(let i = 0; i < buscas.length; i++){ 
@@ -122,11 +138,17 @@ function pesquisa_por_tecnologia(id, nm){
 function pesquisa_ideias(){
     if($("#texto_pesquisa").val().trim() != "" && id_tecnologia_da_pesquisa.length != []){
         pesquisa_por_ambos( $("#texto_pesquisa").val().trim(), id_tecnologia_da_pesquisa)
+        $("#pesquisas").show()
+        $("#botao_voltar_busca").show()
     }else{
         if($("#texto_pesquisa").val().trim() != ""){
             pesquisa_por_texto($("#texto_pesquisa").val().trim())
+            $("#pesquisas").show()
+            $("#botao_voltar_busca").show()
         }else if(id_tecnologia_da_pesquisa.length != []){
             pesquisa_por_tecnologia(id_tecnologia_da_pesquisa[0], id_tecnologia_da_pesquisa[1])
+            $("#pesquisas").show()
+            $("#botao_voltar_busca").show()
         }else{
             M.toast({html: "Busca invalida"})
             return false

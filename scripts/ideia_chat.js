@@ -13,25 +13,20 @@ let id_ideia_pagina
 var tecnologias_insere_ideia = []
 var tecnologia_adicionar_na_ideia = []
 var arrayDadosTecnologia = []
-function determina_visualizacao(tipo_usuario){
-    // se tipo == 0, usuario comum, visitante
-    // se tipo == 1, membro da ideia
-    // se tipo == 2, idealizador
 
-
-}
+let id_tecnologia_da_pesquisa = []
 
 
 $(document).ready(function () {
+    
+    projetos_atuais()
     abre_tecnologias_ideiaChat()
     /** conta carcateres da descrição da ideia em criação de ideia*/
     $('input#input_text, textarea#textarea2').characterCounter();
 
 
     
-    // verifica o id d a ideia passado no parametro
-    var objDiv = document.getElementById("chat");
-    objDiv.scrollTop = objDiv.scrollHeight;
+
 
     // pega o parametro na url de ideia 
     var query = location.search.slice(1);
@@ -44,10 +39,27 @@ $(document).ready(function () {
         data[chave] = valor;
     });
     id_ideia_pagina = data.ideia
-    mostra_chat(data.ideia)
-    mostra_ideia(data.ideia)
+    if(!id_ideia_pagina){
+        window.location.href = "feed.html"
+    }else{
+        mostra_ideia(data.ideia)
 
+    }
+    socket.on("chat_message", (dados) => {
+        if (dados.id_usuario == id) {
+            // mensagem enviada pelo usuario
+            $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+        } else {
+            // mensagem enviada por outro usuario
+            $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+        }
+        let objDiv = document.getElementById("chat");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    })
 })
+function seleciona_tecnologias_pesquisa(id, nm){
+    id_tecnologia_da_pesquisa = [id, nm]
+}
 
 function abre_tecnologias_ideiaChat(){
     
@@ -71,6 +83,36 @@ function abre_tecnologias_ideiaChat(){
     
 }
 
+function mostra_interesse(valor){
+    let url = "http://localhost:3000/interesse"
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: JSON.stringify({
+            "usuario": {
+                "id_usuario": id
+            },
+            "ideia": {
+                "id_ideia": id_ideia_original
+            }
+        }),
+        contentType: "application/json"
+    }).done(function(res){
+        if(res.err){
+            alert("Erro na inserção do interesse")
+        }else{
+            window.location.reload()
+        }
+    })
+}
+
+// Muda icones dos comentarios
+function mudaIcone1(){
+    $("#icone_comentario").html("send")
+}
+function mudaIcone2(){
+    $("#icone_comentario").html("mode_comment")
+}
 
 function mostra_ideia(id_ideia) {
     let url = "http://localhost:3000/ideia/" + id_ideia + "&" + id
@@ -88,13 +130,265 @@ function mostra_ideia(id_ideia) {
             status_ideia_original = res.ideia.status_ideia
             ds_ideia_original = res.ideia.ds_ideia
             let nm_idealizador
+            let verificacao_idealizador = 0
+            let verificacao_membro = 0
+            let verificacao_visitante = 0
+            let elemento_interesse = `<div class="col s2">
+            <a class='btn' onclick='mostra_interesse(1)' style='margin-top:33%;'><i class='material-icons white-text'></i>Interesse</a></div>
+            </div>`
+            
             for (let i = 0; i < res.ideia.membros.length; i++) {
                 if (res.ideia.membros[i].idealizador == 1) {
                     nm_idealizador = res.ideia.membros[i].nm_usuario
+                    if(res.ideia.membros[i].id_usuario == id){
+                        verificacao_idealizador = 1
+                        verificacao_membro = 0
+                    }
+                }
+                if(res.ideia.membros[i].id_usuario == id && res.ideia.membros[i].status_solicitacao == 1 && res.ideia.membros[i].idealizador == 0){
+                    verificacao_membro = 1
+                    verificacao_idealizador = 0
+                }
+                if(res.ideia.membros[i].id_usuario == id && res.ideia.membros[i].status_solicitacao == 0 && res.ideia.membros[i].idealizador == 0){
+                    elemento_interesse = `<div class="col s2">
+                        <a class='btn-floating' onclick='mostra_interesse(0)' style='margin-top:33%;'><i class='material-icons white-text'>done</i></a></div>
+                        </div>`
                 }
             }
+            if(verificacao_membro == 0 && verificacao_idealizador == 0){
+                verificacao_visitante = 1
+            }
 
-            $("#campo_ideia").append(` 
+            // verificação pro tipo de exibição
+            if(verificacao_visitante == 1){
+                //------------------------------------------------------------------------VISITANTE
+                $("#campo_ideia").append(` 
+
+
+        <div class='col s12'>
+            <div class='input-field col s10'>
+                <input disabled='true' id='nm_ideia' type='text'>
+                <label style='font-size: 23px; color:#404f65;' for='nm_ideia' id='label_projeto'>${res.ideia.nm_ideia}
+                </label>
+            </div>
+            ${elemento_interesse}
+            
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>Por ${nm_idealizador}</p>
+        <div class='row'>
+            <div class='col s12'>
+            `)
+
+            for (let i = 0; i < res.ideia.tecnologias.length; i++) {
+                $("#campo_ideia").append(`<div class='chip'>
+                    ${res.ideia.tecnologias[i].nm_tecnologia}
+                    
+                </div>`)
+                
+            }
+
+            $("#campo_ideia").append(`              
+
+
+        </div>
+
+        <div class='row'>
+            <div class='col s12'>
+                <h5>Descrição</h5>
+                <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
+                ${res.ideia.ds_ideia}
+                </blockquote>
+            </div>
+        </div>
+
+
+        <h5>Integrantes</h5>
+        <div class='divider'></div>
+
+
+
+        `)
+
+        // membros
+        for(let i = 0; i < res.ideia.membros.length; i++){
+            if(res.ideia.membros[i].id_usuario != id){
+                $("#campo_ideia").append(`
+                <h6>
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
+                            ${res.ideia.membros[i].nm_usuario}
+                        </div>
+                    </div>
+                </h6>   
+    
+                <div class='divider'></div>
+                
+                
+                
+                `)
+            }else{
+                $("#campo_ideia").append(`
+            <h6>
+                <div class="row">
+                    <div class="col s12 m11 l11">
+                        <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
+                        ${res.ideia.membros[i].nm_usuario}
+                    </div>
+                </div>
+            </h6>
+
+
+            <div class='divider'></div>
+            
+            
+            
+            `)
+            }
+            
+        }
+
+                // comentarios
+                for(let i = 0; i < res.ideia.comentarios.length; i++){
+                    $("#comentarios").append(`
+                        <div style="line-height:100%;">
+
+                            <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                                <label>24 de dezembro de 2019</label>
+                                <br>
+                                <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
+                            
+                            
+                            <!-- BOTAO PARA APAGAR O COMENTARIO -->
+                            <!-- <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
+                                id="iconezinho">delete</i>-->
+                        </div>
+                        <div class="divider"></div>
+                    `)
+                }
+
+            }else if (verificacao_membro == 1){
+                //------------------------------------------------------------------------MEMBRO      
+                       
+                $("#div_do_chat").show()                
+                mostra_chat(id_ideia)   
+                $("#campo_ideia").append(` 
+
+
+        <div class='col s12'>
+            <div class='input-field col s12'>
+                <input disabled='true' id='nm_ideia' type='text'>
+                <label style='font-size: 23px; color:#404f65;' for='nm_ideia' id='label_projeto'>${res.ideia.nm_ideia}
+                </label>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>Por ${nm_idealizador}</p>
+        <div class='row'>
+            <div class='col s12'>
+            `)
+
+            for (let i = 0; i < res.ideia.tecnologias.length; i++) {
+                $("#campo_ideia").append(`<div class='chip'>
+                    ${res.ideia.tecnologias[i].nm_tecnologia}
+                    
+                </div>`)
+                
+            }
+
+            $("#campo_ideia").append(`              
+
+
+        </div>
+
+        <div class='row'>
+            <div class='col s12'>
+                <h5>Descrição</h5>
+                <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
+                ${res.ideia.ds_ideia}
+                </blockquote>
+            </div>
+        </div>
+
+
+        <h5>Integrantes</h5>
+        <div class='divider'></div>
+
+
+
+        `)
+
+        // membros
+        for(let i = 0; i < res.ideia.membros.length; i++){
+            if(res.ideia.membros[i].id_usuario != id){
+                $("#campo_ideia").append(`
+                <h6>
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
+                            ${res.ideia.membros[i].nm_usuario}
+                        </div>
+                    </div>
+                </h6>   
+    
+                <div class='divider'></div>
+                
+                
+                
+                `)
+            }else{
+                $("#campo_ideia").append(`
+            <h6>
+                <div class="row">
+                    <div class="col s12 m11 l11">
+                        <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
+                        ${res.ideia.membros[i].nm_usuario}
+                    </div>
+                </div>
+            </h6>
+
+
+            <div class='divider'></div>
+            
+            
+            
+            `)
+            }
+            
+        }
+
+            // comentarios
+            for(let i = 0; i < res.ideia.comentarios.length; i++){
+                $("#comentarios").append(`
+                    <div style="line-height:100%;">
+
+                        <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                            <label>24 de dezembro de 2019</label>
+                            <br>
+                            <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
+                        
+                        
+                        <!-- BOTAO PARA APAGAR O COMENTARIO -->
+                        <!-- <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
+                            id="iconezinho">delete</i>-->
+                    </div>
+                    <div class="divider"></div>
+                `)
+            }
+                
+            }else if (verificacao_idealizador == 1){
+                //------------------------------------------------------------------------IDEALIZADOR
+                
+                $("#div_do_chat").show()                
+                mostra_chat(id_ideia)   
+                $("#campo_ideia").append(` 
 
         <div class='col s1'  style='margin-top:5%; margin-right:-3%; '>
             
@@ -241,6 +535,9 @@ function mostra_ideia(id_ideia) {
                     <div class="divider"></div>
                 `)
             }
+            }
+
+            
         }
     })
 }
@@ -294,17 +591,31 @@ function remove_usuario(id){
     alert(id)
 }
 
+// ---------------------------------------------------COM SOCKET.IO
+function envia_mensagem(){
+    if($("#campo_mensagem").val().trim() == ""){
+        M.toast({html: "Campo de mensagem vazio!"})
+    }else{
+        let dados_mensagem = {
+            id_usuario: id,
+            id_ideia: id_ideia_original,
+            nm_usuario: nome,
+            ct_mensagem: $("#campo_mensagem").val().trim() 
+        }
+        socket.emit('chat_message', dados_mensagem)
+        //$("#chat").append(`<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>${$("#campo_mensagem").val().trim()}</p></div></div></div>`)
+        
+        $("#campo_mensagem").val("")
+        return false
+    }
+}
 
 function mostra_chat(id_ideia) {
-    let url = "http://localhost:3000/chat/" + id
+
+    let url = "http://localhost:3000/chat/" + id + "&" + id_ideia
     $.ajax({
         url: url,
-        type: "POST",
-        data: JSON.stringify({
-            "ideia": {
-                "id_ideia": id_ideia
-            }
-        }),
+        type: "GET",
         contentType: "application/json"
     }).done(function (res) {
         if (res.err) {
@@ -321,6 +632,8 @@ function mostra_chat(id_ideia) {
                     $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "</p></div></div></div>")
                 }
             }
+            let objDiv = document.getElementById("chat");
+            objDiv.scrollTop = objDiv.scrollHeight;
         }
     })
 }

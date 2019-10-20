@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="nav-extended cor-padrao">
+            <div class="nav-wrapper ">
+                <a href="#" class="brand-logo center">Olá Marcos, seja bem-vindo <3</a> <a href="#"
+                        data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent center">
+                    <li class="tab"><a href="#" onclick=" insereConteudo('graficos');">Acessos</a></li>
+                    <li class="tab"><a href="#" onclick=" insereConteudo('tec');">Tecnologias</a></li>
+                    <li class="tab"><a href="#" onclick=" insereConteudo('ideia');">Ideias</a></li>
+                    <li class="tab"><a href="#" onclick=" insereConteudo('user');">Usuários</a></li>
+                    <li class="tab"><a href="#" onclick=" insereConteudo('denuncia');">Denúncias</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <div id='conteudo'>
+        </div>
+    </div>
+
+
+    <style>
+        .cor-padrao {
+            background-color: #404f65;
+        }
+
+        .clicavel{
+            cursor: pointer;
+        }
+    </style>
+    <script>
+/*CHAMANDO ELEMENNTOS DO MATERIALIZE -- pode ser tirado quando implementado na API*/
+        document.addEventListener('DOMContentLoaded', function () {
+            /*chamando modal*/
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+        });
+       
+/*Função que insere a pesquisa de Tecnologias*/
+        function inserePesquisa_tec() {
+            let pesquisa = document.getElementById('search_tec').value;
+            document.getElementById('component').innerHTML = `
+                Algo relacionado á `+ pesquisa + ` <br><br>
+                <div class='divider'></div>
+                <br>
+                <button class='btn cor-padrao' onclick="insereConteudo('tec');">Voltar</button>`;
+        }
+/*Função que insere a pesquisa de Ideias*/
+        function inserePesquisa_ideia(){
+            let pesquisa = document.getElementById('search_ideia').value;
+            document.getElementById('component').innerHTML = `
+                algo relacionado á `+ pesquisa + `<br><br>
+                <div class='divider'></div>
+                <br>
+                <button class='btn cor-padrao' onclick="insereConteudo('ideia');">Voltar</button>`;
+        }
+/*Função que insere a pesquisa de Usuários*/
+        function inserePesquisa_user(){
+            let pesquisa = document.getElementById('search_user').value;
+            document.getElementById('component').innerHTML = `
+                algo relacionado á `+ pesquisa + `<br><br>
+                <div class='divider'></div>
+                <br>
+                <button class='btn cor-padrao' onclick="insereConteudo('user');">Voltar</button>`;
+        }
+/*Função que insere a pesquisa de Denuncias*/
+        function inserePesquisa_denuncia(){
+            let pesquisa = document.getElementById('search_denuncia').value;
+            document.getElementById('component').innerHTML = `
+                algo relacionado á `+ pesquisa + `<br><br>
+                <div class='divider'></div>
+                <br>
+                <button class='btn cor-padrao' onclick="insereConteudo('denuncia');">Voltar</button>`;
+        }
+
+/*Onde se 'algo relaciona á' é onde pode ser inserido o resultado da pesquisa, no mesmo formato que vem abaixo*/
+/*função que insere a pagina inicial de cada fragmento*/
+        function insereConteudo(nome) {
+            switch (nome) {
+                case 'tec':
+                    document.getElementById('conteudo').innerHTML = `
+                    <h3>Tecnologias</h3>
+<form>
+    <div class="input-field">
+        <input id="search_tec" type="search">
+        <label for="search_tec">Pesquise por tecnologias</label>
+        <i class="material-icons black-text" onclick="inserePesquisa_tec();">search</i>
+    </div>
+</form>
+<div id='component'>
+    <h5>Ranking tecnologias</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>Java
+                </td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque laoreet elit
+                    vitae tristique. Cras consectetur, mauris at aliquet suscipit, sapien magna viverra ligula, non
+                    vestibulum tortor orci ut lectus. Etiam ornare lacus eget auctor placerat. Mauris mollis nisi eu
+                    justo efficitur volutpat. Phasellus sed tortor non enim semper sodales et non magna. Duis aliquam at
+                    dui et tempus. Proin tincidunt est mi, at finibus magna mattis vel. Maecenas at vestibulum ex. </td>
+                <td><button class='btn cor-padrao modal-trigger' href="#edit_tec"><i class="material-icons">
+                            edit
+                        </i></button></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+            `
+                    break;
+
+
+                    case 'ideia':
+                    document.getElementById('conteudo').innerHTML = `
+                    <h3>Ideias</h3>
+<form>
+    <div class="input-field">
+        <input id="search_ideia" type="search">
+        <label for="search_ideia">Pesquise por ideias</label>
+        <i class="material-icons black-text" onclick="inserePesquisa_ideia();">search</i>
+    </div>
+</form>
+<div id='component'>
+    <h5>Ranking ideias</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class='hoverable clicavel'>
+                <td>01</td>
+                <td>
+                        Java
+                </td>
+                <td >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque laoreet elit
+                    vitae tristique. Cras consectetur, mauris at aliquet suscipit, sapien magna viverra ligula, non
+                    vestibulum tortor orci ut lectus. Etiam ornare lacus eget auctor placerat. Mauris mollis nisi eu
+                    justo efficitur volutpat. Phasellus sed tortor non enim semper sodales et non magna. Duis aliquam at
+                    dui et tempus. Proin tincidunt est mi, at finibus magna mattis vel. Maecenas at vestibulum ex. </td>
+               
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+            `
+                    break;
+            
+
+            case 'user':
+                    document.getElementById('conteudo').innerHTML = `
+                    <h3>Usuários</h3>
+<form>
+    <div class="input-field">
+        <input id="search_user" type="search">
+        <label for="search_user">Pesquise por usuários</label>
+        <i class="material-icons black-text" onclick="inserePesquisa_user();">search</i>
+    </div>
+</form>
+<div id='component'>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Ações</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class='hoverable clicavel'>
+                <td>01</td>
+                <td>
+                        Java
+                </td>
+                <td >
+                <button class='btn cor-padrao'>Banir</button>
+                        <button class='btn cor-padrao'>Bloquear</button>
+                 </td>
+               
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+            `
+                    break;
+
+                    case 'denuncia':
+                    document.getElementById('conteudo').innerHTML = `
+                    <h3>Denúncias</h3>
+<form>
+    <div class="input-field">
+        <input id="search_denuncia" type="search">
+        <label for="search_denuncia">Pesquise por Denúncias</label>
+        <i class="material-icons black-text" onclick="inserePesquisa_denuncia();">search</i>
+    </div>
+</form>
+<div id='component'>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Autor</th>
+                <th>Para</th>
+                <th>Descrição</th>
+                <th>Ação</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class='hoverable clicavel'>
+                <td>01</td>
+                <td>
+                        Java
+                </td>
+                <td>
+                       Maria
+                </td>
+                <td>
+                      <b> [aqui dentro pode mostrar se é um comentario, uma ideia ou usuario] </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque laoreet elit
+                    vitae tristique. Cras consectetur, mauris at aliquet suscipit, sapien magna viverra ligula, non
+                    vestibulum tortor orci ut lectus. Etiam ornare lacus eget auctor placerat. Mauris mollis nisi eu
+                    justo efficitur volutpat. Phasellus sed tortor non enim semper sodales et non magna. Duis aliquam at
+                    dui et tempus. Proin tincidunt est mi, at finibus magna mattis vel. Maecenas at vestibulum ex.
+                </td>
+                <td >
+                <button class='btn cor-padrao'>Notificar</button>
+                
+                 </td>
+               
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+            `
+                    break;
+            }
+        }
+    </script>
+<!-- Quando clica na ideia ou no usuario vai para a pagina correspondentem ex: clica na ideia vai p pagina da ideia -->
+    <!-- Modal Structure para edição de tecnologia -->
+    <div id="edit_tec" class="modal">
+        <div class="modal-content">
+            <h4>Editar Tecnologia</h4>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="nm_tecnologia" type="text" value='nome da tecnologia'>
+                    <label for="nm_tecnologia">Nome da Tecnologia</label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="desc_tecnologia" class="materialize-textarea">gdsuahdajdladka</textarea>
+                    <label for="desc_tecnologia">Descrição da Tecnolgia</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Alterar</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

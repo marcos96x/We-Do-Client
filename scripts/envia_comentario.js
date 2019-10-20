@@ -1,4 +1,39 @@
 
+function envia_comentario_ideia(){
+    if($("#texto_comentario").val().trim() == ""){
+        M.toast({html: "Campo de comentário vazio!"})
+    }else{
+        let url = "http://localhost:3000/comentario/" + id
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: JSON.stringify({
+                "mensagem": {
+                    "ct_mensagem": $("#texto_comentario").val().trim()
+                },
+                "ideia": {
+                    "id_ideia": id_ideia_original
+                }
+            }),
+            contentType: "application/json"
+        }).done(function(res){
+            if(res.err){
+                alert("Erro na inserção do comentario")
+            }else{
+                let conteudo = ""
+                conteudo += `<div style='line-height:110%;'>`
+                conteudo += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
+                conteudo += `<a style='font-family:'bree-serif';';>${localStorage.getItem("nome_we_do")} &nbsp;</a>${$("#texto_comentario").val().trim()}</p></div>`
+                conteudo += "<div class='divider'></div>"
+                $("#comentarios").append(conteudo)
+                $("#texto_comentario").val("")
+                M.toast({html: 'Comentário realizado!'})
+            }
+        })
+    }
+}
+
+
 function envia_comentario(id_comentario, id_ideia, id_texto_comentario_feed, div_comentario){
     
     let msg = $(id_comentario).val().trim()
