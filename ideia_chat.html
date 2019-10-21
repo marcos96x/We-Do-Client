@@ -342,13 +342,12 @@
                 style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                 <h5> Comentários</h5>
                 <div class="divider"></div>
-                <div class='row' style='margin-top:-1%; margin-left:-2%;'>
-                    <div class='input-field col s12' id='feed_comentario'>
-                        <textarea id='texto_comentario' class='materialize-textarea' onfocusout='mudaIcone2()'  onfocus='mudaIcone1()' ></textarea>
-                        <label for='"+id_comentario+"'>Comente</label>
-                        <i class='material-icons right icone_comentario' id='icone_comentario' onclick='envia_comentario_ideia()'>mode_comment</i></div></div>
+
                 <div id="comentarios">
 
+
+                </div>
+                <div id="campo_do_comentario">
 
                 </div>
 
@@ -430,6 +429,9 @@
                             </select>
 
                         </div>
+                            <div class="chips" id='tags_' >
+                                <input class="custom-class">
+                            </div>                    
 
 
                     </div>

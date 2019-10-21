@@ -46,15 +46,17 @@ $(document).ready(function () {
 
     }
     socket.on("chat_message", (dados) => {
-        if (dados.id_usuario == id) {
-            // mensagem enviada pelo usuario
-            $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
-        } else {
-            // mensagem enviada por outro usuario
-            $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+        if(dados.id_ideia == id_ideia_original){
+            if (dados.id_usuario == id) {
+                // mensagem enviada pelo usuario
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+            } else {
+                // mensagem enviada por outro usuario
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+            }
+            let objDiv = document.getElementById("chat");
+            objDiv.scrollTop = objDiv.scrollHeight;
         }
-        let objDiv = document.getElementById("chat");
-        objDiv.scrollTop = objDiv.scrollHeight;
     })
 })
 function seleciona_tecnologias_pesquisa(id, nm){
@@ -271,6 +273,14 @@ function mostra_ideia(id_ideia) {
                     `)
                 }
 
+                $("#campo_do_comentario").append(`
+                <div class='row' style='margin-top:-1%; margin-left:-2%;'>
+                <div class='input-field col s12' id='feed_comentario'>
+                    <textarea id='texto_comentario' class='materialize-textarea' onfocusout='mudaIcone2()'  onfocus='mudaIcone1()' ></textarea>
+                    <label for='"+id_comentario+"'>Comente</label>
+                    <i class='material-icons right icone_comentario' id='icone_comentario' onclick='envia_comentario_ideia()'>mode_comment</i></div></div>
+                `)
+
             }else if (verificacao_membro == 1){
                 //------------------------------------------------------------------------MEMBRO      
                        
@@ -382,6 +392,14 @@ function mostra_ideia(id_ideia) {
                     <div class="divider"></div>
                 `)
             }
+
+            $("#campo_do_comentario").append(`
+            <div class='row' style='margin-top:-1%; margin-left:-2%;'>
+            <div class='input-field col s12' id='feed_comentario'>
+                <textarea id='texto_comentario' class='materialize-textarea' onfocusout='mudaIcone2()'  onfocus='mudaIcone1()' ></textarea>
+                <label for='"+id_comentario+"'>Comente</label>
+                <i class='material-icons right icone_comentario' id='icone_comentario' onclick='envia_comentario_ideia()'>mode_comment</i></div></div>
+            `)
                 
             }else if (verificacao_idealizador == 1){
                 //------------------------------------------------------------------------IDEALIZADOR
@@ -520,24 +538,30 @@ function mostra_ideia(id_ideia) {
             
         }
 
-            // comentarios
-            for(let i = 0; i < res.ideia.comentarios.length; i++){
-                $("#comentarios").append(`
-                    <div style="line-height:100%;">
+                // comentarios
+                for(let i = 0; i < res.ideia.comentarios.length; i++){
+                    $("#comentarios").append(`
+                        <div style="line-height:100%;">
 
-                        <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                            <label>24 de dezembro de 2019</label>
-                            <br>
-                            <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
-                        <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
-                            id="iconezinho">delete</i>
-                    </div>
-                    <div class="divider"></div>
+                            <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                                <label>24 de dezembro de 2019</label>
+                                <br>
+                                <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
+                            <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
+                                id="iconezinho">delete</i>
+                        </div>
+                        <div class="divider"></div>
+                    `)
+                }
+
+                $("#campo_do_comentario").append(`
+                <div class='row' style='margin-top:-1%; margin-left:-2%;'>
+                <div class='input-field col s12' id='feed_comentario'>
+                    <textarea id='texto_comentario' class='materialize-textarea' onfocusout='mudaIcone2()'  onfocus='mudaIcone1()' ></textarea>
+                    <label for='"+id_comentario+"'>Comente</label>
+                    <i class='material-icons right icone_comentario' id='icone_comentario' onclick='envia_comentario_ideia()'>mode_comment</i></div></div>
                 `)
-            }
-            }
-
-            
+            }            
         }
     })
 }

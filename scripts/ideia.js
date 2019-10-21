@@ -1,5 +1,11 @@
-
+//chamando a funcao do chip
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.chips');
+    var instances = M.Chips.init(elems);
+});
+var tags = [];
 function cria_ideia(){
+    var campos = document.getElementById('tags_');
     let nm_ideia = document.getElementById("titulo_ideia").value
     let desc = $("#textarea2").val()
     let tecnologias = []
@@ -9,6 +15,12 @@ function cria_ideia(){
     /**
      * Faltando apenas colocar a parte de inserir tags
      */
+
+    console.log('funcção');
+    for (var i = 0; i < campos.M_Chips.chipsData.length; i++) {
+        tags.push(campos.M_Chips.chipsData[i].tag);
+    }
+    console.log(tags)
 }
 
 function insere_tecnologia_ideia(id, nm) {
