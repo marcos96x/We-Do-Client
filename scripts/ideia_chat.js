@@ -254,24 +254,37 @@ function mostra_ideia(id_ideia) {
             
         }
 
-                // comentarios
-                for(let i = 0; i < res.ideia.comentarios.length; i++){
+            // comentarios
+            for(let i = 0; i < res.ideia.comentarios.length; i++){
+                if(res.ideia.comentarios[i].id_usuario == id){
                     $("#comentarios").append(`
-                        <div style="line-height:100%;">
-
+                    <div style="line-height:100%;" id="div_do_comentario${res.ideia.comentarios[i].id_mensagem}">
+                        <div class="row" style="padding-bottom: -1%;">
+                            <div class="col s11">
                             <p style="font-family: Arial, Helvetica, sans-serif" ;>
                                 <label>24 de dezembro de 2019</label>
                                 <br>
-                                <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
-                            
-                            
-                            <!-- BOTAO PARA APAGAR O COMENTARIO -->
-                            <!-- <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
-                                id="iconezinho">delete</i>-->
+                                <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
                         </div>
-                        <div class="divider"></div>
-                    `)
+                    </div>
+                    <div class="divider"></div>
+                `)
+                }else{
+                    $("#comentarios").append(`
+                    <div style="line-height:100%;" id="div_do_comentario${res.ideia.comentarios[i].id_mensagem}">
+                        <div class="row" style="padding-bottom: -1%;">
+                            <div class="col s11">
+                            <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                                <label>24 de dezembro de 2019</label>
+                                <br>
+                                <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                `)
                 }
+
+            }
 
                 $("#campo_do_comentario").append(`
                 <div class='row' style='margin-top:-1%; margin-left:-2%;'>
@@ -376,21 +389,34 @@ function mostra_ideia(id_ideia) {
 
             // comentarios
             for(let i = 0; i < res.ideia.comentarios.length; i++){
-                $("#comentarios").append(`
-                    <div style="line-height:100%;">
-
-                        <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                            <label>24 de dezembro de 2019</label>
-                            <br>
-                            <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
-                        
-                        
-                        <!-- BOTAO PARA APAGAR O COMENTARIO -->
-                        <!-- <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
-                            id="iconezinho">delete</i>-->
+                if(res.ideia.comentarios[i].id_usuario == id){
+                    $("#comentarios").append(`
+                    <div style="line-height:100%;" id="div_do_comentario${res.ideia.comentarios[i].id_mensagem}">
+                        <div class="row" style="padding-bottom: -1%;">
+                            <div class="col s11">
+                            <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                                <label>24 de dezembro de 2019</label>
+                                <br>
+                                <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
+                        </div>
                     </div>
                     <div class="divider"></div>
                 `)
+                }else{
+                    $("#comentarios").append(`
+                    <div style="line-height:100%;" id="div_do_comentario${res.ideia.comentarios[i].id_mensagem}">
+                        <div class="row" style="padding-bottom: -1%;">
+                            <div class="col s11">
+                            <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                                <label>24 de dezembro de 2019</label>
+                                <br>
+                                <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                `)
+                }
+
             }
 
             $("#campo_do_comentario").append(`
@@ -498,13 +524,13 @@ function mostra_ideia(id_ideia) {
             if(res.ideia.membros[i].id_usuario != id){
                 $("#campo_ideia").append(`
                 <h6>
-                    <div class="row">
+                    <div class="row" id="campo_membro${res.ideia.membros[i].id_usuario}">
                         <div class="col s12 m11 l11">
                             <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
                             ${res.ideia.membros[i].nm_usuario}
                         </div>
                         <div class="col s12 m1 l1">
-                            <a class='btn-floating red btn-small right' onclick="remove_usuario(${res.ideia.membros[i].id_usuario})" id='excluir_part' style='margin-left:65.4%;'>
+                            <a class='btn-floating red btn-small right' onclick="remove_usuario(${res.ideia.membros[i].id_usuario}, ${res.ideia.id_ideia})" id='excluir_part' style='margin-left:65.4%;'>
                                 <i class='material-icons white-text'>clear</i>
                             </a>
                         </div>
@@ -541,14 +567,14 @@ function mostra_ideia(id_ideia) {
                 // comentarios
                 for(let i = 0; i < res.ideia.comentarios.length; i++){
                     $("#comentarios").append(`
-                        <div style="line-height:100%;">
-
-                            <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                                <label>24 de dezembro de 2019</label>
-                                <br>
-                                <a style="font-family:'bree-serif';" ;>${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</p>
-                            <i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" style='margin-left:96%; padding-top:-25%;'
-                                id="iconezinho">delete</i>
+                        <div style="line-height:100%;" id="div_do_comentario${res.ideia.comentarios[i].id_mensagem}">
+                            <div class="row" style="padding-bottom: -1%;">
+                                <div class="col s11">
+                                <p style="font-family: Arial, Helvetica, sans-serif" ;>
+                                    <label>24 de dezembro de 2019</label>
+                                    <br>
+                                    <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
+                            </div>
                         </div>
                         <div class="divider"></div>
                     `)
@@ -608,11 +634,54 @@ function deleta_tecnologia(id_tecnologia){
 }
 
 function deleta_comentario(id_mensagem){
-    alert(id_mensagem)
+    let url = "http://localhost:3000/comentario/" + id
+    $.ajax({
+        url: url,
+        type: "DELETE",
+        contentType: "application/json",
+        data: JSON.stringify({
+            comentario: {
+                id_mensagem: id_mensagem
+            }
+        })
+    }).done(function(res){
+        if(res.err){
+            alert(res.err)
+        }else if (res.msg_erro){
+            M.toast({html: res.msg_erro})
+        }else{
+            let nome_da_div_do_comentario_a_ser_excluido = "#div_do_comentario" + id_mensagem
+            $(nome_da_div_do_comentario_a_ser_excluido).hide()
+            M.toast({html: "Comentário excluido com sucesso!"})
+        }
+    })
+
 }
 
-function remove_usuario(id){
-    alert(id)
+function remove_usuario(id_usuario_xxx, id_ideia_xxx){
+    let url = "http://localhost:3000/ideia/remover"
+    $.ajax({
+        url: url,
+        type: "DELETE",
+        contentType: "application/json",
+        data: JSON.stringify({
+            ideia: {
+                id_ideia: id_ideia_xxx,
+                id_criador: id
+            },
+            usuario: {
+                id_usuario: id_usuario_xxx
+            }
+        })
+    }).done((res) => {
+        if(res.err){
+            M.toast({html: res.err})
+        }else{
+            let campo_deletar = "#campo_membro" + id_usuario_xxx
+            $(campo_deletar).hide()
+            M.toast({html: "Usuario removido da ideia"})
+        }
+    })
 }
 
 // ---------------------------------------------------COM SOCKET.IO

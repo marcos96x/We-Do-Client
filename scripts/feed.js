@@ -168,13 +168,31 @@ function carrega_feed(){
                 ideias[i].comentarios.reverse()
                 for(let i2 = 1; i2 >= 0; i2--){
                     if(ideias[i].comentarios[i2]){
-                        content += `<div style='line-height:110%;'>`
-                        content += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
-                        content += `<a style='font-family:'bree-serif';';>${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}</p></div>`
-                        content += "<div class='divider'></div>"
-                    }
-
-                    
+                        if(ideias[i].comentarios[i2].id_usuario == id){
+                            content += `<div style='line-height:110%;' id="div_do_comentario${ideias[i].comentarios[i2].id_mensagem}">`
+                            content += `<div class='row'>
+                            <div class='col s11'>
+                            <p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label></p>
+                            <a style='font-family:'bree-serif';';>${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
+                            </div>`
+                            content += `<div class='col s1' style="padding-top: 3%;">`
+                            content += `<a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${ideias[i].comentarios[i2].id_mensagem})" id="iconezinho">delete</i></a>`
+                            content += `</div>`
+                            content += `</div>`
+                            content += `</div>`
+                            content += "<div class='divider'></div>"
+                        }else{
+                            content += `<div style='line-height:110%;'>`
+                            content += `<div class='row'>
+                            <div class='col s11'>
+                            <p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label></p>
+                            <a style='font-family:'bree-serif';';>${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
+                            </div>`
+                            content += `</div>`
+                            content += `</div>`
+                            content += "<div class='divider'></div>"
+                        }
+                    }                    
                 }
 
                 content +="</div></div>"
@@ -288,3 +306,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
+function deleta_comentario(id_mensagem){
+    let url = "http://localhost:3000/comentario/" + id
+    $.ajax({
+        url: url,
+        type: "DELETE",
+        contentType: "application/json",
+        data: JSON.stringify({
+            comentario: {
+                id_mensagem: id_mensagem
+            }
+        })
+    }).done(function(res){
+        if(res.err){
+            alert(res.err)
+        }else if (res.msg_erro){
+            M.toast({html: res.msg_erro})
+        }else{
+            let nome_da_div_do_comentario_a_ser_excluido = "#div_do_comentario" + id_mensagem
+            $(nome_da_div_do_comentario_a_ser_excluido).hide()
+            M.toast({html: "Comentário excluido com sucesso!"})
+        }
+    })
+
+}
