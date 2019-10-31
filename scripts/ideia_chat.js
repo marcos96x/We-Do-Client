@@ -696,7 +696,6 @@ function envia_mensagem(){
             ct_mensagem: $("#campo_mensagem").val().trim() 
         }
         socket.emit('chat_message', dados_mensagem)
-        //$("#chat").append(`<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>${$("#campo_mensagem").val().trim()}</p></div></div></div>`)
         
         $("#campo_mensagem").val("")
         return false

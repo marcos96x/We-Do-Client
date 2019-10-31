@@ -27,6 +27,7 @@ function curtir(id_feed, id_texto, id_ideia) {
                 $(id_texto).html((qt_curtida + 1))
                 $(id_feed).attr("name", (qt_curtida + 1))
                 carrega_trends()
+                
             }
         })     
         

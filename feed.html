@@ -73,8 +73,7 @@
         <div class="row" id="search_ideia">
           <div class="col s4">
             <div class="input-field col s12">
-              <input id="texto_pesquisa" placeholder="Pesquisa por ideia" type="text" class="validate"
-                on="pesquisa_ideias()">
+              <input id="texto_pesquisa" placeholder="Pesquisa por ideia" type="text" class="validate" on="pesquisa_ideias()">
             </div>
           </div>
           <div class="col s4" id="search_tec">
@@ -192,23 +191,42 @@
 
   <ul id="notifications" class="dropdown-content ">
 
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano curtiu sua ideia
       <br>
       <label>há 44min.</label>
     </li>
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+
+    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano comentou na sua ideia
+      <br>
+      <label>há 44min.</label>
+    </li>
+
+    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano solicitou para participar da ideia "tal tal tal  "
+      <br>
+      <button class='btn green'>Aceitar</button>
+      <button class='btn red'>Recusar</button>
       <br>
       <label>há 44min.</label>
     </li>
 
   </ul>
+
   </ul>
   <ul id="notifications_menu_lateral" class="dropdown-content ">
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
+    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano curtiu sua ideia
       <br>
       <label>há 44min.</label>
     </li>
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
+
+    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano comentou na sua ideia
+      <br>
+      <label>há 44min.</label>
+    </li>
+
+    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano solicitou para participar da ideia "tal tal tal"
+      <br>
+      <button class='btn green'>Aceitar</button>
+      <button class='btn red'>Recusar</button>
       <br>
       <label>há 44min.</label>
     </li>
@@ -264,8 +282,7 @@
 
       <!--coluna feed + ideias-->
       <div class="col s12 m12 l8">
-        <div id="div_adicionar_ideia" class="col s12 m6 l12 z-depth-1 add_ideia"
-          style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;  ">
+        <div id="div_adicionar_ideia" class="col s12 m6 l12 z-depth-1 add_ideia" style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;  ">
 
           <h5 style="color:darkgray;"> &nbsp
             <a class="btn-floating modal-trigger" href="#add_ideia">
@@ -296,8 +313,7 @@
 
 
         <!--coluna trends -->
-        <div class="col s12 m6 l4 z-depth-1  " id='trends'
-          style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+        <div class="col s12 m6 l4 z-depth-1  " id='trends' style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
           <h5>
             # Trends</h5>
 
@@ -334,11 +350,11 @@
 
               </div>
               <div class="input-fields col s12 12 l12">
-                
-                  <h6>Tags (palavras-chaves) para sua ideia</h6>
-                  <div class="chips chips_tags">                    
-                      <input class="custom-class chips_tags">
-                  </div>
+
+                <h6>Tags (palavras-chaves) para sua ideia</h6>
+                <div class="chips chips_tags">
+                  <input class="custom-class chips_tags">
+                </div>
               </div>
 
 
@@ -378,11 +394,11 @@
   <div id="pesquisas" hidden>
     <div class="row">
       <div class="col s12 m8 l8">
-        <div class="col s12  z-depth-1 "
-          style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+        <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
 
           <h5>
-            <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"</h5>
+            <i class="material-icons">search</i>Resultados para "
+            <span id="texto_resultado_busca"></span>"</h5>
           <div class="divider"></div>
 
           <div id="resultado_pesquisas">
