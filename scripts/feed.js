@@ -247,8 +247,6 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
     })
 }
 
-
-
 /** mostra o select de tecnologias qnd o criador clica no botao '+' transforma o botao em 'x' e vice-versa*/
 function mostra_tecnologias() {
     if ($("#btn_add_tecnologia").attr('value') == 1) {
@@ -308,12 +306,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function deleta_comentario(id_mensagem){
-    let url = "http://localhost:3000/comentario/" + id
+    let url = "http://localhost:3000/comentario" 
     $.ajax({
         url: url,
         type: "DELETE",
         contentType: "application/json",
         data: JSON.stringify({
+            usuario: {
+                id_usuario: id
+            },
             comentario: {
                 id_mensagem: id_mensagem
             }
@@ -329,5 +330,4 @@ function deleta_comentario(id_mensagem){
             M.toast({html: "Comentário excluido com sucesso!"})
         }
     })
-
 }

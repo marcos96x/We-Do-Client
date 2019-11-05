@@ -3,11 +3,14 @@ function envia_comentario_ideia(){
     if($("#texto_comentario").val().trim() == ""){
         M.toast({html: "Campo de comentário vazio!"})
     }else{
-        let url = "http://localhost:3000/comentario/" + id
+        let url = "http://localhost:3000/comentario"
         $.ajax({
             url: url,
             type: "POST",
             data: JSON.stringify({
+                "usuario": {
+                    id_usuario: id
+                },  
                 "mensagem": {
                     "ct_mensagem": $("#texto_comentario").val().trim()
                 },
@@ -44,11 +47,14 @@ function envia_comentario(id_comentario, id_ideia, id_texto_comentario_feed, div
         }
     }
     if(teste == 1){
-        let url = "http://localhost:3000/comentario/" + id
+        let url = "http://localhost:3000/comentario"
         $.ajax({
             url: url,
             type: "POST",
             data: JSON.stringify({
+                "usuario": {
+                    id_usuario: id
+                },
                 "mensagem": {
                     "ct_mensagem": msg
                 },

@@ -634,14 +634,20 @@ function deleta_tecnologia(id_tecnologia){
 }
 
 function deleta_comentario(id_mensagem){
-    let url = "http://localhost:3000/comentario/" + id
+    let url = "http://localhost:3000/comentario" 
     $.ajax({
         url: url,
         type: "DELETE",
         contentType: "application/json",
         data: JSON.stringify({
+            usuario: {
+                id_usuario: id
+            },
             comentario: {
                 id_mensagem: id_mensagem
+            },
+            ideia: {
+                id_ideia: id_ideia_original
             }
         })
     }).done(function(res){
@@ -655,7 +661,6 @@ function deleta_comentario(id_mensagem){
             M.toast({html: "Comentário excluido com sucesso!"})
         }
     })
-
 }
 
 function remove_usuario(id_usuario_xxx, id_ideia_xxx){
