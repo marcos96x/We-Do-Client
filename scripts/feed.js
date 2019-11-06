@@ -74,7 +74,6 @@ function carrega_feed(){
         if(res.err){
             alert("Erro na busca do feed")
         }else{
-            console.log(res.ideias)
             let ideias = res.ideias.reverse()
             let nm_ideia, ds_ideia, id_ideia, qtcomentarios, curtidas, tecnologias, membros, idealizador
             let verificacao_interesse, id_icone_interesse_feed, id_icone_curtida_feed, id_texto_curtida_feed, id_texto_comentario_feed
