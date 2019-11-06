@@ -161,17 +161,11 @@ function login() {
             let id = res.usuario.id_usuario
             let token = res.token
             let nome = res.usuario.nm_usuario
-            let id_ultima_curtida = res.usuario.id_ultima_curtida
-            let id_ultima_participacao = res.usuario.id_ultima_participacao
-            let id_ultimo_comentario = res.usuario.id_ultimo_comentario
 
             localStorage.setItem("id_we_do", id)
             localStorage.setItem("email_we_do", email)
             localStorage.setItem("nome_we_do", nome)
             localStorage.setItem("token_we_do", token)
-            localStorage.setItem("id_ultima_curtida", id_ultima_curtida)
-            localStorage.setItem("id_ultima_participacao", id_ultima_participacao)
-            localStorage.setItem("id_ultimo_comentario", id_ultimo_comentario)
 
             window.location.href = "feed.html"
         }
