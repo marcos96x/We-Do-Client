@@ -31,6 +31,13 @@ function envia_comentario_ideia(){
                 $("#comentarios").append(conteudo)
                 $("#texto_comentario").val("")
                 M.toast({html: 'Comentário realizado!'})
+
+                let dados_notificacao = {
+                    id_usuario: id,
+                    id_ideia: id_ideia_original,
+                    acao: 2
+                }
+                socket.emit('notification', dados_notificacao)
             }
         })
     }
@@ -80,6 +87,13 @@ function envia_comentario(id_comentario, id_ideia, id_texto_comentario_feed, div
                 conteudo += "</div><div class='divider'></div>"
                 $(campo).append(conteudo)
                 M.toast({html: 'Comentário realizado!'})
+
+                let dados_notificacao = {
+                    id_usuario: id,
+                    id_ideia: id_ideia,
+                    acao: 2
+                }
+                socket.emit('notification', dados_notificacao)
             }
         })
     }else{

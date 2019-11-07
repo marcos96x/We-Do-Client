@@ -9,6 +9,14 @@
   <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
+  <script src="js/socket.js"></script>
+    <script>
+        // Client Side
+        var socket = io.connect('http://localhost:8080/');
+        socket.on('connect', function () {
+          
+        });
+    </script>
   <script src="scripts/feed.js"></script>
   <script src="scripts/notificacoes.js"></script>
   <script src="scripts/trends.js"></script>
@@ -45,8 +53,8 @@
           </li>
 
           <li>
-            <span class="new badge red white-text">4</span>
-            <a href="#!" class="dropdown-trigger" data-target="notifications">
+            <span hidden class="new badge red white-text" id="qtd_notificacoes"></span>
+            <a href="#!" class="dropdown-trigger" data-target="notifications" id="links_notificacoes">
               <i class="material-icons">
                 notifications
               </i>

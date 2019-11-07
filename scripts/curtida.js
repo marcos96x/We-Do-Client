@@ -3,7 +3,7 @@
 function curtir(id_feed, id_texto, id_ideia) {
     let qt_curtida = Number($(id_feed).attr("name"))
     if ($(id_feed).attr('value') == 0) {
-        // curte
+        // curte        
         let url = "http://localhost:3000/curtida"
         $.ajax({
             url: url,
@@ -33,9 +33,10 @@ function curtir(id_feed, id_texto, id_ideia) {
                     id_ideia: id_ideia,
                     acao: 1
                 }
-                socket.emit('notifications', dados_notificacao)
+                socket.emit('notification', dados_notificacao)
             }
         })     
+        
         
     } else if ($(id_feed).attr('value') == 1) {
         // descurte

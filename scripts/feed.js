@@ -241,6 +241,13 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
             } else if ($(id_elemento).attr('value') == 0){
                 $(id_icone).text("done")
                 $(id_elemento).attr('value', 1).attr('class', 'btn-floating')
+                
+                let dados_notificacao = {
+                    id_usuario: id,
+                    id_ideia: id_ideia,
+                    acao: 3
+                }
+                socket.emit('notification', dados_notificacao)
             }
         }
     })
