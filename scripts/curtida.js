@@ -28,6 +28,12 @@ function curtir(id_feed, id_texto, id_ideia) {
                 $(id_feed).attr("name", (qt_curtida + 1))
                 carrega_trends()
                 
+                let dados_notificacao = {
+                    id_usuario: id,
+                    id_ideia: id_ideia,
+                    acao: 1
+                }
+                socket.emit('notifications', dados_notificacao)
             }
         })     
         

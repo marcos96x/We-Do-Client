@@ -672,7 +672,7 @@ function remove_usuario(id_usuario_xxx, id_ideia_xxx){
         data: JSON.stringify({
             ideia: {
                 id_ideia: id_ideia_xxx,
-                id_criador: id
+                id_usuario: id
             },
             usuario: {
                 id_usuario: id_usuario_xxx
