@@ -46,13 +46,14 @@ $(document).ready(function () {
 
     }
     socket.on("chat_message", (dados) => {
+        console.log(dados)
         if(dados.id_ideia == id_ideia_original){
             if (dados.id_usuario == id) {
                 // mensagem enviada pelo usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<br><label class='left' style='margin-left: 1%;'>"+moment(new Date(), 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
             } else {
                 // mensagem enviada por outro usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "</p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<br><label class='right' style='margin-right: 1%;'>"+moment(new Date(), 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
             }
             let objDiv = document.getElementById("chat");
             objDiv.scrollTop = objDiv.scrollHeight;
@@ -126,7 +127,6 @@ function mostra_ideia(id_ideia) {
         if (res.err) {
             alert("Erro na busca da ideia")
         } else {
-            console.log(res)
             id_ideia_original = id_ideia
             nm_ideia_original = res.ideia.nm_ideia
             status_ideia_original = res.ideia.status_ideia
@@ -135,6 +135,10 @@ function mostra_ideia(id_ideia) {
             let verificacao_idealizador = 0
             let verificacao_membro = 0
             let verificacao_visitante = 0
+
+            $("#nome_da_ideia_com_participantes").html(`
+                <h6 align="center">${nm_ideia_original}</h6>
+            `)
             let elemento_interesse = `<div class="col s2">
             <a class='btn' onclick='mostra_interesse(1)' style='margin-top:33%;'><i class='material-icons white-text'></i>Interesse</a></div>
             </div>`
@@ -262,7 +266,7 @@ function mostra_ideia(id_ideia) {
                         <div class="row" style="padding-bottom: -1%;">
                             <div class="col s11">
                             <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                                <label>24 de dezembro de 2019</label>
+                                <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                 <br>
                                 <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
                         </div>
@@ -275,7 +279,7 @@ function mostra_ideia(id_ideia) {
                         <div class="row" style="padding-bottom: -1%;">
                             <div class="col s11">
                             <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                                <label>24 de dezembro de 2019</label>
+                                <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                 <br>
                                 <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div>
                         </div>
@@ -395,7 +399,7 @@ function mostra_ideia(id_ideia) {
                         <div class="row" style="padding-bottom: -1%;">
                             <div class="col s11">
                             <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                                <label>24 de dezembro de 2019</label>
+                                <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                 <br>
                                 <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
                         </div>
@@ -408,7 +412,7 @@ function mostra_ideia(id_ideia) {
                         <div class="row" style="padding-bottom: -1%;">
                             <div class="col s11">
                             <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                                <label>24 de dezembro de 2019</label>
+                                <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                 <br>
                                 <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div>
                         </div>
@@ -571,7 +575,7 @@ function mostra_ideia(id_ideia) {
                             <div class="row" style="padding-bottom: -1%;">
                                 <div class="col s11">
                                 <p style="font-family: Arial, Helvetica, sans-serif" ;>
-                                    <label>24 de dezembro de 2019</label>
+                                    <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                     <br>
                                     <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
                             </div>
@@ -719,14 +723,13 @@ function mostra_chat(id_ideia) {
             alert("Erro na busca do chat")
         } else {
             let mensagens = res.chat[0]
-            console.log(mensagens)
             for (let i = 0; i < mensagens.length; i++) {
                 if (mensagens[i].id_usuario == id) {
                     // mensagem enviada pelo usuario
-                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "</p></div></div></div>")
+                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<br><label class='left' style='margin-left: 1%;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
                 } else {
                     // mensagem enviada por outro usuario
-                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "</p></div></div></div>")
+                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<br><label class='right' style='margin-right: 1%;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
                 }
             }
             let objDiv = document.getElementById("chat");

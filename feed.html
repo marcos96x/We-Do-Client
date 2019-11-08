@@ -17,6 +17,9 @@
           
         });
     </script>
+    <script src="js/moment-with-locales.js">
+      moment()
+    </script>
   <script src="scripts/feed.js"></script>
   <script src="scripts/notificacoes.js"></script>
   <script src="scripts/trends.js"></script>
@@ -140,12 +143,12 @@
     </ul>
 
     <li>
-      <a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+      <a href="#!" class="dropdown-trigger" data-target="notifications2" id="links_notificacoes2">
         <i class="material-icons">
-          notifications
+            notifications
         </i>Notificações
-        <span class="new badge red white-text">4</span>
-      </a>
+        <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
+     </a>
     </li>
     <li>
       <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
@@ -198,29 +201,12 @@
 
   <!--ESTRUTURA DAS NOTIFICAÇÕES e msgs-->
 
-  <ul id="notifications" class="dropdown-content ">
+  <ul id="notifications" class="dropdown-content">
 
   </ul>
 
   </ul>
-  <ul id="notifications_menu_lateral" class="dropdown-content ">
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano curtiu sua ideia
-      <br>
-      <label>há 44min.</label>
-    </li>
-
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano comentou na sua ideia
-      <br>
-      <label>há 44min.</label>
-    </li>
-
-    <li class="collection-item" style='line-height:100%; padding:10%;'>Fulano solicitou para participar da ideia "tal tal tal"
-      <br>
-      <button class='btn green'>Aceitar</button>
-      <button class='btn red'>Recusar</button>
-      <br>
-      <label>há 44min.</label>
-    </li>
+  <ul id="notifications2" class="dropdown-content ">
 
   </ul>
   <ul id="msgs" class="dropdown-content">

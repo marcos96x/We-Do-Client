@@ -12,8 +12,30 @@ $(document).ready(() => {
             if(res.err){
                 alert(res.err)
             }else{
+                $("#qtd_notificacoes2").fadeOut()                
                 $("#qtd_notificacoes").fadeOut()
+                $("#qtd_notificacoes2").val("")
                 $("#qtd_notificacoes").val("")
+                
+            }
+        })
+    })
+    $("#links_notificacoes2").click(() => {
+        // muda o estado das notificações para "visto"
+        let url = "http://localhost:3000/notificacoes/" + id
+
+        $.ajax({
+            url: url,
+            type: "PUT",
+            contentType: "application/json"
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                $("#qtd_notificacoes").fadeOut()
+                $("#qtd_notificacoes2").fadeOut()
+                $("#qtd_notificacoes").val("")                
+                $("#qtd_notificacoes2").val("")
                 
             }
         })
@@ -24,6 +46,14 @@ $(document).ready(() => {
             if(dados.tp_notificacao == 1){
                 // curtida
                 $("#notifications").append(`
+                <a href="ideia_chat.html?ideia=${dados.id_ideia}">
+                    <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
+                        <br>
+                        <label>em ${dados.momento_notificacao}</label>
+                    </li>
+                </a>
+                `)
+                $("#notifications2").append(`
                 <a href="ideia_chat.html?ideia=${dados.id_ideia}">
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
@@ -43,11 +73,31 @@ $(document).ready(() => {
                     </li>
                 </a>
                 `)
+                $("#notifications2").append(`
+                <a href="ideia_chat.html?ideia=${dados.id_ideia}">
+                    <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
+                        <br>
+                        <label>em ${dados.momento_notificacao}</label>
+                    </li>
+                </a>
+                `)
                 let html = `<a style="color: white;" href="ideia_chat.html?ideia=${dados.id_ideia}">${dados.msg_notificacao}</a>`
                 M.toast({html: html, displayLength: 6000, classes: 'rounded'})
             }else if (dados.tp_notificacao == 3){
                 // solicitação de ideia
                 $("#notifications").append(`                        
+                
+                    <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
+                        <br>
+                            <button class='btn blue' onclick="visualiza_perfil(${dados.id_usuario_acao})">Visitar</button>
+                            <button class='btn green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Aceitar</button>
+                            <button class='btn red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Recusar</button>
+                        <br>
+                        <label>${dados.momento_notificacao}</label>
+                    </li>
+                
+                `)
+                $("#notifications2").append(`                        
                 
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
@@ -165,9 +215,26 @@ function carrega_notificacoes_usuario(id_user){
                             </li>
                         </a>
                         `)
+                        $("#notifications2").append(`
+                        <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
+                            <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
+                                <br>
+                                <label>em ${notificacoes_usuario[i].momento_notificacao}</label>
+                            </li>
+                        </a>
+                        `)
                     }else if (notificacoes_usuario[i].tp_notificacao == 2){
                         // comentario
                         $("#notifications").append(`
+                        
+                        <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
+                            <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
+                                <br>
+                                <label>em ${notificacoes_usuario[i].momento_notificacao}</label>
+                            </li>
+                        </a>
+                        `)
+                        $("#notifications2").append(`
                         
                         <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
@@ -189,9 +256,28 @@ function carrega_notificacoes_usuario(id_user){
                             </li>
                         </a>
                         `)
+                        $("#notifications2").append(`                                                
+                            <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
+                                <br>
+                                    <button style="max-width: 50%;" class='btn blue' onclick="visualiza_perfil(${notificacoes_usuario[i].id_usuario_acao})">Visitar</button>
+                                    <button style="max-width: 50%;" class='btn green' onclick="aceita_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})">Aceitar</button>
+                                    <button style="max-width: 50%;" class='btn red' onclick="recusa_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})">Recusar</button>
+                                <br>
+                                <label>${notificacoes_usuario[i].momento_notificacao}</label>
+                            </li>
+                        </a>
+                        `)
                     }else if (notificacoes_usuario[i].tp_notificacao == 4){
                         // interesse aceito
                         $("#notifications").append(`                        
+                            <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
+                                <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
+                                    <br>                                        
+                                    <label>${notificacoes_usuario[i].momento_notificacao}</label>
+                                </li>
+                            </a>
+                        `)
+                        $("#notifications2").append(`                        
                             <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                                 <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                     <br>                                        
@@ -205,10 +291,17 @@ function carrega_notificacoes_usuario(id_user){
                 if(qtd_notificacoes > 0){
                     $("#qtd_notificacoes").html(qtd_notificacoes)
                     $("#qtd_notificacoes").show()
+                    $("#qtd_notificacoes2").html(qtd_notificacoes)
+                    $("#qtd_notificacoes2").show()
                 }
                 
             }else{
                 $("#notifications").append(`
+                    <li class="collection-item" style='line-height:100%; padding:10%;'>
+                        Nenhuma notificação para mostrar
+                    </li>
+                `)
+                $("#notifications2").append(`
                     <li class="collection-item" style='line-height:100%; padding:10%;'>
                         Nenhuma notificação para mostrar
                     </li>

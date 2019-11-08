@@ -18,12 +18,16 @@
 
         });
     </script>
+    <script src="js/moment-with-locales.js">
+    
+    </script>
     <script src="scripts/ideia_chat.js"></script>
     <script src="scripts/notificacoes.js"></script>
     <script src="scripts/ideia.js"></script>
     <script src="scripts/buscas.js"></script>
     <script src="scripts/envia_comentario.js"></script>
     <script src="scripts/projetos_atuais.js"></script>
+    <script src="scripts/autenticacao_usuario.js"></script>
     <script>
 
     </script>
@@ -147,11 +151,11 @@
         </ul>
 
         <li>
-            <a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+            <a href="#!" class="dropdown-trigger" data-target="notifications2" id="links_notificacoes2">
                 <i class="material-icons">
                     notifications
                 </i>Notificações
-                <span class="new badge red white-text">4</span>
+                <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
             </a>
         </li>
         <li>
@@ -207,26 +211,9 @@
 
     <ul id="notifications" class="dropdown-content ">
 
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-            <br>
-            <label>há 44min.</label>
-        </li>
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-            <br>
-            <label>há 44min.</label>
-        </li>
-
     </ul>
     </ul>
-    <ul id="notifications_menu_lateral" class="dropdown-content ">
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-            <br>
-            <label>há 44min.</label>
-        </li>
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-            <br>
-            <label>há 44min.</label>
-        </li>
+    <ul id="notifications2" class="dropdown-content ">
 
     </ul>
     <ul id="msgs" class="dropdown-content">
@@ -300,9 +287,8 @@
                 <div class="col s12 m12 l12  z-depth-1"
                     style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                     <div class="row z-depth-1">
-                        <div class="col s12 white-text" style="background-color: #404f65;">
-                            <h6>Nome da ideia</h6>
-                            <label style="margin-top:0%;">Com Javã, Gabriel e +3.</label>
+                        <div class="col s12 white-text" style="background-color: #404f65;" id="nome_da_ideia_com_participantes">
+                            
                         </div>
                     </div>
 

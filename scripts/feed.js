@@ -171,7 +171,7 @@ function carrega_feed(){
                             content += `<div style='line-height:110%;' id="div_do_comentario${ideias[i].comentarios[i2].id_mensagem}">`
                             content += `<div class='row'>
                             <div class='col s11'>
-                            <p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label></p>
+                            <p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(ideias[i].comentarios[i2].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}                       </label></p>
                             <a style='font-family:'bree-serif';';>${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
                             </div>`
                             content += `<div class='col s1' style="padding-top: 3%;">`
@@ -184,7 +184,7 @@ function carrega_feed(){
                             content += `<div style='line-height:110%;'>`
                             content += `<div class='row'>
                             <div class='col s11'>
-                            <p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label></p>
+                            <p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(ideias[i].comentarios[i2].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label></p>
                             <a style='font-family:'bree-serif';';>${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
                             </div>`
                             content += `</div>`

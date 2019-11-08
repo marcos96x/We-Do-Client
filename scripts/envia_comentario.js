@@ -25,7 +25,7 @@ function envia_comentario_ideia(){
             }else{
                 let conteudo = ""
                 conteudo += `<div style='line-height:110%;' id="div_do_comentario${res.id_comentario}"><div class="row" style="padding-bottom: -1%;"><div class="col s11">`
-                conteudo += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
+                conteudo += `<p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(new Date(), 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label><br>`
                 conteudo += `<a style='font-family:'bree-serif';'>${localStorage.getItem("nome_we_do")} &nbsp;</a>${$("#texto_comentario").val().trim()}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.id_comentario})" id="iconezinho">delete</i></a></p></div></div>`
                 conteudo += "<div class='divider'></div>"
                 $("#comentarios").append(conteudo)
@@ -81,7 +81,7 @@ function envia_comentario(id_comentario, id_ideia, id_texto_comentario_feed, div
                 let campo = "#" + "bloco_comentarios_ideia" + id_ideia
                 let conteudo = ""
                 conteudo += `<div style='line-height:100%;' id="div_do_comentario${res.id_comentario}">`
-                conteudo += "<p style='font-family: Arial, Helvetica, sans-serif';><label>24 de dezembro de 2019</label><br>"
+                conteudo += `<p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(new Date(), 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label><br>`
                 conteudo += `<a style='font-family:'bree-serif';>${localStorage.getItem("nome_we_do")} &nbsp;</a>${msg}<i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.id_comentario})" style='margin-left:96%; padding-top:-25%;'
                 id="iconezinho">delete</i></p>`
                 conteudo += "</div><div class='divider'></div>"
