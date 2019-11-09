@@ -1,13 +1,14 @@
 let nome = localStorage.getItem("nome_we_do")
 let email = localStorage.getItem("email_we_do")
 let token = localStorage.getItem("token_we_do")
-let id = localStorage.getItem("id_we_do")
+var id = localStorage.getItem("id_we_do")
 
 // valores oficiais da ideia em questão
 var id_ideia_original
 var nm_ideia_original
 var ds_ideia_original
 var status_ideia_original
+var tags_ideia
 // Variaveis globais usadas no index
 let id_ideia_pagina
 var tecnologias_insere_ideia = []
@@ -50,10 +51,10 @@ $(document).ready(function () {
         if(dados.id_ideia == id_ideia_original){
             if (dados.id_usuario == id) {
                 // mensagem enviada pelo usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<br><label class='left' style='margin-left: 1%;'>"+moment(new Date(), 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-left: 1%;margin-top:15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
             } else {
                 // mensagem enviada por outro usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<br><label class='right' style='margin-right: 1%;'>"+moment(new Date(), 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
             }
             let objDiv = document.getElementById("chat");
             objDiv.scrollTop = objDiv.scrollHeight;
@@ -127,10 +128,29 @@ function mostra_ideia(id_ideia) {
         if (res.err) {
             alert("Erro na busca da ideia")
         } else {
+            $("#campo_ideia").html("")
+            $("#div_comentarios").html(`
+            <div class="col s12 m12 l6  z-depth-1"
+            style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
+            <h5> Comentários</h5>
+            <div class="divider"></div>
+
+            <div id="comentarios">
+
+
+            </div>
+            <div id="campo_do_comentario">
+
+            </div>
+
+
+        </div>
+            `)
             id_ideia_original = id_ideia
             nm_ideia_original = res.ideia.nm_ideia
             status_ideia_original = res.ideia.status_ideia
             ds_ideia_original = res.ideia.ds_ideia
+            tags_ideia = res.ideia.tags
             let nm_idealizador
             let verificacao_idealizador = 0
             let verificacao_membro = 0
@@ -140,8 +160,10 @@ function mostra_ideia(id_ideia) {
                 <h6 align="center">${nm_ideia_original}</h6>
             `)
             let elemento_interesse = `<div class="col s2">
-            <a class='btn' onclick='mostra_interesse(1)' style='margin-top:33%;'><i class='material-icons white-text'></i>Interesse</a></div>
-            </div>`
+            <a class='btn' onclick='mostra_interesse(1)' style='margin-top:15%; margin-left: -15px;'><i class='material-icons white-text'></i>Interesse</a></div>
+            </div>
+            
+            `
             
             for (let i = 0; i < res.ideia.membros.length; i++) {
                 if (res.ideia.membros[i].idealizador == 1) {
@@ -156,9 +178,11 @@ function mostra_ideia(id_ideia) {
                     verificacao_idealizador = 0
                 }
                 if(res.ideia.membros[i].id_usuario == id && res.ideia.membros[i].status_solicitacao == 0 && res.ideia.membros[i].idealizador == 0){
-                    elemento_interesse = `<div class="col s2">
-                        <a class='btn-floating' onclick='mostra_interesse(0)' style='margin-top:33%;'><i class='material-icons white-text'>done</i></a></div>
-                        </div>`
+                    elemento_interesse = `
+                    <div class="col s2">
+                        <a class='btn-floating' onclick='mostra_interesse(0)' style='margin-top:15%; margin-left: 45px;'><i class='material-icons white-text'>done</i></a></div>
+                        </div></div>
+                        `
                 }
             }
             if(verificacao_membro == 0 && verificacao_idealizador == 0){
@@ -170,23 +194,22 @@ function mostra_ideia(id_ideia) {
                 //------------------------------------------------------------------------VISITANTE
                 $("#campo_ideia").append(` 
 
-
-        <div class='col s12'>
-            <div class='input-field col s10'>
-                <input disabled='true' id='nm_ideia' type='text'>
-                <label style='font-size: 23px; color:#404f65;' for='nm_ideia' id='label_projeto'>${res.ideia.nm_ideia}
-                </label>
-            </div>
-            ${elemento_interesse}
+                <div class="col s10">
+                <h5 style="margin-left:-11px;">Ideia: ${res.ideia.nm_ideia}</h5></div>
+                ${elemento_interesse}
             
-        </div>
-        <br>
-        <br>
+            
+        
+        
+        
         <br>
         <br>
         <p>Por ${nm_idealizador}</p>
+        <hr>
         <div class='row'>
             <div class='col s12'>
+                
+            <h5>Tecnologias</h5>
             `)
 
             for (let i = 0; i < res.ideia.tecnologias.length; i++) {
@@ -199,7 +222,7 @@ function mostra_ideia(id_ideia) {
 
             $("#campo_ideia").append(`              
 
-
+            <hr>
         </div>
 
         <div class='row'>
@@ -210,7 +233,7 @@ function mostra_ideia(id_ideia) {
                 </blockquote>
             </div>
         </div>
-
+            <hr>
 
         <h5>Integrantes</h5>
         <div class='divider'></div>
@@ -306,20 +329,19 @@ function mostra_ideia(id_ideia) {
                 $("#campo_ideia").append(` 
 
 
-        <div class='col s12'>
-            <div class='input-field col s12'>
-                <input disabled='true' id='nm_ideia' type='text'>
-                <label style='font-size: 23px; color:#404f65;' for='nm_ideia' id='label_projeto'>${res.ideia.nm_ideia}
-                </label>
-            </div>
-        </div>
-        <br>
-        <br>
+                <div class="col s10">
+                    <h5 style="margin-left:-11px;">Ideia: ${res.ideia.nm_ideia}</h5></div>
+
+                </div>
+       
         <br>
         <br>
         <p>Por ${nm_idealizador}</p>
+        <hr>
         <div class='row'>
             <div class='col s12'>
+            
+            <h5>Tecnologias</h5>
             `)
 
             for (let i = 0; i < res.ideia.tecnologias.length; i++) {
@@ -331,7 +353,7 @@ function mostra_ideia(id_ideia) {
             }
 
             $("#campo_ideia").append(`              
-
+            <hr>
 
         </div>
 
@@ -343,7 +365,7 @@ function mostra_ideia(id_ideia) {
                 </blockquote>
             </div>
         </div>
-
+            <hr>
 
         <h5>Integrantes</h5>
         <div class='divider'></div>
@@ -438,35 +460,132 @@ function mostra_ideia(id_ideia) {
                 mostra_chat(id_ideia)   
                 $("#campo_ideia").append(` 
 
-        <div class='col s1'  style='margin-top:5%; margin-right:-3%; '>
-            
-            <a class='btn-floating waves-light  btn-small' id='edita_nome' onclick='edita_nome_ideia()' style='margin-right:2%; '>
-                <i class='material-icons white-text' value='1'  id='iconezinho4'>edit</i>
-            </a>
-        </div>
-        <div class='col s10'>
-            <div class='input-field col s12'>
-                <input disabled='true' id='nm_ideia' type='text'>
-                <label style='font-size: 23px; color:#404f65;' for='nm_ideia' id='label_projeto'>${res.ideia.nm_ideia}
-                </label>
+        <div class="row">
+            <div class='col s1'  style='margin-top:5%; margin-right:-3%; '>
+                
+                <a class='btn-floating waves-light  btn-small' id='edita_nome' onclick='edita_nome_ideia()' style='margin-right:2%; '>
+                    <i class='material-icons white-text' value='1'  id='iconezinho4'>edit</i>
+                </a>
             </div>
+            <div class='col s10'>
+                <div class='input-field col s12'>  
+                    <input disabled='true' id='nm_ideia' type='text'>
+                    <label style='font-size: 23px; color:#404f65;' for='nm_ideia' id='label_projeto'>${res.ideia.nm_ideia}
+                    </label>
+                </div>
 
+            </div>
+            <div class='col s1' style='margin-top:5%; margin-right:-3%;'hidden id='enviar_nm_ideia'>
+                <a class='btn-floating btn-small' id="btn_de_mudar_ideia" onclick="altera_dados_ideia('TI')">
+                    <i class='material-icons'>send</i>
+                </a>
+            </div>
         </div>
-        <div class='col s1' style='margin-top:5%; margin-right:-3%;'hidden id='enviar_nm_ideia'>
-            <a class='btn-floating btn-small' id="btn_de_mudar_ideia" onclick="altera_dados_ideia('TI')">
-                <i class='material-icons'>send</i>
-            </a>
+
+        <p style="margin-top:-20px;">Por ${nm_idealizador}</p>
+        <hr>
+        <div class="row">
+                <div class="col s12">
+                    <h5><button class="btn-floating btn-small" id="btn_edita_status" onclick="btn_edita_status(1)"><i class="material-icons">edit</i></button> &nbspStatus da ideia: <label style='font-size: 23px;' id="txt_status_ideia">`)
+
+                    if(status_ideia_original == 0)
+                        $("#txt_status_ideia").append("Aberta à participações")
+                    else if (status_ideia_original == 1)
+                        $("#txt_status_ideia").append("Em desenvolvimento")
+                    else if (status_ideia_original == 2)
+                        $("#txt_status_ideia").append("Concluída")
+                    
+                    $("#campo_ideia").append(`</label></h5>
+                </div>
+                <div class="col s12" hidden id="opcoes_status">
+                    `)
+                for(let i = 0; i < 3; i++){
+                    if(status_ideia_original == i){
+                        // campo preenchido
+                        if(i == 0){
+                            $("#opcoes_status").append(`
+                            <label>
+                                <input name="status_ideia_radio" value="${i}" type="radio" checked />
+                                <span>Aberto à participações</span>
+                            </label>                      
+                          `)
+                        }else if (i == 1){
+                            $("#opcoes_status").append(`
+                            <label>
+                                <input name="status_ideia_radio" value="${i}" type="radio" checked />
+                                <span>Em Desenvolvimento</span>
+                            </label>                      
+                          `)
+                        }else{
+                            $("#opcoes_status").append(`
+                            <label>
+                                <input name="status_ideia_radio" value="${i}" type="radio" checked />
+                                <span>Ideia concluída</span>
+                            </label>                      
+                          `)
+                        }                        
+                    }else{
+                        // outros campos
+                        if(i == 0){
+                            $("#opcoes_status").append(`
+                            <label>
+                                <input name="status_ideia_radio" value="${i}" type="radio" onclick="altera_dados_ideia('AB')"/>
+                                <span>Aberto à participações</span>
+                            </label>                      
+                          `)
+                        }else if (i == 1){
+                            $("#opcoes_status").append(`
+                            <label>
+                                <input name="status_ideia_radio" value="${i}" type="radio" onclick="altera_dados_ideia('DE')"/>
+                                <span>Em Desenvolvimento</span>
+                            </label>                      
+                          `)
+                        }else{
+                            $("#opcoes_status").append(`
+                            <label>
+                                <input name="status_ideia_radio" value="${i}" type="radio" onclick="altera_dados_ideia('CO')"/>
+                                <span>Ideia concluída</span>
+                            </label>                      
+                          `)
+                        }  
+                    }
+                }
+                    $("#campo_ideia").append(`
+                </div>
         </div>
+        <div class="row">
+        
+            
+            <div class="col s12">
+                <h5> <button class="btn-floating btn-small" onclick="edita_tags(1)" id="btn_edita_tag"><i class="material-icons">edit</i></button> &nbspTags</h5> 
+                <div class="row" id="tags_ideia">
+                    `)
+                    for(let i = 0; i < tags_ideia.length; i++){
+                        $("#campo_ideia").append(`{${tags_ideia[i].nm_tag}}`)
+                    }
 
-
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <p>Por ${nm_idealizador}</p>
+            $("#campo_ideia").append(`
+                </div>  
+                <div hidden class="row"  id="campo_edita_tags">
+                    <div  class='input-field col s10'>  
+                        <input id='texto_tags' type='text' onKeyDown="coloca_tag()">
+                        <label style='font-size: 18px; color:#404f65;' for='texto_tags'>
+                            Digite uma tag (max de 20 caracteres)
+                        </label>
+                    </div>
+                    <div class="col s2">
+                        <button style="margin-top:30px;" class="btn-floating btn-small" onclick="add_tag()"><i class="material-icons">add</i></button>
+                    </div>
+                </div>
+                <div class="row" id="tags_mostradas_ideia">
+                    
+                </div> 
+            </div>
+        </div>
         <div class='row'>
             <div class='col s12'>
+            
+            <h5>Tecnologias</h5>
             `)
 
             for (let i = 0; i < res.ideia.tecnologias.length; i++) {
@@ -630,9 +749,9 @@ function deleta_tecnologia(id_tecnologia){
         }else{            
             if(res.msg){
                 M.toast({html: res.msg})
+                mostra_ideia(id_ideia_pagina)
                 return false
             }
-            window.location.reload()
         }
     })
 }
@@ -726,10 +845,10 @@ function mostra_chat(id_ideia) {
             for (let i = 0; i < mensagens.length; i++) {
                 if (mensagens[i].id_usuario == id) {
                     // mensagem enviada pelo usuario
-                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<br><label class='left' style='margin-left: 1%;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
+                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-left: 1%;margin-top:15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
                 } else {
                     // mensagem enviada por outro usuario
-                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-left: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color:rgb(207, 197, 197); border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<br><label class='right' style='margin-right: 1%;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label></p></div></div></div>")
+                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
                 }
             }
             let objDiv = document.getElementById("chat");

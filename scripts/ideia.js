@@ -4,23 +4,140 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Chips.init(elems);
 });
 var tags = [];
+var tags_para_add = []
+
+function coloca_tag(){
+    if(event.keyCode == "13" || event.keyCode == "32"){
+        if($("#texto_tags").val().trim() != ""){
+            
+            // verifica se ja existe a tag na inserção
+            let verificaTagRepetida = 0
+            for(let i = 0; i < tags_para_add.length; i++){
+                if(tags_para_add[i] == $("#texto_tags").val().trim())
+                    verificaTagRepetida = 1
+            }
+            if(verificaTagRepetida == 0){
+                // verifica se a tag já existe na ideia
+                for(let i = 0; i < tags_ideia.length; i++){
+                    if(tags_ideia[i] == $("#texto_tags").val().trim())
+                        verificaTagRepetida = 1
+                }
+                if(verificaTagRepetida == 0){
+                    tags_para_add.push($("#texto_tags").val().trim())
+                    $("#texto_tags").val("")
+                    $("#tags_mostradas_ideia").html("")
+                    for(let i = 0; i < tags_para_add.length; i++){
+                        $("#tags_mostradas_ideia").append(`{${tags_para_add[i]}}, `)
+                    }
+                }else{
+                    M.toast({html: "Esta tag existe na sua ideia!"})
+                }
+                
+            }else{
+                M.toast({html: "Esta tag já foi inserida!"})
+            }
+            
+        }
+        
+    }
+}
+
+function btn_edita_status(estado){
+    if(estado == 1){
+        // abre a opçao
+        $("#opcoes_status").slideToggle()
+
+        $("#btn_edita_status").attr("onclick", "btn_edita_status(0)")
+    }else{
+        // fecha a opção
+        $("#btn_edita_status").attr("onclick", "btn_edita_status(1)")
+        $("#opcoes_status").slideDown()
+    }
+}
+
+function add_tag(){
+    if(tags_para_add.length == 0){
+        M.toast({html: "Sem tag inserida!"})
+    }else{
+        let url = "http://localhost:3000/ideia/tags"
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                usuario: {
+                    id_usuario: id
+                },
+                ideia: {
+                    id_ideia: id_ideia_original,
+                    tags_ideia: tags_para_add
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                mostra_ideia(id_ideia_original)
+                if(tags_para_add.length < 2){
+                    M.toast({html: "Tag inserida com sucesso"})
+                }else{
+                    M.toast({html: "Tags inseridas com sucesso"})
+                }
+            }
+        })
+    }
+}
+
+function edita_tags(estado){
+    if(estado == 1){
+        // abre a opçao
+        $("#campo_edita_tags").slideToggle()
+
+        $("#btn_edita_tag").attr("onclick", "edita_tags(0)")
+    }else{
+        // fecha a opção
+        $("#btn_edita_tag").attr("onclick", "edita_tags(1)")
+        $("#campo_edita_tags").slideDown()
+    }
+}
+
 function cria_ideia(){
-    var campos = document.getElementById('tags_');
     let nm_ideia = document.getElementById("titulo_ideia").value
     let desc = $("#textarea2").val()
     let tecnologias = []
     for(let i = 0; i < tecnologias_insere_ideia.length; i+= 2){
         tecnologias.push(tecnologias_insere_ideia[i])
     }
-    /**
-     * Faltando apenas colocar a parte de inserir tags
-     */
-
-    console.log('funcção');
-    for (var i = 0; i < campos.M_Chips.chipsData.length; i++) {
-        tags.push(campos.M_Chips.chipsData[i].tag);
+    if(tecnologias.length == 0){
+        M.toast({html: "Insira uma tecnologia"})
+    }else{
+        let url = "http://localhost:3000/ideia"
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                ideia: {
+                    nm_ideia: nm_ideia,
+                    ds_ideia: desc,
+                    tecnologias_ideia: tecnologias,
+                    tags_ideia: tags
+                },
+                usuario: {
+                    id_usuario: id
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                M.toast({html: "Ideia criada com sucesso!"})
+                carrega_feed(id)
+            }
+        })
     }
-    console.log(tags)
+
 }
 
 function insere_tecnologia_ideia(id, nm) {
@@ -63,9 +180,10 @@ function adiciona_tecnologia_na_ideia(){
             }else{
                 if(res.msg){
                     M.toast({html: res.msg})
+                    
+                    mostra_ideia(id_ideia_pagina)
                     return false
                 }
-                window.location.reload()
             }
         })
     }
@@ -126,7 +244,8 @@ function altera_dados_ideia(dado){
                     return false
                 }else{
                     if(res.msg == "OK"){
-                        window.location.reload()
+                        M.toast({html: "Nome da ideia atualizado com sucesso!"})                        
+                        mostra_ideia(id_ideia_pagina)
                     }else{
                         M.toast({html: res.msg})
                         return false
@@ -139,8 +258,6 @@ function altera_dados_ideia(dado){
         if($("#desc_ideiaa").val().trim() == ""){
             M.toast({html: "Campo da nova descrição vazio!"})
         }else{
-            alert("Altera descricao - " + ds_ideia_original + " Para: " + $("#desc_ideiaa").val())
-
             let url = "http://localhost:3000/ideia"
             
             $.ajax({
@@ -164,7 +281,8 @@ function altera_dados_ideia(dado){
                     return false
                 }else{
                     if(res.msg == "OK"){
-                        window.location.reload()
+                        M.toast({html: "Descrição da ideia atualizada com sucesso!"})                        
+                        mostra_ideia(id_ideia_pagina)
                     }else{
                         M.toast({html: res.msg})
                         return false
@@ -173,12 +291,80 @@ function altera_dados_ideia(dado){
             })
         }
     }else if (dado == "CO"){
-        // muda o status para concluída
-        alert("Altera pra ideia concluída")
+        // muda o status da ideia concluída
+        let url = "http://localhost:3000/ideia/status"
+
+        $.ajax({
+            url: url,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
+                ideia: {
+                    id_ideia: id_ideia_original,
+                    status_ideia: 2
+                },
+                usuario: {
+                    id_usuario: id
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                M.toast({html: "Sua ideia foi marcada como concluída!"})
+                mostra_ideia(id_ideia_original)
+            }
+        })
     }else if (dado == "DE"){
-        // muda o status para em desenvolvimento
-    }else if (dado == "PR"){
-        // muda o status para a procura de pessoas
+        // muda o status da ideia para em desenvolvimento
+        let url = "http://localhost:3000/ideia/status"
+
+        $.ajax({
+            url: url,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
+                ideia: {
+                    id_ideia: id_ideia_original,
+                    status_ideia: 1
+                },
+                usuario: {
+                    id_usuario: id
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                M.toast({html: "Sua ideia foi marcada como em desenvolvimento!"})
+                mostra_ideia(id_ideia_original)
+            }
+        })
+    }else if (dado == "AB"){
+        // muda o status da ideia para aberta
+        let url = "http://localhost:3000/ideia/status"
+
+        $.ajax({
+            url: url,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
+                ideia: {
+                    id_ideia: id_ideia_original,
+                    status_ideia: 0
+                },
+                usuario: {
+                    id_usuario: id
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                M.toast({html: "Sua ideia foi marcada como Aberta à participações!"})
+                mostra_ideia(id_ideia_original)
+            }
+        })
     }
 }
 

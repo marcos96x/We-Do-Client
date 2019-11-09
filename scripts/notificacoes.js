@@ -49,7 +49,7 @@ $(document).ready(() => {
                 <a href="ideia_chat.html?ideia=${dados.id_ideia}">
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
-                        <label>em ${dados.momento_notificacao}</label>
+                        <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
                 </a>
                 `)
@@ -57,7 +57,7 @@ $(document).ready(() => {
                 <a href="ideia_chat.html?ideia=${dados.id_ideia}">
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
-                        <label>em ${dados.momento_notificacao}</label>
+                        <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
                 </a>
                 `)
@@ -69,7 +69,7 @@ $(document).ready(() => {
                 <a href="ideia_chat.html?ideia=${dados.id_ideia}">
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
-                        <label>em ${dados.momento_notificacao}</label>
+                        <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
                 </a>
                 `)
@@ -77,7 +77,7 @@ $(document).ready(() => {
                 <a href="ideia_chat.html?ideia=${dados.id_ideia}">
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
-                        <label>em ${dados.momento_notificacao}</label>
+                        <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
                 </a>
                 `)
@@ -93,7 +93,7 @@ $(document).ready(() => {
                             <button class='btn green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Aceitar</button>
                             <button class='btn red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Recusar</button>
                         <br>
-                        <label>${dados.momento_notificacao}</label>
+                        <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
                 
                 `)
@@ -105,13 +105,14 @@ $(document).ready(() => {
                             <button class='btn green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Aceitar</button>
                             <button class='btn red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Recusar</button>
                         <br>
-                        <label>${dados.momento_notificacao}</label>
+                        <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
                 
                 `)
+                // --====================================---------------------------------------------------------BOTAO DE VISITAR PERFIL
                 let html = `
                     <a style="color: white;" href="ideia_chat.html?ideia=${dados.id_ideia}">${dados.msg_notificacao}</a>&nbsp&nbsp
-                        <button class='btn blue' onclick="visualiza_perfil(${dados.id_usuario_acao})">Visitar</button>
+                        <button class='btn-floating blue' onclick="visualiza_perfil(${dados.id_usuario_acao})"><i class="material-icons">person</i></button>
                         <button class='btn-floating green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})"><i class="material-icons">check</i></button>
                         <button class='btn-floating red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})"><i class="material-icons">close</i></button>
                     `
@@ -211,7 +212,7 @@ function carrega_notificacoes_usuario(id_user){
                         <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                 <br>
-                                <label>em ${notificacoes_usuario[i].momento_notificacao}</label>
+                                <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                             </li>
                         </a>
                         `)
@@ -219,7 +220,7 @@ function carrega_notificacoes_usuario(id_user){
                         <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                 <br>
-                                <label>em ${notificacoes_usuario[i].momento_notificacao}</label>
+                                <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                             </li>
                         </a>
                         `)
@@ -230,7 +231,7 @@ function carrega_notificacoes_usuario(id_user){
                         <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                 <br>
-                                <label>em ${notificacoes_usuario[i].momento_notificacao}</label>
+                                <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                             </li>
                         </a>
                         `)
@@ -239,7 +240,7 @@ function carrega_notificacoes_usuario(id_user){
                         <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                 <br>
-                                <label>em ${notificacoes_usuario[i].momento_notificacao}</label>
+                                <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                             </li>
                         </a>
                         `)
@@ -248,22 +249,22 @@ function carrega_notificacoes_usuario(id_user){
                         $("#notifications").append(`                                                
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                 <br>
-                                    <button style="max-width: 50%;" class='btn blue' onclick="visualiza_perfil(${notificacoes_usuario[i].id_usuario_acao})">Visitar</button>
-                                    <button style="max-width: 50%;" class='btn green' onclick="aceita_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})">Aceitar</button>
-                                    <button style="max-width: 50%;" class='btn red' onclick="recusa_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})">Recusar</button>
+                                    <button style="max-width: 50%;" class='btn-floating blue' onclick="visualiza_perfil(${notificacoes_usuario[i].id_usuario_acao})"><i style="margin-top:-10px;" class="material-icons">person</i></button>
+                                    <button style="max-width: 50%;" class='btn-floating green' onclick="aceita_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})"><i style="margin-top:-10px;" class="material-icons">done</i></button>
+                                    <button style="max-width: 50%;" class='btn-floating red' onclick="recusa_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})"><i style="margin-top:-10px;" class="material-icons">close</i></button>
                                 <br>
-                                <label>${notificacoes_usuario[i].momento_notificacao}</label>
+                                <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                             </li>
                         </a>
                         `)
                         $("#notifications2").append(`                                                
                             <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                 <br>
-                                    <button style="max-width: 50%;" class='btn blue' onclick="visualiza_perfil(${notificacoes_usuario[i].id_usuario_acao})">Visitar</button>
-                                    <button style="max-width: 50%;" class='btn green' onclick="aceita_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})">Aceitar</button>
-                                    <button style="max-width: 50%;" class='btn red' onclick="recusa_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})">Recusar</button>
+                                    <button style="max-width: 50%;" class='btn-floating blue' onclick="visualiza_perfil(${notificacoes_usuario[i].id_usuario_acao})"><i class="material-icons">person</i></button>
+                                    <button style="max-width: 50%;" class='btn-floating green' onclick="aceita_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})"><i class="material-icons">done</i></button>
+                                    <button style="max-width: 50%;" class='btn-floating red' onclick="recusa_participacao(${notificacoes_usuario[i].id_usuario}, ${notificacoes_usuario[i].id_usuario_acao}, ${notificacoes_usuario[i].id_ideia})"><i class="material-icons">close</i></button>
                                 <br>
-                                <label>${notificacoes_usuario[i].momento_notificacao}</label>
+                                <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                             </li>
                         </a>
                         `)
@@ -273,7 +274,7 @@ function carrega_notificacoes_usuario(id_user){
                             <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                                 <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                     <br>                                        
-                                    <label>${notificacoes_usuario[i].momento_notificacao}</label>
+                                    <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                 </li>
                             </a>
                         `)
@@ -281,7 +282,7 @@ function carrega_notificacoes_usuario(id_user){
                             <a href="ideia_chat.html?ideia=${notificacoes_usuario[i].id_ideia}">
                                 <li class="collection-item" style='line-height:100%; padding:10%;'>${notificacoes_usuario[i].msg_notificacao}
                                     <br>                                        
-                                    <label>${notificacoes_usuario[i].momento_notificacao}</label>
+                                    <label>${moment(notificacoes_usuario[i].momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                 </li>
                             </a>
                         `)

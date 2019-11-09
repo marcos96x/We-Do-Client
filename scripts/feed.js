@@ -74,7 +74,7 @@ function carrega_feed(){
         if(res.err){
             alert("Erro na busca do feed")
         }else{
-            let ideias = res.ideias.reverse()
+            let ideias = res.ideias
             let nm_ideia, ds_ideia, id_ideia, qtcomentarios, curtidas, tecnologias, membros, idealizador
             let verificacao_interesse, id_icone_interesse_feed, id_icone_curtida_feed, id_texto_curtida_feed, id_texto_comentario_feed
             for(let i = 0; i < ideias.length; i++){
@@ -97,7 +97,6 @@ function carrega_feed(){
                 for(let i2 = 0; i2 < membros.length; i2++){
                     if(membros[i2].idealizador == 1){
                         idealizador = membros[i2]
-                        //membros.splice(i2, 1)
                     }                     
                 }
                 let nm_id_interesse = "btn_add_tecnologia_feed"+id_ideia
@@ -106,8 +105,14 @@ function carrega_feed(){
                 // verifica se o usuario já se interessou pela ideia
                 for(let i2 = 0; i2 < membros.length; i2++){     
                     if(membros[i2].id_usuario == id){
-                        // ja se interessou
-                        verificacao_interesse = 1
+                        if(membros[i2].status_solicitacao == 1){
+                            // ja faz parte
+                            verificacao_interesse = 2
+                        }else{
+                            // ja se interessou
+                            verificacao_interesse = 1
+                        }
+                        
                     }  
                 }
                 id_icone_interesse_feed = "icone_interesse_feed" + id_ideia
@@ -117,13 +122,15 @@ function carrega_feed(){
                 if(verificacao_interesse == 0){
                     // imprime sem interesse clicado
                     content += "<a class='btn' id='"+nm_id_interesse+"' onclick='mostra_interesse("+nm_id_interesse+", "+id_icone_interesse_feed+", "+id_ideia+")' value='0' style='margin-top:13%;'><i class='material-icons white-text' id='"+id_icone_interesse_feed +"'></i>Interesse</a></div>"
+                }else if (verificacao_interesse == 2){
+                    content += "</div>"
                 }else{
                     // imprime com interesse clicado
                     content += "<a class='btn-floating' id='"+nm_id_interesse+"' onclick='mostra_interesse("+nm_id_interesse+", "+id_icone_interesse_feed+", "+id_ideia+")' value='1' style='margin-top:13%;'><i class='material-icons white-text' id='"+id_icone_interesse_feed +"'>done</i>Interesse</a></div>"
                 }
 
                 
-                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - "+idealizador.nm_usuario+"</label></h5><div class='divider'></div><div class='divider'></div><br>"
+                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - "+idealizador.nm_usuario+"</label></h5><div style='width: 101%;' class='divider'></div><br>"
                 
                 for(let i2 = 0; i2 < tecnologias.length; i2++){
                     content += "<div class='chip'>"+tecnologias[i2].nm_tecnologia+"</div>"
@@ -237,6 +244,8 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
                 $(id_icone).text(" ")
                 $(id_elemento).attr('value', 0).attr('class', 'btn')
 
+                M.toast({html: "Interesse removido!"})
+
                 
             } else if ($(id_elemento).attr('value') == 0){
                 $(id_icone).text("done")
@@ -248,6 +257,7 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
                     acao: 3
                 }
                 socket.emit('notification', dados_notificacao)
+                M.toast({html: "Interesse demonstrado!"})
             }
         }
     })
