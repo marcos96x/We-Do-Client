@@ -51,10 +51,10 @@ $(document).ready(function () {
         if(dados.id_ideia == id_ideia_original){
             if (dados.id_usuario == id) {
                 // mensagem enviada pelo usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-left: 1%;margin-top:15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<label class='right' style='margin-left: 1%;margin-top:15px;'>"+moment(dados.hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
             } else {
                 // mensagem enviada por outro usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(dados.hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
             }
             let objDiv = document.getElementById("chat");
             objDiv.scrollTop = objDiv.scrollHeight;
