@@ -134,6 +134,7 @@ function cria_ideia(){
             }else{
                 M.toast({html: "Ideia criada com sucesso!"})
                 carrega_feed(id)
+                projetos_atuais()
             }
         })
     }

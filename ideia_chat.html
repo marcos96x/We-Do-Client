@@ -19,7 +19,7 @@
         });
     </script>
     <script src="js/moment-with-locales.js">
-    
+
     </script>
     <script src="scripts/ideia_chat.js"></script>
     <script src="scripts/notificacoes.js"></script>
@@ -141,7 +141,7 @@
                     <div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
 
                     <div class="collapsible-body" id="projetos_atuais_lateral">
-                            <a class='black-text' href='#!'></a>
+                        <a class='black-text' href='#!'></a>
                     </div>
 
 
@@ -287,8 +287,9 @@
                 <div class="col s12 m12 l12  z-depth-1"
                     style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                     <div class="row z-depth-1">
-                        <div class="col s12 white-text" style="background-color: #404f65;" id="nome_da_ideia_com_participantes">
-                            
+                        <div class="col s12 white-text" style="background-color: #404f65;"
+                            id="nome_da_ideia_com_participantes">
+
                         </div>
                     </div>
 
@@ -305,7 +306,7 @@
                             <div class="col s11 chat"
                                 style='padding-left:5%;padding-right:5%;padding-top:-5%;border-color:rgb(209, 203, 203);border-style: solid; border-width: 1px; border-radius:30px ;'>
 
-                                <input id="campo_mensagem" type="text" on="envia_mensagem()">
+                                <input id="campo_mensagem" type="text" onkeydown="envia_mensagem_enter()">
 
                             </div>
                             <div class="col s1" style='margin-top:1%;'>
@@ -346,105 +347,141 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Modal Structure de adicionar tecnologia-->
-    <div id="add_tecnologia_ideia" class="modal">
+    <!-- Modal de passar ideia -->
+    <div id="modal_passa_ideia" class="modal">
         <div class="modal-content">
-            <h4>Adicione uma tecnologia à sua ideia!</h4>
-            <div class="row">
-                <form class="col s12" id="form_add_tecnologia">
-                    <div class="row">
-                        <div class="input-field col s12 m6 l12 ">
-                            <select>
-                                <option value="" disabled>Adicione as tecnologias necessárias </option>
-                            </select>
-
-                        </div>
-                    </div>
-
-                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias_add">
-
-                    </div>
-
-                </form>
+            <h5>Escolha um membro da sua ideia para se tornar o novo idealizador!</h5>
+            <div class="row" id="membros_passa_ideia">
+                
             </div>
-            <br><br><br><br><br>
             <div class="row center-align">
-                <a class="btn modal-close" onclick="adiciona_tecnologia_na_ideia()">Adicionar</a>
+                <a class="btn modal-close" onclick="passa_ideia()">Torna-lo idealizador</a>
 
                 <a class="btn modal-close" id="cancela_tecnologia">cancelar</a>
             </div>
         </div>
     </div>
-
-
-
-
-    <!-- Modal Structure de ADICIONAR UMA IDEIA-->
-    <div id="add_ideia" class="modal">
+    <!-- Modal de apagar ideia -->
+    <div id="modal_apaga_ideia" class="modal">
         <div class="modal-content">
-            <h4>Adicionar uma ideia</h4>
-            <div class="row">
-                <form class="col s12" id="alt_dados">
-                    <div class="row">
-                        <div class="input-field col s12 black-text">
-                            <input id="titulo_ideia" type="text">
-                            <label for="titulo_ideia">Titulo da ideia</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
-                            <label for="textarea2">Descrição da ideia</label>
-                        </div>
-                        <div class="input-field col s12 m6 l12 ">
-                            <select multiple id='tecnologias_select'>
-                                <option value="" disabled>Adicione as tecnologias necessárias </option>
-                            </select>
-
-                        </div>
-                            <div class="chips" id='tags_' >
-                                <input class="custom-class">
-                            </div>                    
-
-
-                    </div>
-
-                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
-
-                    </div>
-                    <div class="row center">
-                        <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
-                        <a class="btn modal-close" id="cancela">Cancela</a>
-                    </div>
-                </form>
+            <h5 id="txt_confirma_apagar_ideia"></h5>
+            <div class="input-field col s12 black-text">
+                <input id="confirma_nome_ideia" type="text" onkeydown="confere_nome_ideia()">
+                <label for="confirma_nome_ideia">Nome da ideia</label>
             </div>
+            <div class="row center-align">
+                <a id="btn_apaga_ideia" class="btn modal-close red disabled" onclick="apaga_ideia()">Apagar</a>
 
+                <a class="btn modal-close" id="cancela_tecnologia">Cancelar</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de sair de uma ideia -->
+    <div id="modal_sair_ideia" class="modal">
+        <div class="modal-content">
+            <h5 id="txt_confirma_sair_ideia"></h5>
+            <div class="row center-align">
+                <a id="btn_sair_ideia" class="btn modal-close red" onclick="sair_ideia()">Sair</a>
+
+                <a class="btn modal-close" id="cancela_tecnologia">Cancelar</a>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal Structure de adicionar tecnologia-->
+        <div id="add_tecnologia_ideia" class="modal">
+            <div class="modal-content">
+                <h4>Adicione uma tecnologia à sua ideia!</h4>
+                <div class="row">
+                    <form class="col s12" id="form_add_tecnologia">
+                        <div class="row">
+                            <div class="input-field col s12 m6 l12 ">
+                                <select>
+                                    <option value="" disabled>Adicione as tecnologias necessárias </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class=" col s12 m6 l12 center-align" id="lista_tecnologias_add">
+
+                        </div>
+
+                    </form>
+                </div>
+                <br><br><br><br><br>
+                <div class="row center-align">
+                    <a class="btn modal-close" onclick="adiciona_tecnologia_na_ideia()">Adicionar</a>
+
+                    <a class="btn modal-close" id="cancela_tecnologia">cancelar</a>
+                </div>
+            </div>
         </div>
 
 
-    </div>
-    <!-- Resultado das buscas -->
-
-    <div id="pesquisas" hidden>
-        <div class="row">
-            <div class="col s12 m8 l8">
-                <div class="col s12  z-depth-1 "
-                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
-
-                    <h5>
-                        <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"
-                    </h5>
-                    <div class="divider"></div>
-
-                    <div id="resultado_pesquisas">
 
 
+        <!-- Modal Structure de ADICIONAR UMA IDEIA-->
+        <div id="add_ideia" class="modal">
+            <div class="modal-content">
+                <h4>Adicionar uma ideia</h4>
+                <div class="row">
+                    <form class="col s12" id="alt_dados">
+                        <div class="row">
+                            <div class="input-field col s12 black-text">
+                                <input id="titulo_ideia" type="text">
+                                <label for="titulo_ideia">Titulo da ideia</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                                <label for="textarea2">Descrição da ideia</label>
+                            </div>
+                            <div class="input-field col s12 m6 l12 ">
+                                <select multiple id='tecnologias_select'>
+                                    <option value="" disabled>Adicione as tecnologias necessárias </option>
+                                </select>
 
+                            </div>
+                        </div>
+
+                        <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+
+                        </div>
+                        <div class="row center">
+                            <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                            <a class="btn modal-close" id="cancela">Cancela</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- Resultado das buscas -->
+
+        <div id="pesquisas" hidden>
+            <div class="row">
+                <div class="col s12 m8 l8">
+                    <div class="col s12  z-depth-1 "
+                        style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+                        <h5>
+                            <i class="material-icons">search</i>Resultados para "<span
+                                id="texto_resultado_busca"></span>"
+                        </h5>
+                        <div class="divider"></div>
+
+                        <div id="resultado_pesquisas">
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>

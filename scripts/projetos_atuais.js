@@ -1,4 +1,6 @@
 function projetos_atuais(){
+    $("#projetos_atuais_lateral").html("")
+    $("#projetos_atuais").html("")
     let url = "http://localhost:3000/ideia/projetos_atuais/" + id
     $.ajax({
         url: url,

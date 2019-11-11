@@ -12,6 +12,31 @@ $(document).ready(function(){
     projetos_atuais()
     abre_tecnologias()
     $("#pesquisas").hide()
+
+     // pega o parametro na url de msg 
+     var query = location.search.slice(1);
+     var partes = query.split('&');
+     var data = {};
+     partes.forEach(function (parte) {
+         var chaveValor = parte.split('=');
+         var chave = chaveValor[0];
+         var valor = chaveValor[1];
+         data[chave] = valor;
+     });
+     let idMsg = Number(data.msg)
+     if(idMsg){
+         switch(idMsg){
+             case 1:
+                M.toast({html: "Sua ideia foi excluida com sucesso!"})
+                break
+            case 2:
+                M.toast({html: "Ideia não encontrada"})
+                break
+            default:
+                M.toast({html: "Código de mensagem invalido"})
+                break
+         }
+     }
 })
 
 
@@ -75,6 +100,7 @@ function carrega_feed(){
             alert("Erro na busca do feed")
         }else{
             let ideias = res.ideias
+            console.log(ideias)
             let nm_ideia, ds_ideia, id_ideia, qtcomentarios, curtidas, tecnologias, membros, idealizador
             let verificacao_interesse, id_icone_interesse_feed, id_icone_curtida_feed, id_texto_curtida_feed, id_texto_comentario_feed
             for(let i = 0; i < ideias.length; i++){
