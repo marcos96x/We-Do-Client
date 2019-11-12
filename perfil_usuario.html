@@ -9,7 +9,24 @@
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    
+    <script src="scripts/perfil_config.js"></script>
+    <script src="scripts/buscas.js"></script>
+    <script src="scripts/trends.js"></script>
+    <script src="scripts/autenticacao_usuario.js"></script>
+    <script src="scripts/projetos_atuais.js"></script>
+    <script src="scripts/notificacoes.js"></script>
+    <script src="js/socket.js"></script>
+    <script>
+        // Client Side
+        var socket = io.connect('http://localhost:8080/');
+        socket.on('connect', function () {
+
+        });
+    </script>
+    <script src="js/moment-with-locales.js">
+
+    </script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -27,10 +44,21 @@
                 </a>
 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-
+                    <li hidden onclick="volta_busca()" id="botao_voltar_busca">
+                        <a> <i class="material-icons">
+                                reply
+                            </i></a>
+                    </li>
                     <li>
-                        <span class="new badge red white-text">4</span>
-                        <a href="#!" class="dropdown-trigger" data-target="notifications">
+                        <a href="feed.html"> <i class="material-icons">
+                                home
+                            </i></a>
+
+
+                    </li>
+                    <li>
+                        <span hidden class="new badge red white-text" id="qtd_notificacoes"></span>
+                        <a href="#!" class="dropdown-trigger" data-target="notifications" id="links_notificacoes">
                             <i class="material-icons">
                                 notifications
                             </i>
@@ -50,7 +78,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="collapsible.html">Sair</a>
+                        <a onclick="sair()">Sair</a>
                     </li>
 
 
@@ -59,35 +87,27 @@
                     <div class="col s4">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" type="text" class="validate">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate">
                         </div>
                     </div>
 
-                    <div class="col s4" id="search_tec">
+                    <div class="col s3" id="search_tec">
                         <div class="input-field col s12">
-                            <select>
-                                <option value="" disabled selected>Pesquise por tecnologia</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                            <select multiple id='todas_tecnologias'>
+                                <option value="" disabled>Pesquise por tecnologia</option>
                             </select>
-
                         </div>
                     </div>
-
-
-
                     <div class="col s1">
-                        <i class="material-icons">
-                            search
-                        </i>
+                        <button class="btn_pesquisa" onclick="pesquisa_ideias()">
+                            <i class="material-icons white-text">search </i>
+                        </button>
                     </div>
                 </div>
 
             </div>
 
-    </div>
-    </nav>
+        </nav>
     </div>
 
 
@@ -108,29 +128,26 @@
                 </a>
             </div>
         </li>
-        <ul class="collapsible ">
-
+        <ul class="collapsible">
             <li>
                 <a href='#!'>
                     <i class="material-icons">code</i>
                     <div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
 
-                    <div class="collapsible-body">
-                        <a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+                    <div class="collapsible-body" id="projetos_atuais_lateral">
+                        <a class='black-text' href='#!'></a>
                     </div>
-
-
                 </a>
             </li>
 
         </ul>
 
         <li>
-            <a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+            <a href="#!" class="dropdown-trigger" data-target="notifications2" id="links_notificacoes2">
                 <i class="material-icons">
                     notifications
                 </i>Notificações
-                <span class="new badge red white-text">4</span>
+                <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
             </a>
         </li>
         <li>
@@ -175,7 +192,7 @@
                 </i>Ajuda</a>
         </li>
         <li>
-            <a href="collapsible.html">
+            <a onclick="sair()">
                 <i class="material-icons">
                     power_settings_new
                 </i>Sair</a>
@@ -186,26 +203,9 @@
 
     <ul id="notifications" class="dropdown-content ">
 
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-            <br>
-            <label>há 44min.</label>
-        </li>
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-            <br>
-            <label>há 44min.</label>
-        </li>
-
     </ul>
     </ul>
-    <ul id="notifications_menu_lateral" class="dropdown-content ">
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-            <br>
-            <label>há 44min.</label>
-        </li>
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-            <br>
-            <label>há 44min.</label>
-        </li>
+    <ul id="notifications2" class="dropdown-content ">
 
     </ul>
     <ul id="msgs" class="dropdown-content">
@@ -425,47 +425,65 @@
     </div>
 
 
-    <!-- Modal Structure -->
+    <!-- Modal Structure de ADICIONAR UMA IDEIA-->
     <div id="add_ideia" class="modal">
         <div class="modal-content">
             <h4>Adicionar uma ideia</h4>
             <div class="row">
-                <form class="col s12" onchange="mostrar_interesses();">
+                <form class="col s12" id="alt_dados">
                     <div class="row">
                         <div class="input-field col s12 black-text">
-                            <input id="nm_ideia" type="text">
-                            <label for="nm_ideia">Titulo da ideia</label>
+                            <input id="titulo_ideia" type="text">
+                            <label for="titulo_ideia">Titulo da ideia</label>
                         </div>
                         <div class="input-field col s12">
                             <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
                             <label for="textarea2">Descrição da ideia</label>
                         </div>
-                        <div class="input-field col s12 m6 l12 " onchange="mostrar_interesses();">
-                            <select multiple id='todas_tecnologias'>
+                        <div class="input-field col s12 m6 l12 ">
+                            <select multiple id='tecnologias_select'>
                                 <option value="" disabled>Adicione as tecnologias necessárias </option>
-                                <option name='interesses' value="1">Option 1</option>
-                                <option name='interesses' value="2">Option 2</option>
-                                <option name='interesses' value="3">Option 3</option>
                             </select>
 
                         </div>
-
-
                     </div>
 
-                    <div class=" col s12 m6 l12 center-align" id="lista_interesses">
+                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
 
                     </div>
+                    <div class="row center">
+                        <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                        <a class="btn modal-close" id="cancela">Cancela</a>
+                    </div>
+                </form>
             </div>
-            <div class="row center">
-                <a class="btn">Prontinho</a>
-            </div>
-            </form>
+
         </div>
 
+
     </div>
+    <!-- Resultado das buscas -->
+
+    <div id="pesquisas" hidden>
+        <div class="row">
+            <div class="col s12 m8 l8">
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+                    <h5>
+                        <i class="material-icons">search</i>Resultados para "<span
+                            id="texto_resultado_busca"></span>"
+                    </h5>
+                    <div class="divider"></div>
+
+                    <div id="resultado_pesquisas">
 
 
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

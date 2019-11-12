@@ -12,14 +12,16 @@ $(document).ready(() => {
             if(res.err){
                 alert(res.err)
             }else{
-                $("#qtd_notificacoes2").fadeOut()                
+                              
                 $("#qtd_notificacoes").fadeOut()
+                $("#qtd_notificacoes2").fadeOut()
+                $("#qtd_notificacoes").val("")                
                 $("#qtd_notificacoes2").val("")
-                $("#qtd_notificacoes").val("")
                 
             }
         })
     })
+    
     $("#links_notificacoes2").click(() => {
         // muda o estado das notificações para "visto"
         let url = "http://localhost:3000/notificacoes/" + id
