@@ -32,6 +32,9 @@ $(document).ready(function(){
             case 2:
                 M.toast({html: "Ideia não encontrada"})
                 break
+            case 3:
+                M.toast({html: "Usuário não encontrado"})
+                break
             default:
                 M.toast({html: "Código de mensagem invalido"})
                 break
@@ -156,7 +159,7 @@ function carrega_feed(){
                 }
 
                 
-                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - "+idealizador.nm_usuario+"</label></h5><div style='width: 101%;' class='divider'></div><br>"
+                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - <a href='http://127.0.0.1:5500/perfil_usuario.html?id_usuario="+idealizador.id_usuario+"'>"+idealizador.nm_usuario+"</a></label></h5><div style='width: 101%;' class='divider'></div><br>"
                 
                 for(let i2 = 0; i2 < tecnologias.length; i2++){
                     content += "<div class='chip'>"+tecnologias[i2].nm_tecnologia+"</div>"

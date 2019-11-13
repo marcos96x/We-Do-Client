@@ -15,9 +15,10 @@
     <script src="scripts/trends.js"></script>
     <script src="scripts/autenticacao_usuario.js"></script>
     <script src="scripts/notificacoes.js"></script>
-    <script src="scripts/curtida.js"></script>
-    
+    <script src="scripts/curtida.js"></script>    
     <script src="scripts/projetos_atuais.js"></script>
+    <script src="scripts/portifolio.js"></script>
+    <script src="scripts/visualiza_usuario.js"></script>
     <script src="js/socket.js"></script>
     <script>
         // Client Side
@@ -260,43 +261,9 @@
             <div class="col s12 m8 l8">
 
                 <div class="col s12  z-depth-1 "
-                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
-
-                    <div class="col s2" style="margin-top: 2%;">
-
-                        <img src="img/perfil.jpg" width="100%" alt="" class="circle responsive-img">
-                    </div>
-
-                    <div class="col s10">
-                        <div class="row" style="margin-top: 2%;">
-                            <h5>Paula Cavalcante de Oliveira</h5>
-                        </div>
-                        <div class="row" style="margin-top: -3%;">
-                            <div class="chip">
-                                Java
-
-                            </div>
-                            <div class="chip">
-                                Java
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s11">
-                            <blockquote class='black-text'
-                                style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the
-                                industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley of
-                                type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,</blockquote>
-                        </div>
-                    </div>
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;" id="visualizacao_perfil">
 
                 </div>
-                <!-- AQUIIII-->
                 <div class="row">
                     <div class="col s12">
                         <ul class="collapsible collection with-header"   id='projetos_atuais_perfil'>
@@ -305,76 +272,13 @@
                                     <div class="material-icons">code</div> Projetos Atuais
                                 </h5>
                             </li>
-                            <li>
-                                <div class="collapsible-header">Nome da ideia</div>
-                                <div class="collapsible-body" >
-        
-                                    <div class="chip">java</div>
-                                    <div class="chip">java</div>
-                                    <div class="chip">java</div>
-                                    </a>
-                                    <a class="btn" id="btn_add_tecnologia2" onclick="mostra_interesse2()" value="1"
-                                    style='margin-left:63%;margin-right:-3%;'>
-                                    <i class="material-icons white-text" id="iconezinho2"></i>Interesse</a>
-                                    <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem
-                                        Ipsum is simply
-                                        dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                                        and scrambled it
-                                        to
-                                        make a type specimen book. It has survived not only five centuries,</blockquote>
-        
-                                    <p>
-                                        <labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3.
-                                        <br>
-                                        <div id="curtida-coment" class='left'>
-                                            <i class='material-icons'>favorite</i>3000
-                                            <i class="material-icons">
-                                                mode_comment
-                                            </i> 2.500
-                                        </div>&nbsp&nbsp &nbsp&nbsp
-        
-                                </div>
-                            </li>
         
                         </ul>
                     </div>
                     <div class="col s12">
                         <ul class="collapsible collection with-header" id='portfolio'>
-                            <li class="collection-header">
-                                <h5>
-                                    <div class="material-icons">menu_book</div> Portfólio
-                                </h5>
-                            </li>
-                            <li>
-                                <div class="collapsible-header">Nome da ideia</div>
-                                <div class="collapsible-body">
-        
-                                    <div class="chip">java</div>
-                                    <div class="chip">java</div>
-                                    <div class="chip">java</div>
-                                    </a>
-        
-                                    <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem
-                                        Ipsum is simply
-                                        dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                                        and scrambled it
-                                        to
-                                        make a type specimen book. It has survived not only five centuries,</blockquote>
-        
-                                    <p>
-                                        <labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3.
-                                        <br>
-                                        <div id="curtida-coment" class='left'>
-                                            <i class='material-icons'>favorite</i>3000
-                                            <i class="material-icons">
-                                                mode_comment
-                                            </i> 2.500
-                                        </div>&nbsp&nbsp &nbsp&nbsp
-        
-                                </div>
-                            </li>
+
+                            
         
                         </ul>
                     </div>

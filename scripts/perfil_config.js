@@ -3,9 +3,12 @@ let nome = localStorage.getItem("nome_we_do")
 let email = localStorage.getItem("email_we_do")
 let token = localStorage.getItem("token_we_do")
 var id = localStorage.getItem("id_we_do")
+
+let id_tecnologia_da_pesquisa = []
 $(document).ready(function () {
     carrega_trends()
     projetos_atuais()
+    
     $('.modal').modal({
  
         dismissible: false, // Modal cannot be closed by clicking anywhere outside
