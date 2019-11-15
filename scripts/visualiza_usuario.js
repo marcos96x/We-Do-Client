@@ -19,11 +19,10 @@ if(id_perfil == null){
 }
 
 
-
-visualiza_usuario(id_perfil)
-projetos_atuais_perfil(id_perfil)
-portifolio(id_perfil)
-
+$(document).ready(() => {
+    visualiza_usuario(id_perfil)
+    portifolio(id_perfil)    
+})
 
 
 function visualiza_usuario(id_user){
@@ -37,7 +36,6 @@ function visualiza_usuario(id_user){
         if(res.err){
             alert(res.err)
         }else{
-            console.log(res)
             $("#visualizacao_perfil").html("")            
             $("#visualizacao_perfil").append(`
             <div class="col s2" style="margin-top: 2%;">
@@ -111,6 +109,13 @@ function visualiza_usuario(id_user){
                 </div>
             </div>
             `)
+
+            // -------------------- carrega o modal de configuração
+            $("#label_nm_usuario").html(res.perfil_usuario.nm_usuario)
+            $("#label_email_usuario").html(res.perfil_usuario.email_usuario)
+            $("#label_dt_nascimento").html(moment(res.perfil_usuario.dt_nascimento, 'YYYY-MM-DD', 'pt').format("L"))
+
+            
         }
     })
 }

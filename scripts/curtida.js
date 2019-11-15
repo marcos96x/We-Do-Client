@@ -61,7 +61,7 @@ function curtir(id_feed, id_texto, id_ideia) {
                 $(id_feed).attr('class', 'material-icons ')
                 $(id_feed).html("favorite")
                 $(id_feed).attr('value', 0)
-                $(id_feed).html((qt_curtida - 1))
+                $(id_texto).html((qt_curtida - 1))
                 $(id_feed).attr("name", (qt_curtida - 1))
                 carrega_trends()
             }

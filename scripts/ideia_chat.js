@@ -259,10 +259,10 @@ function mostra_ideia(id_ideia) {
                 if(res.ideia.membros[i].id_usuario != id){
                     $("#campo_ideia").append(`
                     <h6>
-                        <div class="row">
+                        <div class="row>
                             <div class="col s12 m12 l12">
                                 <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
-                                ${res.ideia.membros[i].nm_usuario}
+                                <a href="perfil_usuario.html?id_usuario=${res.ideia.membros[i].id_usuario}" style="color: #404f65;">${res.ideia.membros[i].nm_usuario}</a>
                             </div>
                         </div>
                     </h6>   
@@ -278,7 +278,7 @@ function mostra_ideia(id_ideia) {
                     <div class="row">
                         <div class="col s12 m11 l11">
                             <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
-                            ${res.ideia.membros[i].nm_usuario}
+                            <a href="perfil_usuario.html?id_usuario=${res.ideia.membros[i].id_usuario}" style="color: #404f65;">${res.ideia.membros[i].nm_usuario}</a>
                         </div>
                     </div>
                 </h6>
@@ -303,7 +303,7 @@ function mostra_ideia(id_ideia) {
                                 <p style="font-family: Arial, Helvetica, sans-serif" ;>
                                     <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                     <br>
-                                    <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
+                                    <a style="font-family:'bree-serif';"  href="perfil_usuario.html?id_usuario=${res.ideia.comentarios[i].id_usuario}">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div><div class="col s1" style="padding-top: 3%;"><a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${res.ideia.comentarios[i].id_mensagem})" id="iconezinho">delete</i></a></p></div>
                             </div>
                         </div>
                         <div class="divider"></div>
@@ -316,7 +316,7 @@ function mostra_ideia(id_ideia) {
                                 <p style="font-family: Arial, Helvetica, sans-serif" ;>
                                     <label>Postado ${moment(res.ideia.comentarios[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                                     <br>
-                                    <a style="font-family:'bree-serif';">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div>
+                                    <a style="font-family:'bree-serif';" href="perfil_usuario.html?id_usuario=${res.ideia.comentarios[i].id_usuario}">${res.ideia.comentarios[i].nm_usuario} &nbsp; </a>${res.ideia.comentarios[i].ct_mensagem}</div>
                             </div>
                         </div>
                         <div class="divider"></div>

@@ -1,5 +1,6 @@
 /**inicialização das funções do materialize */
 document.addEventListener('DOMContentLoaded', function () {
+    
     /**dropdown */
     M.Dropdown.init(
         document.querySelectorAll('.dropdown-trigger'));
@@ -39,3 +40,45 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 })
 
+/** mostra interesse no feed */
+function mostra_interesse(id_elemento, id_icone, id_ideia) {
+
+    let url = "http://localhost:3000/interesse"
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: JSON.stringify({
+            "usuario": {
+                "id_usuario": id
+            },
+            "ideia": {
+                "id_ideia": id_ideia
+            }
+        }),
+        contentType: "application/json"
+    }).done(function(res){
+        if(res.err){
+            alert("Erro na inserção do interesse")
+        }else{
+            if ($(id_elemento).attr('value') == 1) {
+                $(id_icone).text(" ")
+                $(id_elemento).attr('value', 0).attr('class', 'btn')
+
+                M.toast({html: "Interesse removido!"})
+
+                
+            } else if ($(id_elemento).attr('value') == 0){
+                $(id_icone).text("done")
+                $(id_elemento).attr('value', 1).attr('class', 'btn-floating')
+                
+                let dados_notificacao = {
+                    id_usuario: id,
+                    id_ideia: id_ideia,
+                    acao: 3
+                }
+                socket.emit('notification', dados_notificacao)
+                M.toast({html: "Interesse demonstrado!"})
+            }
+        }
+    })
+}

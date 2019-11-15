@@ -21,11 +21,19 @@
     <script src="scripts/visualiza_usuario.js"></script>
     <script src="js/socket.js"></script>
     <script>
+        projetos_atuais_perfil(id_perfil)
         // Client Side
         var socket = io.connect('http://localhost:8080/');
         socket.on('connect', function () {
 
         });
+        function sair(){
+            localStorage.clear()
+            window.location.href = "index.html"
+        }
+
+        
+        
     </script>
     <script src="js/moment-with-locales.js">
 

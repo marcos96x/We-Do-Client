@@ -91,6 +91,10 @@ function carrega_feed(){
     valida_usuario()
     $("#nm_usuario").html(nome)
     $("#email_usuario").html(email)
+    let str_link = `perfil_config.html?id_usuario=${id}`
+    $("#link_usuario").click(() => {
+        window.location.href= str_link
+    })
     let content
 
     let url = "http://localhost:3000/feed/" + id

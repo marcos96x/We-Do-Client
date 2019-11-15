@@ -181,31 +181,35 @@ function projetos_atuais_perfil(id_user){
 
             if(verificador == 1){
               div_curtida += `
-              <i class='material-icons red-text' id="icone_curtida_projeto${res.ideias[i].id_ideia}" value="1" name="${res.ideias[i].curtidas.length}" onclick="curtir('icone_curtida_projeto${res.ideias[i].id_ideia}', 'txt_curtida_projeto${res.ideias[i].id_ideia}', ${res.ideias[i].id_ideia})">favorite</i><text id="txt_curtida_projeto${res.ideias[i].id_ideia}">${res.ideias[i].curtidas.length}</text>
+              <i class='material-icons red-text' id="icone_curtida_projeto${res.ideias[i].id_ideia}" value="1" name="${res.ideias[i].curtidas.length}" onclick="curtir_ideia('icone_curtida_projeto${res.ideias[i].id_ideia}', 'txt_curtida_projeto${res.ideias[i].id_ideia}', ${res.ideias[i].id_ideia})">favorite</i><text id="txt_curtida_projeto${res.ideias[i].id_ideia}">${res.ideias[i].curtidas.length}</text>
                        &nbsp&nbsp&nbsp
               `
             }else{
               div_curtida += `
-              <i class='material-icons' id="icone_curtida_projeto${res.ideias[i].id_ideia}" value="0" name="${res.ideias[i].curtidas.length}" onclick="curtir('icone_curtida_projeto${res.ideias[i].id_ideia}', 'txt_curtida_projeto${res.ideias[i].id_ideia}', ${res.ideias[i].id_ideia})">favorite</i><text id="txt_curtida_projeto${res.ideias[i].id_ideia}">${res.ideias[i].curtidas.length}</text>
+              <i class='material-icons' id="icone_curtida_projeto${res.ideias[i].id_ideia}" value="0" name="${res.ideias[i].curtidas.length}" onclick="curtir_ideia('icone_curtida_projeto${res.ideias[i].id_ideia}', 'txt_curtida_projeto${res.ideias[i].id_ideia}', ${res.ideias[i].id_ideia})">favorite</i><text id="txt_curtida_projeto${res.ideias[i].id_ideia}">${res.ideias[i].curtidas.length}</text>
                        &nbsp&nbsp&nbsp
               `
             }
             verificador = 0
             for(let i2 = 0; i2 < res.ideias[i].membros.length; i2++){
-              if(res.ideias[i].membros[i2].id_usuario == id_user)
+              if(res.ideias[i].membros[i2].id_usuario == id)
                 verificador = 1
             }
+
+            let elemento = `campo_interesse_projeto${res.ideias[i].id_ideia}`
+            let icone = `icone_interesse_projeto${res.ideias[i].id_ideia}`
+            
             if(verificador == 1){
               div_interesse += `
-              <a class="btn-floating" class="btn_de_interesse" id="campo_interesse_projeto${res.ideias[i].id_ideia}" onclick="mostra_interesse('campo_interesse_projeto${res.ideias[i].id_ideia}', 'icone_interesse_projeto${res.ideias[i].id_ideia}', ${res.ideias[i].id_ideia})" value="1"
+              <a class="btn-floating" class="btn_de_interesse" id="${elemento}" onclick="mostra_interesse(${elemento}, ${icone}, ${res.ideias[i].id_ideia})" value="1"
                   style='margin-right: -2%;'>
-                  <i class="material-icons white-text" id="icone_interesse_projeto${res.ideias[i].id_ideia}">done</i></a>
+                  <i class="material-icons white-text" id="${icone}">done</i>Interesse</a>
               `
             }else{
               div_interesse += `
-              <a class="btn" class="btn_de_interesse" id="campo_interesse_projeto${res.ideias[i].id_ideia}" onclick="mostra_interesse('campo_interesse_projeto${res.ideias[i].id_ideia}', 'icone_interesse_projeto${res.ideias[i].id_ideia}', ${res.ideias[i].id_ideia})" value="0"
+              <a class="btn" class="btn_de_interesse" id="${elemento}" onclick="mostra_interesse(${elemento}, ${icone},${res.ideias[i].id_ideia})" value="0"
                   style='margin-right: -2%;'>
-                  <i class="material-icons white-text" id="icone_interesse_projeto${res.ideias[i].id_ideia}"></i>Interesse</a>
+                  <i class="material-icons white-text" id="${icone}"></i>Interesse</a>
               `
             }
 
@@ -262,7 +266,7 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
           alert("Erro na inserção do interesse")
       }else{
           if ($(id_elemento).attr('value') == 1) {
-              $(id_icone).text(" ")
+              $(id_icone).text("")
               $(id_elemento).attr('value', 0).attr('class', 'btn')
 
               M.toast({html: "Interesse removido!"})

@@ -31,6 +31,12 @@
         socket.on('connect', function () {
 
         });
+
+        function sair(){
+            localStorage.clear()
+            window.location.href = "index.html"
+        }
+
     </script>
     <script src="js/moment-with-locales.js">
 
@@ -365,13 +371,13 @@
                         <div class="row">
                             <div class="col s11">
                                 <div class="input-field col s12">
-                                    <input id="first_name" disabled type="text">
-                                    <label for="first_name" class='label_modal'>Paula</label>
+                                    <input id="campo_nm_usuario" disabled type="text">
+                                    <label for="campo_nm_usuario" class='label_modal' id="label_nm_usuario">Paula</label>
                                 </div>
                             </div>
                             <div class="col s1">
                                 <a class='btn btn-floating'>
-                                    <i class="material-icons">edit</i>
+                                    <i class="material-icons" onclick="abre_nome()">edit</i>
                                 </a>
                             </div>
 
@@ -380,34 +386,34 @@
 
                             <div class="col s6">
                                 <div class="input-field col s12">
-                                    <input id="email_user" disabled type="text">
-                                    <label for="email_user" class='label_modal'>paulacavalcantedeoliveira@gmail.com</label>
+                                    <input id="campo_email_usuario" disabled type="text">
+                                    <label for="campo_email_usuario" class='label_modal' id="label_email_usuario">paulacavalcantedeoliveira@gmail.com</label>
                                 </div>
                             </div>
 
                             <div class="col s1">
                                 <a class='btn btn-floating'>
-                                    <i class="material-icons">edit</i>
+                                    <i class="material-icons" onclick="abre_email()">edit</i>
                                 </a>
                             </div>
                         
                             <div class="col s4">
                                 <div class="input-field col s12 m6 l12">
-                                    <input id="dt_nascimento" disabled type="text">
-                                    <label for="dt_nascimento">12/02/2000</label>
+                                    <input id="campo_dt_nascimento" disabled type="text">
+                                    <label for="campo_dt_nascimento" id="label_dt_nascimento">12/02/2000</label>
                                 </div>
                             </div>
 
                             <div class="col s1">
                                 <a class='btn btn-floating'>
-                                    <i class="material-icons">edit</i>
+                                    <i class="material-icons" onclick="abre_data()">edit</i>
                                 </a>
                             </div>
 
                         </div>
                             <div class="input-field col s12 m6 l12 ">
 
-                                <select multiple id='todas_tecnologias'>
+                                <select multiple id='campo_tecnologias_usuario'>
                                     <option value="" disabled>Seus interesses</option>
                                 </select>
 
@@ -434,9 +440,9 @@
                                 <label for="nv_senha_conf">Confirme a nova senha</label>
                             </div>
                             <div class="col s1">
-                                    <a class='btn btn-floating'>
-                                            <i class="material-icons">edit</i>
-                                        </a>
+                                <a class='btn btn-floating'>
+                                    <i class="material-icons" onclick="abre_senha()">edit</i>
+                                </a>
                             </div>
                             
                         </div>
