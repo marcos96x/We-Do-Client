@@ -10,7 +10,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
     
-    <script src="scripts/perfil_config.js"></script>
+    <script src="scripts/perfil_usuario.js"></script>
     <script src="scripts/buscas.js"></script>
     <script src="scripts/trends.js"></script>
     <script src="scripts/autenticacao_usuario.js"></script>
@@ -90,7 +90,7 @@
                     <div class="col s4">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate" onkeydown="verifica_enter_busca()">
                         </div>
                     </div>
 
@@ -260,8 +260,7 @@
         <div class="row">
             <div class="col s12 m8 l8">
 
-                <div class="col s12  z-depth-1 "
-                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;" id="visualizacao_perfil">
+                <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;" id="visualizacao_perfil">
 
                 </div>
                 <div class="row">
@@ -271,8 +270,7 @@
                                 <h5>
                                     <div class="material-icons">code</div> Projetos Atuais
                                 </h5>
-                            </li>
-        
+                            </li>        
                         </ul>
                     </div>
                     <div class="col s12">

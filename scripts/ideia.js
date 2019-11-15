@@ -103,7 +103,13 @@ function edita_tags(estado){
 }
 
 function cria_ideia(){
+
     let nm_ideia = document.getElementById("titulo_ideia").value
+
+    let ideia_quebrada = []
+    ideia_quebrada.push(nm_ideia.split(" "))
+    
+    
     let desc = $("#textarea2").val()
     let tecnologias = []
     for(let i = 0; i < tecnologias_insere_ideia.length; i+= 2){
@@ -122,7 +128,7 @@ function cria_ideia(){
                     nm_ideia: nm_ideia,
                     ds_ideia: desc,
                     tecnologias_ideia: tecnologias,
-                    tags_ideia: tags
+                    tags_ideia: ideia_quebrada
                 },
                 usuario: {
                     id_usuario: id
@@ -131,7 +137,7 @@ function cria_ideia(){
         }).done((res) => {
             if(res.err){
                 alert(res.err)
-            }else{
+            }else{                
                 M.toast({html: "Ideia criada com sucesso!"})
                 carrega_feed(id)
                 projetos_atuais()

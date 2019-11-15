@@ -135,6 +135,12 @@ function pesquisa_por_tecnologia(id, nm){
     return false
 }
 
+function verifica_enter_busca(){
+    if(event.keyCode == 13){
+        pesquisa_ideias()
+    }
+}
+
 function pesquisa_ideias(){
     if($("#texto_pesquisa").val().trim() != "" && id_tecnologia_da_pesquisa.length != []){
         pesquisa_por_ambos( $("#texto_pesquisa").val().trim(), id_tecnologia_da_pesquisa)

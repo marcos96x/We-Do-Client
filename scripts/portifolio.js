@@ -17,7 +17,6 @@ function portifolio(id_usuario) {
                 </h5>
             </li>
             `)
-            console.log(res.ideias)
             if(res.ideias.length == []){
                 $("#portfolio").append(`<li class="collection-header">
                 <p>
@@ -71,7 +70,6 @@ function portifolio(id_usuario) {
                                 <labeL>Por</labeL> &nbsp&nbsp ${div_membros_ideia}
                                 <br>
                                 <div id="curtida-coment" class='left'>
-                                    ${div_curtida}
                                     <i class="material-icons">
                                         mode_comment
                                     </i> ${res.ideias[i].comentarios.length}

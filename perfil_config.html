@@ -11,6 +11,30 @@
     <script type="text/javascript" src="js/materialize.js"></script>
     <script type="text/javascript" src="scripts/perfil_config.js"></script>
     <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+    
+    <script src="scripts/buscas.js"></script>
+    <script src="scripts/curtida.js"></script>
+    <script src="scripts/trends.js"></script>
+    <script src="scripts/autenticacao_usuario.js"></script>
+    <script src="scripts/notificacoes.js"></script>
+    <script src="scripts/projetos_atuais.js"></script>
+    <script src="scripts/portifolio.js"></script>
+    <script src="scripts/visualiza_usuario.js"></script>
+    
+    <script src="scripts/perfil_config.js"></script>
+    <script src="js/socket.js"></script>
+    <script>
+        projetos_atuais_perfil_usuario(id)
+        carrega_trends()
+        // Client Side
+        var socket = io.connect('http://localhost:8080/');
+        socket.on('connect', function () {
+
+        });
+    </script>
+    <script src="js/moment-with-locales.js">
+
+    </script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -28,10 +52,21 @@
                 </a>
 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-
+                    <li hidden onclick="volta_busca()" id="botao_voltar_busca">
+                        <a> <i class="material-icons">
+                                reply
+                            </i></a>
+                    </li>
                     <li>
-                        <span class="new badge red white-text">4</span>
-                        <a href="#!" class="dropdown-trigger" data-target="notifications">
+                        <a href="feed.html"> <i class="material-icons">
+                                home
+                            </i></a>
+
+
+                    </li>
+                    <li>
+                        <span hidden class="new badge red white-text" id="qtd_notificacoes"></span>
+                        <a href="#!" class="dropdown-trigger" data-target="notifications" id="links_notificacoes">
                             <i class="material-icons">
                                 notifications
                             </i>
@@ -51,7 +86,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="collapsible.html">Sair</a>
+                        <a onclick="sair()">Sair</a>
                     </li>
 
 
@@ -60,35 +95,27 @@
                     <div class="col s4">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" type="text" class="validate">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate" onkeydown="verifica_enter_busca()">
                         </div>
                     </div>
 
-                    <div class="col s4" id="search_tec">
+                    <div class="col s3" id="search_tec">
                         <div class="input-field col s12">
-                            <select>
-                                <option value="" disabled selected>Pesquise por tecnologia</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                            <select multiple id='todas_tecnologias'>
+                                <option value="" disabled>Pesquise por tecnologia</option>
                             </select>
-
                         </div>
                     </div>
-
-
-
                     <div class="col s1">
-                        <i class="material-icons">
-                            search
-                        </i>
+                        <button class="btn_pesquisa" onclick="pesquisa_ideias()">
+                            <i class="material-icons white-text">search </i>
+                        </button>
                     </div>
                 </div>
 
             </div>
 
-    </div>
-    </nav>
+        </nav>
     </div>
 
 
@@ -109,29 +136,26 @@
                 </a>
             </div>
         </li>
-        <ul class="collapsible ">
-
+        <ul class="collapsible">
             <li>
                 <a href='#!'>
                     <i class="material-icons">code</i>
                     <div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
 
-                    <div class="collapsible-body">
-                        <a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+                    <div class="collapsible-body" id="projetos_atuais_lateral">
+                        <a class='black-text' href='#!'></a>
                     </div>
-
-
                 </a>
             </li>
 
         </ul>
 
         <li>
-            <a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+            <a href="#!" class="dropdown-trigger" data-target="notifications2" id="links_notificacoes2">
                 <i class="material-icons">
                     notifications
                 </i>Notificações
-                <span class="new badge red white-text">4</span>
+                <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
             </a>
         </li>
         <li>
@@ -164,7 +188,7 @@
             <div class="divider"></div>
         </li>
         <li>
-            <a class="waves-effect modal-trigger" href="#config_conta">
+            <a class="waves-effect" href="#!">
                 <i class="material-icons">
                     settings_applications
                 </i>Configurações</a>
@@ -176,7 +200,7 @@
                 </i>Ajuda</a>
         </li>
         <li>
-            <a href="collapsible.html">
+            <a onclick="sair()">
                 <i class="material-icons">
                     power_settings_new
                 </i>Sair</a>
@@ -187,26 +211,9 @@
 
     <ul id="notifications" class="dropdown-content ">
 
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-            <br>
-            <label>há 44min.</label>
-        </li>
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-            <br>
-            <label>há 44min.</label>
-        </li>
-
     </ul>
     </ul>
-    <ul id="notifications_menu_lateral" class="dropdown-content ">
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-            <br>
-            <label>há 44min.</label>
-        </li>
-        <li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-            <br>
-            <label>há 44min.</label>
-        </li>
+    <ul id="notifications2" class="dropdown-content ">
 
     </ul>
     <ul id="msgs" class="dropdown-content">
@@ -258,123 +265,48 @@
         <div class="row">
             <div class="col s12 m8 l8">
 
-                <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
-
-                    <div class="col s2" style="margin-top: 2%;">
-
-                        <img src="img/perfil.jpg" width="100%" alt="" class="circle responsive-img">
-                    </div>
-                    <div class="col s1 right">
-                        <div class="row" style="margin-top: 35%; margin-left: 35%;">
-                            <i class="material-icons small modal-trigger" href="#config_conta" id="btn_configuracao_conta">
-                                settings_applications
-                            </i>
-                        </div>
-                    </div>
-                    <div class="col s9">
-                        <div class="row" style="margin-top: 5%;">
-                            <h5>Paula Cavalcante de Oliveira</h5>
-                        </div>
-                        <div class="row" style="margin-top: -4%;">
-                            <label>paulacavalcantedeoliveira@gmail.com</label>
-                        </div>
-                        <div class="row" style="margin-top: -1%;">
-                            <div class="chip">
-                                Java
-
-                            </div>
-                            <div class="chip">
-                                Java
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s11">
-                            <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                to make a type specimen book. It has survived not only five centuries,
-                            </blockquote>
-                        </div>
-                    </div>
+                <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;" id="visualizacao_perfil_usuario">
 
                 </div>
 
             </div>
 
-            <div id='fixado'>
-                <ul class="collection with-header s12 m6 l4 z-depth-1 " id='projetos_atuais'>
-                    <div class='container'>
-                        <h5>
-                            < /> Projetos Atuais</h5>
-                        <div class='divider'></div>
-                        <li class="collection-item tooltipped" data-position="top" data-tooltip="Com Paula, Marcos, Lucas, Maria">
-                            <div>Nome da ideia
-                                <a href="#!" class="secondary-content">
-                                    <i class="material-icons black-text">arrow_forward_ios</i>
-                                </a>
-                            </div>
-                        </li>
-
-
-
-                    </div>
-
-                </ul>
+            <div id='fixado'>               
 
 
                 <!--coluna trends -->
                 <div class="col s12 m6 l4 z-depth-1  " id='trends' style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
                     <h5>
-                        # Trends</h5>
-
+                      # Trends</h5>
+          
                     <div class='divider'></div>
                     <div class='divider'></div>
                     <!-- Aqui será carregado os trends -->
-                </div>
+                    <div>
+          
+                    </div>
+                  </div>
             </div>
 
             <div class="row">
-                <div class="col s8">
-                    <ul class="collapsible collection with-header" id='portfolio'>
-                        <li class="collection-header">
-                            <h5>
-                                <div class="material-icons">menu_book</div> Portfólio
-                            </h5>
-                        </li>
-                        <li>
-                            <div class="collapsible-header">Nome da ideia</div>
-                            <div class="collapsible-body">
+                    <div class="col s8">
+                        <ul class="collapsible collection with-header"   id='projetos_atuais_perfil1'>
+                            <li class="collection-header">
+                                <h5>
+                                    <div class="material-icons">code</div> Projetos Atuais
+                                </h5>
+                            </li>        
+                        </ul>
+                    </div>
+                    <div class="col s8">
+                        <ul class="collapsible collection with-header" id='portfolio'>
 
-                                <div class="chip">java</div>
-                                <div class="chip">java</div>
-                                <div class="chip">java</div>
-                                </a>
-
-                                <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                    took a galley of type and scrambled it to make a type specimen book. It has survived
-                                    not only five centuries,</blockquote>
-
-                                <p>
-                                    <labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3.
-                                    <br>
-                                    <div id="curtida-coment" class='left'>
-                                        <i class='material-icons'>favorite</i>3000
-                                        <i class="material-icons">
-                                            mode_comment
-                                        </i> 2.500
-                                    </div>&nbsp&nbsp &nbsp&nbsp
-
-                            </div>
-                        </li>
-
-                    </ul>
+                            
+        
+                        </ul>
+                    </div>
+        
                 </div>
-
-            </div>
         </div>
 
 

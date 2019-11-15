@@ -317,6 +317,13 @@ input{
   border-color: transparent;
 }
 
+.material-icons {
+  cursor:pointer;
+}
+
+.material-icons:active{
+  background-color: transparent;
+}
 
 
 
