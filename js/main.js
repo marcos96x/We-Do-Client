@@ -1,7 +1,98 @@
 // Variaveis globais usadas no index
 
 var tecnologias = []
+var token_recuperacao
+var id_usuario
 
+function pega_token(){
+    // pega o parametro ideia na url
+    var query = location.search.slice(1);
+    var partes = query.split('&');
+    var data = {};
+    partes.forEach(function (parte) {
+        var chaveValor = parte.split('=');
+        var chave = chaveValor[0];
+        var valor = chaveValor[1];
+        data[chave] = valor;
+    });
+    token_recuperacao = data.token
+    if(token_recuperacao){
+        let url = "http://localhost:3000/usuario/saber_id"
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                token: token_recuperacao
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                id_usuario = res.id_usuario
+            }
+        })
+    }else{
+        window.location.href = "127.0.0.1:5500/index.html?msg=2"
+    }
+}
+
+
+function recupera_senha(){
+    let email_recupera = $("#email_recupera_senha").val().trim()
+    if(email_recupera == ""){
+        M.toast({html: "Email vazio!"})
+    }else{
+        let url = "http://localhost:3000/usuario/recuperar_senha"
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                usuario: {
+                    email_usuario: email_recupera
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                M.toast({html: res.err})
+            }else{
+                M.toast({html: res.msg})
+            }
+        })
+    }
+}
+
+function troca_senha(){
+    let senha = $("#nv_senha").val().trim()
+    let senha_confirm = $("#nv_senha_confirm").val().trim()
+    if(senha == "" || senha_confirm == ""){
+        M.toast({html: "Campos de senha vazios!"})
+    }else{
+        if(senha != senha_confirm){
+            M.toast({html: "As senhas devem ser iguais!"})
+        }else{
+            let url = "http://localhost:3000/usuario/troca_senha"
+            $.ajax({
+                url: url,
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    usuario: {
+                        id_usuario: id_usuario,
+                        senha_nova: senha
+                    }
+                })
+            }).done((res) => {
+                if(res.err){
+                    alert(res.err)
+                }else{
+                    window.location.href = "http://127.0.0.1:5500/index.html?msg=3"
+                }
+            })
+        }
+    }
+}
 $(document).ready(function () {
     /** conta carcateres da descrição da ideia em criação de ideia*/
     $('input#input_text, textarea#textarea2').characterCounter();
@@ -37,6 +128,12 @@ $(document).ready(function () {
         let msg = data.msg
         if (msg == 1) {
             M.toast({ html: "Você tentou acessar uma pagina restrita!" })
+        }else if (msg == 2){
+            M.toast({ html: "Para recuperar sua senha você deve solicitar o recurso clicando em 'Esqueceu sua senha'!" })
+        }else if (msg == 3){
+            M.toast({ html: "Sua senha foi alterada com sucesso!"})
+        }else if (msg == 5){
+            M.toast({html: "Agradecemos pela sua presença em nossa plataforma!"})
         }
 
 

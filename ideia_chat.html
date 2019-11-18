@@ -10,8 +10,11 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
+    
+    <script src="scripts/autenticacao_usuario.js"></script>
     <script src="js/socket.js"></script>
     <script>
+        valida_usuario()
         // Client Side
         var socket = io.connect('http://localhost:8080/');
         socket.on('connect', function () {
@@ -27,7 +30,6 @@
     <script src="scripts/buscas.js"></script>
     <script src="scripts/envia_comentario.js"></script>
     <script src="scripts/projetos_atuais.js"></script>
-    <script src="scripts/autenticacao_usuario.js"></script>
     <script>
 
     </script>
@@ -65,14 +67,6 @@
                         <a href="#!" class="dropdown-trigger" data-target="notifications" id="links_notificacoes">
                             <i class="material-icons">
                                 notifications
-                            </i>
-                        </a>
-                    </li>
-                    <li>
-                        <span class="new badge red white-text">4</span>
-                        <a href="#!" class="dropdown-trigger" data-target="msgs">
-                            <i class="material-icons">
-                                chat_bubble
                             </i>
                         </a>
                     </li>
@@ -117,20 +111,20 @@
 
     <ul id="slide-out" class="sidenav ">
         <li>
-            <div class="user-view ">
+            <div class="user-view"  id="link_usuario">
                 <div class="background">
-                    <img src="img/fund.jpg">
+                  <img src="img/fund.jpg">
                 </div>
                 <a href="#user">
-                    <img class="circle" src="img/perfil.jpg">
+                  <img class="circle" src="https://image.flaticon.com/icons/png/512/74/74472.png">
                 </a>
                 <a href="#name">
-                    <span class="name black-text">John Doe</span>
+                  <span class="name black-text" id="nm_usuario">John Doe</span>
                 </a>
                 <a href="#email">
-                    <span class=" email black-text">jdandturk@gmail.com</span>
+                  <span class=" email black-text" id="email_usuario">jdandturk@gmail.com</span>
                 </a>
-            </div>
+              </div>
         </li>
         <ul class="collapsible ">
 
@@ -157,26 +151,8 @@
                 <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
             </a>
         </li>
-        <li>
-            <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
-                <i class="material-icons">
-                    chat_bubble
-                </i>Mensagens
-                <span class="new badge red white-text">4</span>
-            </a>
-        </li>
 
-
-
-
-
-        <li>
-            <a href="#!">
-                <i class="material-icons">
-                    menu_book
-                </i>Portfólio</a>
-        </li>
-        <li>
+        <li class="hide-on-large-only">
             <a class="waves-effect" href="#!">
                 <i class="material-icons">
                     emoji_events
@@ -185,12 +161,6 @@
 
         <li>
             <div class="divider"></div>
-        </li>
-        <li>
-            <a class="waves-effect" href="#!">
-                <i class="material-icons">
-                    settings_applications
-                </i>Configurações</a>
         </li>
         <li>
             <a class="waves-effect" href="#!">
@@ -282,8 +252,8 @@
 
 
 
-            <div class="col s12 m12 l6" style='position: fixed;width: 40%;margin-left: 43%;' id="div_do_chat" hidden>
-                <div class="col s12 m12 l12  z-depth-1"
+            <div class="col s12 m12 l6" style='position: fixed;width: 30%;margin-left: 50%;' id="div_do_chat" hidden>
+                <div class="col s12 m12 l12  z-depth-1 hide-on-med-and-down"
                     style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;">
                     <div class="row z-depth-1">
                         <div class="col s12 white-text" style="background-color: #404f65;"
@@ -291,9 +261,6 @@
 
                         </div>
                     </div>
-
-
-                    <!--  ISSO AQUI NAO FAZ PARTE DO SISTEMA  -->
                     <div id="chat">
 
                     </div>

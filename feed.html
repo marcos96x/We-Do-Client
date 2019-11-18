@@ -9,8 +9,11 @@
   <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
+  
+  <script src="scripts/autenticacao_usuario.js"></script>
   <script src="js/socket.js"></script>
     <script>
+        valida_usuario()
         // Client Side
         var socket = io.connect('http://localhost:8080/');
         socket.on('connect', function () {
@@ -25,7 +28,6 @@
   <script src="scripts/projetos_atuais.js"></script>
   <script src="scripts/curtida.js"></script>
   <script src="scripts/ideia.js"></script>
-  <script src="scripts/autenticacao_usuario.js"></script>
   <script src="scripts/envia_comentario.js"></script>
   <script src="scripts/buscas.js"></script>
 
@@ -63,14 +65,6 @@
             </a>
           </li>
           <li>
-            <span class="new badge red white-text">4</span>
-            <a href="#!" class="dropdown-trigger" data-target="msgs">
-              <i class="material-icons">
-                chat_bubble
-              </i>
-            </a>
-          </li>
-          <li>
             <a class="btn-floating waves-effect waves-light white modal-trigger" href="#add_ideia">
               <i class="material-icons black-text">add</i>
             </a>
@@ -102,8 +96,7 @@
         </div>
       </div>
 
-  </div>
-  </nav>
+    </nav>
   </div>
 
 
@@ -149,27 +142,8 @@
         <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
      </a>
     </li>
-    <li>
-      <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
-        <i class="material-icons">
-          chat_bubble
-        </i>Mensagens
-        <span class="new badge red white-text">4</span>
-      </a>
-    </li>
-
-
-
-
-
-    <li>
-      <a href="#!">
-        <i class="material-icons">
-          menu_book
-        </i>Portfólio</a>
-    </li>
-    <li>
-      <a class="waves-effect" href="#!">
+    <li class="hide-on-large-only">
+      <a class="waves-effect" href="trends.html">
         <i class="material-icons">
           emoji_events
         </i>Trends</a>
@@ -177,12 +151,6 @@
 
     <li>
       <div class="divider"></div>
-    </li>
-    <li>
-      <a class="waves-effect" href="#!">
-        <i class="material-icons">
-          settings_applications
-        </i>Configurações</a>
     </li>
     <li>
       <a class="waves-effect" href="#!">
@@ -277,7 +245,7 @@
 
       </div>
 
-      <div id='fixado'>
+      <div id='fixado' class="hide-on-med-and-down">
         <ul class="collection with-header s12 m6 l4 z-depth-1 ">
           <div class='container'>
             <h5>

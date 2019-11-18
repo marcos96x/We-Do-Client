@@ -9,14 +9,13 @@ var nm_ideia_original
 var ds_ideia_original
 var status_ideia_original
 var tags_ideia
-let id_novo_idealizador
+let id_novo_idealizador = null
 // Variaveis globais usadas no index
 let id_ideia_pagina
 var tecnologias_insere_ideia = []
 var tecnologia_adicionar_na_ideia = []
 var arrayDadosTecnologia = []
 
-let id_tecnologia_da_pesquisa = []
 
 
 $(document).ready(function () {
@@ -25,6 +24,13 @@ $(document).ready(function () {
     abre_tecnologias_ideiaChat()
     /** conta carcateres da descrição da ideia em criação de ideia*/
     $('input#input_text, textarea#textarea2').characterCounter();
+
+    $("#nm_usuario").html(nome)
+    $("#email_usuario").html(email)
+    let str_link = `perfil_config.html?id_usuario=${id}`
+    $("#link_usuario").click(() => {
+        window.location.href= str_link
+    })
 
 
     
@@ -76,7 +82,7 @@ function abre_tecnologias_ideiaChat(){
         let id_tecnologia, nm_tecnologia
         let select_ideia = document.getElementsByTagName("ul")[9]
         let select_add_tecnologia = document.getElementsByTagName("ul")[8]
-        let select_tecnologias = document.getElementsByTagName("ul")[3]
+        let select_tecnologias = document.getElementsByTagName("ul")[2]
         for (let i = 0; i < res.tecnologias.length; i++) {
             id_tecnologia = res.tecnologias[i].id_tecnologia
             nm_tecnologia = "" + res.tecnologias[i].nm_tecnologia + ""
@@ -515,7 +521,7 @@ function mostra_ideia(id_ideia) {
             </div>
             <div class="row" hidden id="configuracoes_ideia">
                 <div class="col s12">
-                    <a class="modal-trigger btn" href="#modal_passa_ideia" >Passar ideia</a>Permite que outra pessoa seja a idealizadora da ideia
+                    <a class="modal-trigger btn" href="#modal_passa_ideia" >Passar ideia</a>Passa o título de idealizador para outra pessoa
                     <br><br>
                     <a class="modal-trigger btn red" href="#modal_apaga_ideia">Apagar ideia</a>Removerá a ideia do sistema definitivamente.
                 </div>
@@ -825,28 +831,33 @@ function sair_ideia(){
 }
 
 function passa_ideia(){
-    let url = "http://localhost:3000/ideia/passar"
-    $.ajax({
-        url: url,
-        type: "PUT",
-        contentType: "application/json",
-        data: JSON.stringify({
-            ideia: {
-                id_ideia: id_ideia_original,
-                id_criador: id
-            },
-            usuario: {
-                id_usuario: id_novo_idealizador
+    if(id_novo_idealizador != null){
+        let url = "http://localhost:3000/ideia/passar"
+        $.ajax({
+            url: url,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({
+                ideia: {
+                    id_ideia: id_ideia_original,
+                    id_criador: id
+                },
+                usuario: {
+                    id_usuario: id_novo_idealizador
+                }
+            })
+        }).done((res) => {
+            if(res.err){
+                alert(res.err)
+            }else{
+                M.toast({html: "Troca de idealizadores feita com sucesso!"})
+                mostra_ideia(id_ideia_original)
             }
         })
-    }).done((res) => {
-        if(res.err){
-            alert(res.err)
-        }else{
-            M.toast({html: "Troca de idealizadores feita com sucesso!"})
-            mostra_ideia(id_ideia_original)
-        }
-    })
+    }else{
+        M.toast({html: "Selecione uma pessoa para ser o novo idealizador!"})
+    }
+    
 }
 
 function aparece_botoes_configuracao(tipo){

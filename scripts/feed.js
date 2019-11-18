@@ -3,10 +3,9 @@ let email = localStorage.getItem("email_we_do")
 let token = localStorage.getItem("token_we_do")
 let id = localStorage.getItem("id_we_do")
 
-let tecnologias_insere_ideia = []
-let id_tecnologia_da_pesquisa = []
 
 $(document).ready(function(){
+    valida_usuario()
     carrega_feed()
     carrega_trends()
     projetos_atuais()
@@ -67,7 +66,8 @@ function abre_tecnologias(){
     }).done(function (res) {
         let id_tecnologia, nm_tecnologia
         let select_ideia = document.getElementsByTagName("ul")[9]
-        let select_tecnologias = document.getElementsByTagName("ul")[3]
+        let select_tecnologias = document.getElementsByTagName("ul")[2]
+        
         for (let i = 0; i < res.tecnologias.length; i++) {
             id_tecnologia = res.tecnologias[i].id_tecnologia
             nm_tecnologia = "" + res.tecnologias[i].nm_tecnologia + ""
@@ -75,6 +75,7 @@ function abre_tecnologias(){
             select_ideia.innerHTML += "<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='checkbox'  ><span onClick='insere_tecnologias_criacao_ideia("+ id_tecnologia + ", \""+nm_tecnologia+"\" )'>" + nm_tecnologia + "</span></label></span></li>"
             
         }
+        
     })
     
 }

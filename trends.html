@@ -8,22 +8,135 @@
 	<link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="js/materialize.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script src="scripts/autenticacao_usuario.js"></script>
+	<script src="scripts/trends.js"></script>
+	<script src="scripts/curtida.js"></script>
+	<script src="scripts/buscas.js"></script>
+	<script src="scripts/ideia.js"></script>
+	<script src="scripts/notificacoes.js"></script>
+	<script src="scripts/projetos_atuais.js"></script>
+
+	<script src="js/socket.js"></script>
+    <script>
+		valida_usuario()
+        // Client Side
+        var socket = io.connect('http://localhost:8080/');
+        socket.on('connect', function () {
+          
+		});
+    </script>
+    <script src="js/moment-with-locales.js">
+    </script>
+
+	<script>
+		var nome = localStorage.getItem("nome_we_do")
+var email = localStorage.getItem("email_we_do")
+var token = localStorage.getItem("token_we_do")
+var id = localStorage.getItem("id_we_do")
+		var id_tecnologia_da_pesquisa = []
+		carrega_trends()
+		abre_tecnologias()
+
+		
+		/**inicialização das funções do materialize */
+		document.addEventListener('DOMContentLoaded', function () {
+			/**dropdown */
+			M.Dropdown.init(
+				document.querySelectorAll('.dropdown-trigger'));
+			/**select */
+			var elems = document.querySelectorAll('select');
+			var instances = M.FormSelect.init(elems);
+			/**chips */
+			var elems = document.querySelectorAll('.chips');
+			var instances = M.Chips.init(elems);
+			/**sidenav */
+			var elems = document.querySelectorAll('.sidenav');
+			var instances = M.Sidenav.init(elems)
+			/**botão fixo add ideia --  mostra apenas no mobile */
+			var elems = document.querySelectorAll('.fixed-action-btn');
+			var instances = M.FloatingActionButton.init(elems);
+			/**tootip das ideias atuais */
+			var elems = document.querySelectorAll('.tooltipped');
+			var instances = M.Tooltip.init(elems, { exitDelay: 20 });
+			/** colapsible do menu lateral - projetos atuais */
+			var elems = document.querySelectorAll('.collapsible');
+			var instances = M.Collapsible.init(elems);
+
+			$('.modal').modal({
+
+				dismissible: false, // Modal cannot be closed by clicking anywhere outside
+
+			}
+
+			);
+
+
+
+			$("#cancela").click(function () {
+				/* Single line Reset function executes on click of Reset Button */
+				$("#alt_dados")[0].reset();
+				document.getElementById("lista_tecnologias").innerHTML = " "
+			});
+
+
+		});
+
+		function seleciona_tecnologias_pesquisa(id, nm) {
+			id_tecnologia_da_pesquisa = [id, nm]
+		}
+
+
+
+		// -------------------------------- Funções usadas no sistema
+		function abre_tecnologias() {
+
+			$.ajax({
+				url: "http://localhost:3000/tecnologia",
+				type: "GET",
+				contentType: 'application/json'
+			}).done(function (res) {
+				let id_tecnologia, nm_tecnologia
+				let select_ideia = document.getElementsByTagName("ul")[8]
+				let select_tecnologias = document.getElementsByTagName("ul")[3]
+				for (let i = 0; i < res.tecnologias.length; i++) {
+					id_tecnologia = res.tecnologias[i].id_tecnologia
+					nm_tecnologia = "" + res.tecnologias[i].nm_tecnologia + ""
+					select_tecnologias.innerHTML += "<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='radio' name='tecnologias_pesquisa' value='" + id_tecnologia + "'  ><span onClick='seleciona_tecnologias_pesquisa(" + id_tecnologia + ", \"" + nm_tecnologia + "\" )'>" + nm_tecnologia + "</span></label></span></li>"
+					select_ideia.innerHTML += "<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='checkbox'  ><span onClick='insere_tecnologias_criacao_ideia(" + id_tecnologia + ", \"" + nm_tecnologia + "\" )'>" + nm_tecnologia + "</span></label></span></li>"
+
+				}
+			})
+
+		}
+	</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Trends</title>
 </head>
 
 <body style='background-color: white; background-image: none;'>
 	<div class="navbar-fixed ">
+
 		<nav>
+
 			<div class="nav-wrapper container ">
+
 				<a href="#" data-target="slide-out" class="sidenav-trigger ">
 					<i class="material-icons">menu</i>
 				</a>
+
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li onclick="revela_feed_apos_busca()">
+						<a href="feed.html">
+							<i class="material-icons">
+								home
+							</i>
+						</a>
+
+					</li>
+
 					<li>
-						<span class="new badge red white-text">4</span>
-						<a href="#!" class="dropdown-trigger" data-target="notifications">
+						<span hidden class="new badge red white-text" id="qtd_notificacoes"></span>
+						<a href="#!" class="dropdown-trigger" data-target="notifications" id="links_notificacoes">
 							<i class="material-icons">
 								notifications
 							</i>
@@ -43,46 +156,77 @@
 						</a>
 					</li>
 					<li>
-						<a href="collapsible.html">Sair</a>
+						<a href="#" onclick="sair()">Sair</a>
 					</li>
+
+
 				</ul>
+				<div class="row" id="search_ideia">
+					<div class="col s4">
+						<div class="input-field col s12">
+							<input id="texto_pesquisa" placeholder="Pesquisa por ideia" type="text" class="validate"
+								onkeydown="verifica_enter_busca()">
+						</div>
+					</div>
+					<div class="col s4" id="search_tec">
+						<div class="input-field col s12">
+							<select multiple id='todas_tecnologias'>
+								<option value="" disabled selected>Pesquise por tecnologia</option>
+							</select>
+						</div>
+					</div>
+					<div class="col s1">
+						<button class="btn_pesquisa" onclick="pesquisa_ideias()">
+							<i class="material-icons white-text">search </i>
+						</button>
+					</div>
+				</div>
 			</div>
+
 		</nav>
 	</div>
+
+
 	<ul id="slide-out" class="sidenav ">
 		<li>
-			<div class="user-view ">
+			<div class="user-view" id="link_usuario">
 				<div class="background">
 					<img src="img/fund.jpg">
 				</div>
 				<a href="#user">
-					<img class="circle" src="img/perfil.jpg">
+					<img class="circle" src="https://image.flaticon.com/icons/png/512/74/74472.png">
 				</a>
 				<a href="#name">
-					<span class="name black-text">John Doe</span>
+					<span class="name black-text" id="nm_usuario">John Doe</span>
 				</a>
 				<a href="#email">
-					<span class=" email black-text">jdandturk@gmail.com</span>
+					<span class=" email black-text" id="email_usuario">jdandturk@gmail.com</span>
 				</a>
 			</div>
 		</li>
 		<ul class="collapsible ">
+
 			<li>
 				<a href='#!'>
 					<i class="material-icons">code</i>
 					<div class="collapsible-header black-text" style='padding-left:0%;'>Projetos Atuais</div>
-					<div class="collapsible-body">
-						<a class='black-text' style='padding-left:10%;' href='#!'>Projeto 1</a>
+
+					<div class="collapsible-body" id="projetos_atuais_lateral">
+						<a class='black-text' href='#!'></a>
 					</div>
+
+
 				</a>
 			</li>
+
 		</ul>
+
 		<li>
-			<a href="#!" class="dropdown-trigger" data-target="notifications_menu_lateral">
+			<a href="#!" class="dropdown-trigger" data-target="notifications2" id="links_notificacoes2">
 				<i class="material-icons">
 					notifications
 				</i>Notificações
-				<span class="new badge red white-text">4</span>
+				<span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
 			</a>
 		</li>
 		<li>
@@ -93,26 +237,16 @@
 				<span class="new badge red white-text">4</span>
 			</a>
 		</li>
+
 		<li>
-			<a href="#!">
-				<i class="material-icons">
-					menu_book
-				</i>Portfólio</a>
-		</li>
-		<li>
-			<a class="waves-effect" href="#!">
+			<a class="waves-effect" href="trends.html">
 				<i class="material-icons">
 					emoji_events
 				</i>Trends</a>
 		</li>
+
 		<li>
 			<div class="divider"></div>
-		</li>
-		<li>
-			<a class="waves-effect" href="#!">
-				<i class="material-icons">
-					settings_applications
-				</i>Configurações</a>
 		</li>
 		<li>
 			<a class="waves-effect" href="#!">
@@ -121,7 +255,7 @@
 				</i>Ajuda</a>
 		</li>
 		<li>
-			<a href="collapsible.html">
+			<a href="#" onclick="sair()">
 				<i class="material-icons">
 					power_settings_new
 				</i>Sair</a>
@@ -130,30 +264,15 @@
 
 	<!--ESTRUTURA DAS NOTIFICAÇÕES e msgs-->
 
-	<ul id="notifications" class="dropdown-content ">
-
-		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-			<br>
-			<label>há 44min.</label>
-		</li>
-		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-			<br>
-			<label>há 44min.</label>
-		</li>
+	<ul id="notifications" class="dropdown-content">
 
 	</ul>
-	</ul>
-	<ul id="notifications_menu_lateral" class="dropdown-content ">
-		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação nome tal
-			<br>
-			<label>há 44min.</label>
-		</li>
-		<li class="collection-item" style='line-height:100%; padding:10%;'>Nome da notificação
-			<br>
-			<label>há 44min.</label>
-		</li>
 
 	</ul>
+	<ul id="notifications2" class="dropdown-content ">
+
+	</ul>
+
 	<ul id="msgs" class="dropdown-content">
 		<li>
 			<a href="#!" class="black-text">
@@ -197,145 +316,106 @@
 	</ul>
 	<br>
 	<!-- Foi retirado o id = trends	-->
-	<div class="container">
+	<div class="container" id="div_do_trends">
 		<div class="row">
-			<div class="col s12 m12 l12 z-depth-1" style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
-				<h5># Trends</h5>
-				<div class="divider"></div>
-				<h6>Nome da ideia
-					<br>
-					<label> Nome do criador</label>
-					<br>
-					<br>
-					<div class="chip">C++</div>
-					<div class="chip">Ruby</div>
-					<div class="chip">Java</div>
-					<br>
-					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-						book. It has survived not only five centuries,</blockquote> 
-					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
-					<a class="btn" id="btnInterrese">Interesse</a>
-					<br>
-				</h6>
-				<div id="curtida-coment" class='left'>
-					<i class='material-icons'>favorite</i>3000
-					<i class="material-icons">
-						mode_comment
-					</i> 2.500
-				</div>&nbsp&nbsp &nbsp&nbsp
-				<br>
-				<br>
-				<div class='divider'></div>
-				<h6>Nome da ideia
-					<br>
-					<label> Nome do criador</label>
-					<br>
-					<br>
-					<div class="chip">C</div>
-					<div class="chip">Cobol</div>
-					<div class="chip">Arduino</div>
-					<br>
-					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-						book. It has survived not only five centuries,</blockquote> 
-					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
-					<a class="btn" id="btnInterrese">Interesse</a>
-					<br>
-				</h6>
-				<div id="curtida-coment" class='left'>
-					<i class='material-icons'>favorite</i>3000
-					<i class="material-icons">
-						mode_comment
-					</i> 2.500
-				</div>&nbsp&nbsp &nbsp&nbsp
-				<br>
-				<br>
-				<div class='divider'></div>
-				<h6>Nome da ideia
-					<br>
-					<label> Nome do criador</label>
-					<br>
-					<br>
-					<div class="chip">C++</div>
-					<div class="chip">Python</div>
-					<div class="chip">Ruby</div>
-					<br>
-					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-						book. It has survived not only five centuries,</blockquote> 
-					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
-					<a class="btn" id="btnInterrese">Interesse</a>
-					<br>
+			<div class="col s12 m12 l12 z-depth-1" id="trends"
+				style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+				<h5>
+					# Trends</h5>
 
-				</h6>
-
-				<div id="curtida-coment" class='left'>
-					<i class='material-icons'>favorite</i>3000
-					<i class="material-icons">
-						mode_comment
-					</i> 2.500
-				</div>&nbsp&nbsp &nbsp&nbsp
-				<br>
-				<br>
 				<div class='divider'></div>
 				<div class='divider'></div>
-				<h6>Nome da ideia
-					<br>
-					<label> Nome do criador</label>
-					<br>
-					<br>
-					<div class="chip">C++</div>
-					<div class="chip">Python</div>
-					<div class="chip">Ruby</div>
-					<br>
-					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-						book. It has survived not only five centuries,</blockquote> 
-					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
-					<a class="btn" id="btnInterrese">Interesse</a>
-					<br>
-
-				</h6>
-
-				<div id="curtida-coment" class='left'>
-					<i class='material-icons'>favorite</i>3000
-					<i class="material-icons">
-						mode_comment
-					</i> 2.500
-				</div>&nbsp&nbsp &nbsp&nbsp
-				<br>
-				<br>
-				<div class='divider'></div>
-				<h6>Nome da ideia
-					<br>
-					<label> Nome do criador</label>
-					<br>
-					<br>
-					<div class="chip">C++</div>
-					<div class="chip">Python</div>
-					<div class="chip">Ruby</div>
-					<br>
-					<!-- <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-						book. It has survived not only five centuries,</blockquote> 
-					<labeL>Com</labeL> &nbsp&nbsp Paula, Lucas, Marcos e +3. -->
-					<a class="btn" id="btnInterrese">Interesse</a>
-					<br>
-
-				</h6>
-
-				<div id="curtida-coment" class='left'>
-					<i class='material-icons'>favorite</i>3000
-					<i class="material-icons">
-						mode_comment
-					</i> 2.500
-				</div>&nbsp&nbsp &nbsp&nbsp
-				<br>
-				<br>
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal Structure -->
+	<div id="add_ideia" class="modal">
+		<div class="modal-content">
+			<h4>Adicionar uma ideia</h4>
+			<div class="row">
+				<form class="col s12" id="alt_dados">
+					<div class="row">
+						<div class="input-field col s12 black-text">
+							<input id="titulo_ideia" type="text">
+							<label for="titulo_ideia">Titulo da ideia</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+							<label for="textarea2">Descrição da ideia</label>
+						</div>
+						<div class="input-field col s12 m6 l12 ">
+							<select multiple id='tecnologias_select'>
+								<option value="" disabled>Adicione as tecnologias necessárias </option>
+							</select>
+
+						</div>
+
+
+					</div>
+
+					<div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+
+					</div>
+					<div class="row center">
+						<a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+						<a class="btn modal-close" id="cancela">Cancela</a>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+
+	</div>
+	<div class="fixed-action-btn">
+		<a href='#add_ideia' class="btn-floating btn-large modal-trigger">
+			<i class="large material-icons">add</i>
+		</a>
+
+	</div>
+	</div>
+
+
+
+
+
+
+
+
+	<!-- Resultado das buscas -->
+
+	<div id="pesquisas" hidden>
+		<div class="row">
+			<div class="col s12 m8 l8">
+				<div class="col s12  z-depth-1 "
+					style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+					<h5>
+						<i class="material-icons">search</i>Resultados para "
+						<span id="texto_resultado_busca"></span>"</h5>
+					<div class="divider"></div>
+
+					<div id="resultado_pesquisas">
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$("#nm_usuario").html(nome)
+		$("#email_usuario").html(email)
+		let str_link = `perfil_config.html?id_usuario=${id}`
+		$("#link_usuario").click(() => {
+			window.location.href = str_link
+		})
+
+		projetos_atuais()
+
+	</script>
 </body>
 
 </html>

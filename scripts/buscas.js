@@ -1,3 +1,4 @@
+var id_tecnologia_da_pesquisa = []
 function pesquisa_por_ambos(texto, tecnologia){
     $("#texto_resultado_busca").text(texto + `" e "` + tecnologia[1])
     $("#resultado_pesquisas").html("")
@@ -11,10 +12,12 @@ function pesquisa_por_ambos(texto, tecnologia){
             alert(res.err)
         }else{            
             $("#feed").hide()
+            $("#div_do_trends").hide()
             $("#div_adicionar_ideia").hide()
 
             $("#div_do_chat").hide()
             $("#campo_ideia").hide()
+            $("#pagina_perfil_config").hide()
             $("#div_comentarios").hide()
             $("#pesquisas").show()
             let buscas = res.ideias
@@ -60,6 +63,8 @@ function pesquisa_por_texto(texto){
             $("#div_do_chat").hide()
             $("#campo_ideia").hide()
             $("#div_comentarios").hide()
+
+            $("#pagina_perfil_config").hide()
             $("#pesquisas").show()
             let buscas = res.ideias
             for(let i = 0; i < buscas.length; i++){ 
@@ -107,6 +112,7 @@ function pesquisa_por_tecnologia(id, nm){
             $("#div_do_chat").hide()
             $("#campo_ideia").hide()
 
+            $("#pagina_perfil_config").hide()
             $("#div_comentarios").hide()
             $("#pesquisas").show()
             let buscas = res.ideias

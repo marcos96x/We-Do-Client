@@ -50,6 +50,11 @@ function projetos_atuais_perfil_usuario(id_user){
           M.toast({html: res.err})
       }else if(res.msg){
           $("#projetos_atuais_lateral").append(`<a class='black-text' style='padding-left:10%;' href='#!'>${res.msg}</a><br>`)
+          $("#projetos_atuais_perfil1").append(`<li class="collection-header">
+          <p>
+              ${res.msg}
+          </p>
+      </li>`)
 
       }else{
           for(let i = 0; i < res.ideias.length; i++){

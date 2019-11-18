@@ -316,5 +316,5 @@ function carrega_notificacoes_usuario(id_user){
 }
 
 function visualiza_perfil(id_user){
-    window.location.href = "http://127.0.0.1:5500/perfil_usuario.html?usuario=" + id_user
+    window.location.href = "http://127.0.0.1:5500/perfil_usuario.html?id_usuario=" + id_user
 }

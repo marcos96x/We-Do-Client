@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 var tags = [];
 var tags_para_add = []
-
+var tecnologias_insere_ideia = []
 function coloca_tag(){
     if(event.keyCode == "13" || event.keyCode == "32"){
         if($("#texto_tags").val().trim() != ""){
@@ -220,6 +220,30 @@ function insere_tecnologias_criacao_ideia(id, nm) {
         
 
     }    
+}
+
+function xablau(id, nm){
+    let verificador = 0
+
+    for (let i = 0; i <= tecnologias_insere_ideia.length; i++) {
+        if (tecnologias_insere_ideia[i] == id) {
+            tecnologias_insere_ideia.splice(i, 1)
+            tecnologias_insere_ideia.splice(i, 1)
+            verificador = 1
+        }
+    }
+
+    if (verificador == 0) {
+        tecnologias_insere_ideia.push(id)
+        tecnologias_insere_ideia.push(nm)
+    }
+    document.getElementById("lista_tecnologias").innerHTML = " "
+    for (var i = 1; i < tecnologias_insere_ideia.length; i+= 2) {
+        
+        document.getElementById("lista_tecnologias").innerHTML += "<div class='chip' > " + tecnologias_insere_ideia[i] + " </div>";
+        
+
+    }  
 }
 
 function altera_dados_ideia(dado){

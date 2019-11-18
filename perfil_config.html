@@ -9,18 +9,24 @@
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
-    <script type="text/javascript" src="scripts/perfil_config.js"></script>
     <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+
+    <script src="scripts/autenticacao_usuario.js"></script>
+    <script>
+        valida_usuario()
+        
+    </script>
     
-    <script src="scripts/buscas.js"></script>
+    <script src="scripts/ideia.js"></script>
     <script src="scripts/curtida.js"></script>
     <script src="scripts/trends.js"></script>
-    <script src="scripts/autenticacao_usuario.js"></script>
     <script src="scripts/notificacoes.js"></script>
     <script src="scripts/projetos_atuais.js"></script>
     <script src="scripts/portifolio.js"></script>
     <script src="scripts/visualiza_usuario.js"></script>
-    
+
+    <script src="scripts/buscas.js"></script>
+
     <script src="scripts/perfil_config.js"></script>
     <script src="js/socket.js"></script>
     <script>
@@ -31,11 +37,6 @@
         socket.on('connect', function () {
 
         });
-
-        function sair(){
-            localStorage.clear()
-            window.location.href = "index.html"
-        }
 
     </script>
     <script src="js/moment-with-locales.js">
@@ -79,14 +80,6 @@
                         </a>
                     </li>
                     <li>
-                        <span class="new badge red white-text">4</span>
-                        <a href="#!" class="dropdown-trigger" data-target="msgs">
-                            <i class="material-icons">
-                                chat_bubble
-                            </i>
-                        </a>
-                    </li>
-                    <li>
                         <a class="btn-floating waves-effect waves-light white modal-trigger" href="#add_ideia">
                             <i class="material-icons black-text">add</i>
                         </a>
@@ -101,7 +94,8 @@
                     <div class="col s4">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate" onkeydown="verifica_enter_busca()">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate"
+                                onkeydown="verifica_enter_busca()">
                         </div>
                     </div>
 
@@ -127,18 +121,18 @@
 
     <ul id="slide-out" class="sidenav ">
         <li>
-            <div class="user-view ">
+            <div class="user-view" id="link_usuario">
                 <div class="background">
                     <img src="img/fund.jpg">
                 </div>
                 <a href="#user">
-                    <img class="circle" src="img/perfil.jpg">
+                    <img class="circle" src="https://image.flaticon.com/icons/png/512/74/74472.png">
                 </a>
                 <a href="#name">
-                    <span class="name black-text">John Doe</span>
+                    <span class="name black-text" id="nm_usuario">John Doe</span>
                 </a>
                 <a href="#email">
-                    <span class=" email black-text">jdandturk@gmail.com</span>
+                    <span class=" email black-text" id="email_usuario">jdandturk@gmail.com</span>
                 </a>
             </div>
         </li>
@@ -164,27 +158,8 @@
                 <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
             </a>
         </li>
-        <li>
-            <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
-                <i class="material-icons">
-                    chat_bubble
-                </i>Mensagens
-                <span class="new badge red white-text">4</span>
-            </a>
-        </li>
-
-
-
-
-
-        <li>
-            <a href="#!">
-                <i class="material-icons">
-                    menu_book
-                </i>Portfólio</a>
-        </li>
-        <li>
-            <a class="waves-effect" href="#!">
+        <li class="hide-on-large-only">
+            <a class="waves-effect" href="trends.html">
                 <i class="material-icons">
                     emoji_events
                 </i>Trends</a>
@@ -192,12 +167,6 @@
 
         <li>
             <div class="divider"></div>
-        </li>
-        <li>
-            <a class="waves-effect" href="#!">
-                <i class="material-icons">
-                    settings_applications
-                </i>Configurações</a>
         </li>
         <li>
             <a class="waves-effect" href="#!">
@@ -268,93 +237,96 @@
     <!--/////-->
     <div class="container">
 
-        <div class="row">
+        <div class="row" id="pagina_perfil_config">
             <div class="col s12 m8 l8">
 
-                <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;" id="visualizacao_perfil_usuario">
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;"
+                    id="visualizacao_perfil_usuario">
 
                 </div>
 
             </div>
 
-            <div id='fixado'>               
+            <div id='fixado'>
 
 
                 <!--coluna trends -->
-                <div class="col s12 m6 l4 z-depth-1  " id='trends' style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+                <div class="col s12 m6 l4 z-depth-1  " id='trends'
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
                     <h5>
-                      # Trends</h5>
-          
+                        # Trends</h5>
+
                     <div class='divider'></div>
                     <div class='divider'></div>
                     <!-- Aqui será carregado os trends -->
                     <div>
-          
+
                     </div>
-                  </div>
+                </div>
             </div>
 
             <div class="row">
-                    <div class="col s8">
-                        <ul class="collapsible collection with-header"   id='projetos_atuais_perfil1'>
-                            <li class="collection-header">
-                                <h5>
-                                    <div class="material-icons">code</div> Projetos Atuais
-                                </h5>
-                            </li>        
-                        </ul>
-                    </div>
-                    <div class="col s8">
-                        <ul class="collapsible collection with-header" id='portfolio'>
-
-                            
-        
-                        </ul>
-                    </div>
-        
+                <div class="col s8">
+                    <ul class="collapsible collection with-header" id='projetos_atuais_perfil1'>
+                        <li class="collection-header">
+                            <h5>
+                                <div class="material-icons">code</div> Projetos Atuais
+                            </h5>
+                        </li>
+                    </ul>
                 </div>
-        </div>
+                <div class="col s8">
+                    <ul class="collapsible collection with-header" id='portfolio'>
 
 
-        <!-- Modal Structure -->
-        <div id="add_ideia" class="modal">
-            <div class="modal-content">
-                <h4>Adicionar uma ideia</h4>
-                <div class="row">
-                    <form class="col s12" onchange="mostrar_interesses();">
-                        <div class="row">
-                            <div class="input-field col s12 black-text">
-                                <input id="nm_ideia" type="text">
-                                <label for="nm_ideia">Titulo da ideia</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
-                                <label for="textarea2">Descrição da ideia</label>
-                            </div>
-                            <div class="input-field col s12 m6 l12 " onchange="mostrar_interesses();">
-                                <select multiple id='todas_tecnologias'>
-                                    <option value="" disabled>Adicione as tecnologias necessárias </option>
-                                    <option name='interesses' value="1">Option 1</option>
-                                    <option name='interesses' value="2">Option 2</option>
-                                    <option name='interesses' value="3">Option 3</option>
-                                </select>
 
-                            </div>
-
-
-                        </div>
-
-                        <div class=" col s12 m6 l12 center-align" id="lista_interesses">
-
-                        </div>
+                    </ul>
                 </div>
-                <div class="row center">
-                    <a class="btn">Prontinho</a>
-                </div>
-                </form>
+
             </div>
-
         </div>
+
+
+         <!-- Modal Structure -->
+    <div id="add_ideia" class="modal">
+            <div class="modal-content">
+              <h4>Adicionar uma ideia</h4>
+              <div class="row">
+                <form class="col s12" id="alt_dados">
+                  <div class="row">
+                    <div class="input-field col s12 black-text">
+                      <input id="titulo_ideia" type="text">
+                      <label for="titulo_ideia">Titulo da ideia</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                      <label for="textarea2">Descrição da ideia</label>
+                    </div>
+                    <div class="input-field col s12 m6 l12 ">
+                      <select multiple id='tecnologias_select'>
+                        <option value="" disabled>Adicione as tecnologias necessárias </option>
+                      </select>
+      
+                    </div>
+      
+      
+                  </div>
+      
+                  <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+      
+                  </div>
+                  <div class="row center">
+                    <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                    <a class="btn modal-close" id="cancela">Cancela</a>
+                  </div>
+                </form>
+              </div>
+      
+            </div>
+      
+      
+          </div>
 
         <div id="config_conta" class="modal modal-fixed-footer">
             <div class="modal-content">
@@ -367,36 +339,23 @@
                         </i> Dados Pessoais</h6>
                 </div>
                 <div class="row">
-                    <form id='alt_dados' class="col s12">
+                    <form id='alt_dados2' class="col s12">
                         <div class="row">
-                            <div class="col s11">
+
+                            <div class="col s6">
                                 <div class="input-field col s12">
                                     <input id="campo_nm_usuario" disabled type="text">
-                                    <label for="campo_nm_usuario" class='label_modal' id="label_nm_usuario">Paula</label>
+                                    <label for="campo_nm_usuario" class='label_modal'
+                                        id="label_nm_usuario">Paula</label>
                                 </div>
                             </div>
+
                             <div class="col s1">
                                 <a class='btn btn-floating'>
                                     <i class="material-icons" onclick="abre_nome()">edit</i>
                                 </a>
                             </div>
 
-                        </div>
-                        <div class="row">
-
-                            <div class="col s6">
-                                <div class="input-field col s12">
-                                    <input id="campo_email_usuario" disabled type="text">
-                                    <label for="campo_email_usuario" class='label_modal' id="label_email_usuario">paulacavalcantedeoliveira@gmail.com</label>
-                                </div>
-                            </div>
-
-                            <div class="col s1">
-                                <a class='btn btn-floating'>
-                                    <i class="material-icons" onclick="abre_email()">edit</i>
-                                </a>
-                            </div>
-                        
                             <div class="col s4">
                                 <div class="input-field col s12 m6 l12">
                                     <input id="campo_dt_nascimento" disabled type="text">
@@ -411,13 +370,42 @@
                             </div>
 
                         </div>
-                            <div class="input-field col s12 m6 l12 ">
+                        <div class="row">
+                            <div class="input-field col s12 m5 l5">
+                                <div class="input-field col s12 m6 l12">
+                                    <input id="campo_descricao" disabled type="text">
+                                    <label for="campo_descricao" id="label_descricao">Descrição</label>
+                                </div>
+                            </div>
+                            <div class="col s1">
+                                <a class='btn btn-floating'>
+                                    <i class="material-icons" onclick="abre_desc()">edit</i>
+                                </a>
+                            </div>
 
+                            <div class="input-field col s12 m5 l5">
+                                <div class="input-field col s12 m6 l12">
+                                    <input id="campo_tel" disabled type="text">
+                                    <label for="campo_tel" id="label_tel">Telefone</label>
+                                </div>
+                            </div>
+                            <div class="col s1">
+                                <a class='btn btn-floating'>
+                                    <i class="material-icons" onclick="abre_tel()">edit</i>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m12 l12 ">
                                 <select multiple id='campo_tecnologias_usuario'>
                                     <option value="" disabled>Seus interesses</option>
                                 </select>
 
                             </div>
+                        </div>
+
+
 
                         <div class="divider"></div>
                         <div class="row center">
@@ -428,7 +416,12 @@
                         </div>
 
                         <div class="row">
-
+                            <div class="input-field col s6">
+                                <input id="senha_antiga" disabled type="password">
+                                <label for="senha_antiga">Senha atual</label>
+                            </div>
+                        </div>
+                        <div class="row">
                             <!-- fazer um script que faça o usuario confirmar senha atual dele -->
 
                             <div class="input-field col s6">
@@ -436,15 +429,25 @@
                                 <label for="nv_senha">Nova Senha</label>
                             </div>
                             <div class="input-field col s5">
-                                <input id="nv_senha_conf" disabled type="password">
-                                <label for="nv_senha_conf">Confirme a nova senha</label>
+                                <input id="nv_senha_confirm" disabled type="password">
+                                <label for="nv_senha_confirm">Confirme a nova senha</label>
                             </div>
                             <div class="col s1">
                                 <a class='btn btn-floating'>
                                     <i class="material-icons" onclick="abre_senha()">edit</i>
                                 </a>
                             </div>
-                            
+
+                        </div>
+
+                        <div class="row">
+                            <h6 onclick="aparece_deletar_conta()">
+                                <i class="material-icons">sentiment_very_dissatisfied</i>Deletar conta
+                            </h6>
+                            <div id="deletar_conta" hidden>
+                                <h6>Tem certeza que deseja apagar sua conta? Esta ação não poderá ser desfeita!</h6>
+                                <button onclick="deleta_conta()" class="btn red">Sim</button>
+                            </div>
                         </div>
 
                     </form>
@@ -453,27 +456,54 @@
             </div>
 
             <div class="modal-footer">
-                <a href="#!" id='envia_form' class="modal-close waves-effect waves-green btn-flat">Prontinho</a>
+                <a href="#!" id='envia_form' class="modal-close waves-effect waves-green btn-flat"
+                    onclick="altera_dados_usuario()">Prontinho</a>
                 <a href="#!" id='cancela' class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
             </div>
         </div>
-        <script>
-            $(function () {
-                $.mask.definitions['~'] = "[+-]";
-                $("#dt_nascimento").mask("99/99/9999")
-            });
+    </div>
+
+    <!-- Resultado das buscas -->
+
+    <div id="pesquisas" hidden>
+        <div class="row">
+            <div class="col s12 m8 l8">
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+                    <h5>
+                        <i class="material-icons">search</i>Resultados para "
+                        <span id="texto_resultado_busca"></span>"</h5>
+                    <div class="divider"></div>
+
+                    <div id="resultado_pesquisas">
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(function () {
+            $.mask.definitions['~'] = "[+-]";
+            $("#dt_nascimento").mask("99/99/9999")
+        });
 
 
 
 
-            /**select */
-            var elems = document.querySelectorAll('select');
-            var instances = M.FormSelect.init(elems);
+        /**select */
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
 
 
 
 
-        </script>
+    </script>
 </body>
 
 </html>

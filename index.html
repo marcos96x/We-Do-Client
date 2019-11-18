@@ -52,6 +52,8 @@
           <div class="input-field col s12 m4 l5">
             <input id="senha_login" type="password" class="validate"  on="login()">
             <label for="senha_login">Senha</label>
+            <br>
+            <a style="color: white;" class="modal-trigger" href="#modal_recupera_senha">Esqueceu sua senha?</a>
           </div>
           <div class="col s12 m12 l2 center-align " onclick="login()">
             <br>
@@ -128,6 +130,30 @@
   </div>
 
   </div>
+
+  <div id="modal_recupera_senha" class="modal">
+      <div class="modal-content">
+        <h4>Recupere sua senha</h4>
+        <h5>Enviaremos um link para seu email para recuperar sua senha</h5>
+        <div class="row">
+          <form class="col s12" id="alt_dados">
+            <div class="row">
+              <div class="input-field col s12 black-text">
+                <input id="email_recupera_senha" type="text">
+                <label for="email_recupera_senha">Insira seu email</label>
+              </div> 
+            </div>
+            <div class="row center">
+              <a class="btn modal-close" onclick="recupera_senha()">Enviar</a>
+              <a class="btn modal-close" id="cancela">Cancela</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+
+    </div>
 
   <script>
     $(function () {

@@ -9,31 +9,35 @@
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
-    
-    <script src="scripts/perfil_usuario.js"></script>
+
+
+    <script src="scripts/autenticacao_usuario.js"></script>
     <script src="scripts/buscas.js"></script>
     <script src="scripts/trends.js"></script>
-    <script src="scripts/autenticacao_usuario.js"></script>
     <script src="scripts/notificacoes.js"></script>
-    <script src="scripts/curtida.js"></script>    
+    <script src="scripts/curtida.js"></script>
     <script src="scripts/projetos_atuais.js"></script>
     <script src="scripts/portifolio.js"></script>
     <script src="scripts/visualiza_usuario.js"></script>
+    <script src="scripts/ideia.js"></script>
     <script src="js/socket.js"></script>
+    <script src="scripts/perfil_usuario.js"></script>
     <script>
+        valida_usuario()
         projetos_atuais_perfil(id_perfil)
+        projetos_atuais(id)
         // Client Side
         var socket = io.connect('http://localhost:8080/');
         socket.on('connect', function () {
 
         });
-        function sair(){
+        function sair() {
             localStorage.clear()
             window.location.href = "index.html"
         }
 
-        
-        
+
+
     </script>
     <script src="js/moment-with-locales.js">
 
@@ -76,14 +80,6 @@
                         </a>
                     </li>
                     <li>
-                        <span class="new badge red white-text">4</span>
-                        <a href="#!" class="dropdown-trigger" data-target="msgs">
-                            <i class="material-icons">
-                                chat_bubble
-                            </i>
-                        </a>
-                    </li>
-                    <li>
                         <a class="btn-floating waves-effect waves-light white modal-trigger" href="#add_ideia">
                             <i class="material-icons black-text">add</i>
                         </a>
@@ -98,7 +94,8 @@
                     <div class="col s4">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate" onkeydown="verifica_enter_busca()">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate"
+                                onkeydown="verifica_enter_busca()">
                         </div>
                     </div>
 
@@ -124,18 +121,18 @@
 
     <ul id="slide-out" class="sidenav ">
         <li>
-            <div class="user-view ">
+            <div class="user-view" id="link_usuario">
                 <div class="background">
                     <img src="img/fund.jpg">
                 </div>
                 <a href="#user">
-                    <img class="circle" src="img/perfil.jpg">
+                    <img class="circle" src="https://image.flaticon.com/icons/png/512/74/74472.png">
                 </a>
                 <a href="#name">
-                    <span class="name black-text">John Doe</span>
+                    <span class="name black-text" id="nm_usuario">John Doe</span>
                 </a>
                 <a href="#email">
-                    <span class=" email black-text">jdandturk@gmail.com</span>
+                    <span class=" email black-text" id="email_usuario">jdandturk@gmail.com</span>
                 </a>
             </div>
         </li>
@@ -161,27 +158,8 @@
                 <span hidden class="new badge red white-text" id="qtd_notificacoes2"></span>
             </a>
         </li>
-        <li>
-            <a href="#!" class="dropdown-trigger" data-target="msgs_menu_lateral">
-                <i class="material-icons">
-                    chat_bubble
-                </i>Mensagens
-                <span class="new badge red white-text">4</span>
-            </a>
-        </li>
-
-
-
-
-
-        <li>
-            <a href="#!">
-                <i class="material-icons">
-                    menu_book
-                </i>Portfólio</a>
-        </li>
-        <li>
-            <a class="waves-effect" href="#!">
+        <li class="hide-on-large-only">
+            <a class="waves-effect" href="trends.html">
                 <i class="material-icons">
                     emoji_events
                 </i>Trends</a>
@@ -189,12 +167,6 @@
 
         <li>
             <div class="divider"></div>
-        </li>
-        <li>
-            <a class="waves-effect" href="#!">
-                <i class="material-icons">
-                    settings_applications
-                </i>Configurações</a>
         </li>
         <li>
             <a class="waves-effect" href="#!">
@@ -265,34 +237,36 @@
     <!--/////-->
     <div class="container">
 
-        <div class="row">
+        <div class="row" id="pagina_perfil_config">
             <div class="col s12 m8 l8">
 
-                <div class="col s12  z-depth-1 " style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;" id="visualizacao_perfil">
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;"
+                    id="visualizacao_perfil">
 
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <ul class="collapsible collection with-header"   id='projetos_atuais_perfil'>
+                        <ul class="collapsible collection with-header" id='projetos_atuais_perfil'>
                             <li class="collection-header">
                                 <h5>
                                     <div class="material-icons">code</div> Projetos Atuais
                                 </h5>
-                            </li>        
+                            </li>
                         </ul>
                     </div>
                     <div class="col s12">
                         <ul class="collapsible collection with-header" id='portfolio'>
 
-                            
-        
+
+
                         </ul>
                     </div>
-        
+
                 </div>
                 <div class="row">
-                    
-        
+
+
                 </div>
 
             </div>
@@ -336,8 +310,8 @@
             </div>
 
         </div>
-        
-        
+
+
     </div>
 
 
@@ -378,6 +352,32 @@
 
 
     </div>
+
+
+    
+    <div id="modal_denuncia" class="modal">
+        <div class="modal-content">
+            <h4>Reporte um usuario</h4>
+            <div class="row">
+                <form class="col s12" id="alt_dados">
+                    <div class="row">
+                        <div class="input-field col s12 black-text">
+                            <textarea id="desc_denuncia"></textarea>
+                            <label for="desc_denuncia">Descrição da denuncia</label>
+                        </div>                        
+                    </div>
+
+                    <div class="row center">
+                        <a class="btn modal-close" onclick="denuncia()">Denunciar</a>
+                        <a class="btn modal-close" id="cancela">Cancela</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
     <!-- Resultado das buscas -->
 
     <div id="pesquisas" hidden>
@@ -387,8 +387,7 @@
                     style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
 
                     <h5>
-                        <i class="material-icons">search</i>Resultados para "<span
-                            id="texto_resultado_busca"></span>"
+                        <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"
                     </h5>
                     <div class="divider"></div>
 
@@ -401,6 +400,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $("#nm_usuario").html(nome)
+        $("#email_usuario").html(email)
+        let str_link = `perfil_config.html?id_usuario=${id}`
+        $("#link_usuario").click(() => {
+            window.location.href = str_link
+        })
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main2.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+
+    <script>
+        pega_token()
+    </script>
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12" id="img">
+                <div class="container">
+                    <h3><img src='img/logo.png' align='center' width="10%"> Troque uma ideia.</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row white z-depth-5" style="width: 50%; text-align: center;">
+            <div class="col s12 m12 l12">
+                <h4>Insira sua nova senha</h4>
+            </div>
+            <div class="input-field col s12 m12 l12">
+                <input id="nv_senha" type="password" class="validate">
+                <label for="nv_senha">Nova senha</label>
+            </div>
+            <div class="input-field col s12 m12 l12">
+                <input id="nv_senha_confirm" type="password" class="validate">
+                <label for="nv_senha_confirm">Confirme a nova senha</label>
+            </div>
+            <button class="btn" onclick="troca_senha()">Trocar senha</button>
+            <br><br>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+@font-face {
+    font-family: 'bree-serif';
+    src: url('BreeSerif-Regular.ttf');
+}
+
+
+body{
+ 
+  background-image: url("../img/fundo-home.jpg");
+  background-size: 70%;
+ font-family: 'bree-serif';
+  color:  #404f65;
+
+}
+
+#img{
+  
+  font-family: 'bree-serif';
+  color:  #404f65;
+ 
+
+  
+}
+#chat {
+  max-height: 550px;
+  width: 100%;
+	background-color: transparent ;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar {
+  width: 9px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #404f65;
+}
+/*
+input{
+    font-family: 'bree-serif';
+   
+}
+
+
+*/
+/* label focus color */
+/*
+.input-field input:focus + label {
+    color: white !important;
+  }
+  /* label underline focus color */
+  /*
+  .row .input-field input:focus {
+    border-bottom: 1px solid white !important;
+    box-shadow: 0 1px 0 0 white !important;
+    color: white;
+  }
+
+
+*/
+
+#wedo{
+    background-color: #404f65;
+    font-family: 'bree-serif';
+    color:white;
+ padding-bottom: 6.5%;
+    padding-top: 2.5%;
+    
+   
+}
+
+
+#wedo .input-field input+label {
+  color: #fff;
+  
+}
+
+
+
+#wedo input {
+  font-family: 'bree-serif';
+  color: #fff;
+  border-bottom: 1px solid white !important;
+}
+
+
+#search_ideia .input-field input+label {
+  color: #fff;
+  
+}
+
+#search_ideia input::placeholder {
+  color: #fff;
+  
+}
+
+
+
+
+#search_ideia input {
+  font-family: 'bree-serif';
+  color: #fff;
+  border-bottom: 1px solid white !important;
+}
+
+#search_tec{
+ padding-top: 0.72%;
+
+
+}
+
+
+
+.fixed-action-btn{
+  visibility: hidden !important;
+  }
+
+.btn{
+  color: #404f65;
+}
+
+@media only screen and (max-width: 400px) {
+.fixed-action-btn{
+  visibility: visible !important;
+  }
+
+  .add_ideia{
+    display: none !important;
+   }
+   #btnInterrese{
+    margin-left: 60%;
+  }
+  #chat_ideia{
+    display: none;
+  }
+  
+
+}
+
+@media only screen and (max-width: 999px) {
+
+  #img{
+    
+    display: none !important;
+    
+  }
+ 
+  .fixed-action-btn{
+   visibility: visible !important;
+   }
+   .add_ideia{
+    display: none !important;
+   }
+   #trends{
+    display: none !important;
+   }
+   #projetos_atuais{
+    display: none !important;
+
+   }
+   #chat_ideia{
+    display: none;
+  }
+
+  
+   #btnInterrese{
+    margin-left: 70%;
+  }
+  
+   
+  }
+
+  @media only screen and (min-width: 1000px){
+    #btnInterrese{
+      margin-left: 75%;
+    }
+  }
+
+  
+
+
+  
+  
+ 
+ 
+
+
+  blockquote{
+    margin: 20px 0;
+    padding-left: 1.5rem;
+    border-left: 5px solid #404f65; /* Just change the color value and that's it*/
+  }
+
+
+  nav{
+  background-color: #404f65;
+  
+}
+
+.brand-logo{
+  margin-top: 0.5%;
+}
+
+::placeholder{
+  font-family: 'bree-serif';
+}
+
+
+
+.btn-floating,.btn{
+  background-color: #404f65;
+  color:white;
+}
+
+#fixado{
+  position:fixed;
+  margin-left:60%;
+  margin-top:-0.5%;
+ 
+}
+
+
+
+#trends{
+  width: 420px;
+}
+
+
+.btn:hover, .btn-floating:hover {
+  background-color: #404f65;
+}
+
+#add_ideia .input-field input+label {
+  color: #404f65;
+}
+
+#add_ideia .input-field textarea+label {
+  color: #404f65;
+}
+
+#add_ideia input {
+  font-family: 'bree-serif';
+  color: #404f65;
+}
+
+
+
+/* label focus color */
+
+#add_ideia .input-field input:focus+label {
+  color: #404f65 !important;
+}
+
+#add_ideia .input-field textarea:focus+label {
+  color: #404f65 !important;
+}
+
+
+/* label underline focus color */
+
+#add_ideia .row .input-field input:focus {
+  border-bottom: 1px solid #404f65 !important;
+  box-shadow: 0 1px 0 0 #404f65 !important;
+  color: #404f65;
+
+}
+
+
+#add_ideia .row .input-field textarea:focus {
+  border-bottom: 1px solid #404f65 !important;
+  box-shadow: 0 1px 0 0 #404f65 !important;
+  color: #404f65;
+
+}
+
+.input-field#feed_comentario  textarea:focus+label{
+  color: #404f65;
+  max-width: 90%;
+
+}
+
+.row .input-field#feed_comentario textarea {
+  border-bottom: 1px solid #404f65 !important;
+  box-shadow: 0 1px 0 0 #404f65 !important;
+  color: #404f65;
+  max-width: 90%;
+
+}
+
+
+
+
+#add_tecnologia .select-wrapper  input.select-dropdown {
+
+
+  border-bottom: 1px solid #404f65 !important;;
+  font-family: 'bree-serif';
+  color:#404f65
+}
+
+.input-field #nm_ideia{
+  border-bottom: 1px solid #404f65 !important;;
+  font-family: 'bree-serif';
+  color:#404f65
+}
+
+.icone_comentario{
+  font-size: 40px;
+}
+
+.btn_pesquisa{
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.material-icons {
+  cursor:pointer;
+}
+
+.material-icons:active{
+  background-color: transparent;
+}
+
+.membros_ideia:hover{
+  background-color: #eee;
+}
+
+
+
+
+
+
+
+
+
