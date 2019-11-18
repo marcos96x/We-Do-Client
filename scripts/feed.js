@@ -60,7 +60,7 @@ function seleciona_tecnologias_pesquisa(id, nm){
 function abre_tecnologias(){
     
     $.ajax({
-        url: "http://localhost:3000/tecnologia",
+        url: url_api + "/tecnologia",
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -98,7 +98,7 @@ function carrega_feed(){
     })
     let content
 
-    let url = "http://localhost:3000/feed/" + id
+    let url = url_api + "/feed/" + id
     $.ajax({
         url: url,
         type: "GET",
@@ -173,14 +173,14 @@ function carrega_feed(){
                 content += "<blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>"+ds_ideia+"</blockquote>"
 
                 if(membros.length == 1){
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>.<br><br>`
                 }else if (membros.length == 2){
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a> e <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a> e <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>.<br><br>`
                 }else if (membros.length == 3){
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a> e <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a> e <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>.<br><br>`
                 }else{
                     let qt_membros = membros.length - 3
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[3].id_usuario}">${membros[3].nm_usuario}</a> e +${qt_membros}.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[3].id_usuario}">${membros[3].nm_usuario}</a> e +${qt_membros}.<br><br>`
                 }
 
                 let teste_curtida = 0
@@ -213,7 +213,7 @@ function carrega_feed(){
                             content += `<div class='row'>
                             <div class='col s11'>
                             <p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(ideias[i].comentarios[i2].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}                       </label></p>
-                            <a style='font-family:'bree-serif';' href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${ideias[i].comentarios[i2].id_usuario}">${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
+                            <a style='font-family:'bree-serif';' href="perfil_usuario.html?id_usuario=${ideias[i].comentarios[i2].id_usuario}">${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
                             </div>`
                             content += `<div class='col s1' style="padding-top: 3%;">`
                             content += `<a href="#!"><i class="material-icons red-text exclui_coment" onclick="deleta_comentario(${ideias[i].comentarios[i2].id_mensagem})" id="iconezinho">delete</i></a>`
@@ -226,7 +226,7 @@ function carrega_feed(){
                             content += `<div class='row'>
                             <div class='col s11'>
                             <p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(ideias[i].comentarios[i2].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label></p>
-                            <a style='font-family:'bree-serif';' href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${ideias[i].comentarios[i2].id_usuario}">${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
+                            <a style='font-family:'bree-serif';' href="perfil_usuario.html?id_usuario=${ideias[i].comentarios[i2].id_usuario}">${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
                             </div>`
                             content += `</div>`
                             content += `</div>`
@@ -257,7 +257,7 @@ function mudaIcone2(classe){
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-    let url = "http://localhost:3000/interesse"
+    let url = url_api + "/interesse"
     $.ajax({
         url: url,
         type: "POST",
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function deleta_comentario(id_mensagem){
-    let url = "http://localhost:3000/comentario" 
+    let url = url_api + "/comentario" 
     $.ajax({
         url: url,
         type: "DELETE",

@@ -4,7 +4,7 @@ function curtir(id_feed, id_texto, id_ideia) {
     let qt_curtida = Number($(id_feed).attr("name"))
     if ($(id_feed).attr("value") == 0) {
         // curte        
-        let url = "http://localhost:3000/curtida"
+        let url = url_api + "/curtida"
         $.ajax({
             url: url,
             type: "POST",
@@ -41,7 +41,7 @@ function curtir(id_feed, id_texto, id_ideia) {
         
     } else if ($(id_feed).attr('value') == 1) {
         // descurte
-        let url = "http://localhost:3000/curtida"
+        let url = url_api + "/curtida"
         $.ajax({
             url: url,
             type: "POST",
@@ -75,7 +75,7 @@ function curtir_ideia(id_feed, id_texto, id_ideia) {
     let qt_curtida = Number($(id_feed).attr("name"))
     if ($(id_feed).attr("value") == 0) {
         // curte        
-        let url = "http://localhost:3000/curtida"
+        let url = url_api + "/curtida"
         $.ajax({
             url: url,
             type: "POST",
@@ -112,7 +112,7 @@ function curtir_ideia(id_feed, id_texto, id_ideia) {
         
     } else if ($(id_feed).attr('value') == 1) {
         // descurte
-        let url = "http://localhost:3000/curtida"
+        let url = url_api + "/curtida"
         $.ajax({
             url: url,
             type: "POST",

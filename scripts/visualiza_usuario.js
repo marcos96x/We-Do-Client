@@ -26,7 +26,7 @@ $(document).ready(() => {
 
 
 function visualiza_usuario(id_user){
-    let url = "http://localhost:3000/usuario/perfil/"+id+"&"+id_user
+    let url = url_api + "/usuario/perfil/"+id+"&"+id_user
 
     $.ajax({
         url: url,
@@ -137,9 +137,9 @@ function visualiza_usuario(id_user){
             $("#label_nm_usuario").html(res.perfil_usuario.nm_usuario)
             $("#label_email_usuario").html(res.perfil_usuario.email_usuario)
             $("#label_dt_nascimento").html(moment(res.perfil_usuario.dt_nascimento, 'YYYY-MM-DD', 'pt').format("L"))
-
+              let url2 = url_api + "/tecnologia"
             $.ajax({
-                url: "http://localhost:3000/tecnologia",
+                url: url2,
                 type: "GET",
                 contentType: 'application/json'
             }).done(function (res) {

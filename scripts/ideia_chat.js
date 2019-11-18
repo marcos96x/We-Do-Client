@@ -75,7 +75,7 @@ function seleciona_tecnologias_pesquisa(id, nm){
 function abre_tecnologias_ideiaChat(){
     
     $.ajax({
-        url: "http://localhost:3000/tecnologia",
+        url: url_api + "/tecnologia",
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -100,7 +100,7 @@ function altera_dados_ideia_enter(tipo){
 }
 
 function mostra_interesse(valor){
-    let url = "http://localhost:3000/interesse"
+    let url = url_api + "/interesse"
     $.ajax({
         url: url,
         type: "POST",
@@ -131,7 +131,7 @@ function mudaIcone2(){
 }
 
 function mostra_ideia(id_ideia) {
-    let url = "http://localhost:3000/ideia/" + id_ideia + "&" + id
+    let url = url_api + "/ideia/" + id_ideia + "&" + id
     $.ajax({
         url: url,
         type: "GET",
@@ -779,7 +779,7 @@ function confere_nome_ideia(){
 }
 
 function apaga_ideia(){
-    let url = "http://localhost:3000/ideia/deletar"
+    let url = url_api + "/ideia/deletar"
     $.ajax({
         url: url,
         type: "DELETE",
@@ -806,7 +806,7 @@ function seta_idealizador(valor){
 }
 
 function sair_ideia(){
-    let url = "http://localhost:3000/ideia/sair"
+    let url = url_api + "/ideia/sair"
     $.ajax({
         url: url,
         type: "DELETE",
@@ -832,7 +832,7 @@ function sair_ideia(){
 
 function passa_ideia(){
     if(id_novo_idealizador != null){
-        let url = "http://localhost:3000/ideia/passar"
+        let url = url_api + "/ideia/passar"
         $.ajax({
             url: url,
             type: "PUT",
@@ -881,7 +881,7 @@ function configura_delete_tecnologia(id_tecnologia){
 }
 
 function deleta_tecnologia(id_tecnologia){
-    let url = "http://localhost:3000/tecnologia/ideia"
+    let url = url_api + "/tecnologia/ideia"
 
     $.ajax({
         url: url,
@@ -912,7 +912,7 @@ function deleta_tecnologia(id_tecnologia){
 }
 
 function deleta_comentario(id_mensagem){
-    let url = "http://localhost:3000/comentario" 
+    let url = url_api + "/comentario" 
     $.ajax({
         url: url,
         type: "DELETE",
@@ -942,7 +942,7 @@ function deleta_comentario(id_mensagem){
 }
 
 function remove_usuario(id_usuario_xxx, id_ideia_xxx){
-    let url = "http://localhost:3000/ideia/remover"
+    let url = url_api + "/ideia/remover"
     $.ajax({
         url: url,
         type: "DELETE",
@@ -992,7 +992,7 @@ function envia_mensagem(){
 
 function mostra_chat(id_ideia) {
 
-    let url = "http://localhost:3000/chat/" + id + "&" + id_ideia
+    let url = url_api + "/chat/" + id + "&" + id_ideia
     $.ajax({
         url: url,
         type: "GET",
