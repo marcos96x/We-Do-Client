@@ -10,7 +10,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
 
-
+    <script src="js/url-api.js"></script>
     <script src="scripts/autenticacao_usuario.js"></script>
     <script src="scripts/buscas.js"></script>
     <script src="scripts/trends.js"></script>
@@ -27,7 +27,7 @@
         projetos_atuais_perfil(id_perfil)
         projetos_atuais(id)
         // Client Side
-        var socket = io.connect('http://localhost:8080/');
+        var socket = io.connect('http://wedo-ml.umbler.net:8080/');
         socket.on('connect', function () {
 
         });

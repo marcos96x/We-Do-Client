@@ -17,7 +17,7 @@ function pega_token(){
     });
     token_recuperacao = data.token
     if(token_recuperacao){
-        let url = "http://localhost:3000/usuario/saber_id"
+        let url = url_api + "/usuario/saber_id"
         $.ajax({
             url: url,
             type: "POST",
@@ -43,7 +43,7 @@ function recupera_senha(){
     if(email_recupera == ""){
         M.toast({html: "Email vazio!"})
     }else{
-        let url = "http://localhost:3000/usuario/recuperar_senha"
+        let url = url_api + "/usuario/recuperar_senha"
         $.ajax({
             url: url,
             type: "POST",
@@ -72,7 +72,7 @@ function troca_senha(){
         if(senha != senha_confirm){
             M.toast({html: "As senhas devem ser iguais!"})
         }else{
-            let url = "http://localhost:3000/usuario/troca_senha"
+            let url = url_api + "/usuario/troca_senha"
             $.ajax({
                 url: url,
                 type: "PUT",
@@ -149,7 +149,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: "http://localhost:3000/tecnologia",
+        url: url_api + "/tecnologia",
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -239,7 +239,7 @@ function login() {
     let email = $("#email_login").val()
     let senha = $("#senha_login").val()
 
-    let url = "http://localhost:3000/usuario/login"
+    let url = url_api + "/usuario/login"
     $.ajax({
         url: url,
         type: "POST",
@@ -286,7 +286,7 @@ function cadastrar() {
             id_tecnologias_usuario.push(tecnologias[i])
         }
 
-        let url = "http://localhost:3000/usuario/cadastro"
+        let url = url_api + "/usuario/cadastro"
         $.ajax({
             url: url,
             type: "POST",
@@ -306,7 +306,7 @@ function cadastrar() {
                 M.toast({ html: res.err })
             } else {
                 $.ajax({
-                    url: "http://localhost:3000/tecnologia",
+                    url: url_api + "/tecnologia",
                     type: "GET",
                     contentType: 'application/json'
                 }).done(function (res2) {
