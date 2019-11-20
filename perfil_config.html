@@ -10,7 +10,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
     <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
-    <script src="js/url-api.js"></script>
+
     <script src="scripts/autenticacao_usuario.js"></script>
     <script>
         valida_usuario()
@@ -33,7 +33,7 @@
         projetos_atuais_perfil_usuario(id)
         carrega_trends()
         // Client Side
-        var socket = io.connect('http://wedo-ml.umbler.net:8080/');
+        var socket = io.connect('http://localhost:8080/');
         socket.on('connect', function () {
 
         });
@@ -488,6 +488,13 @@
 
 
     <script>
+
+$       ("#nm_usuario").html(localStorage.getItem("nome_we_do"))
+        $("#email_usuario").html(localStorage.getItem("email_we_do"))
+        let str_link = `perfil_config.html?id_usuario=${localStorage.getItem("id_we_do")}`
+        $("#link_usuario").click(() => {
+            window.location.href = str_link
+        })
         $(function () {
             $.mask.definitions['~'] = "[+-]";
             $("#dt_nascimento").mask("99/99/9999")

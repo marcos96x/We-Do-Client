@@ -14,7 +14,7 @@ if(data.token){
     console.log(token)
 
     
-    let url = url_api + "/usuario/valida_conta"
+    let url = "http://localhost:3000/usuario/valida_conta"
     $.ajax({
         url: url,
         type: "POST",

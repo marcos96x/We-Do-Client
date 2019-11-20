@@ -58,10 +58,10 @@ $(document).ready(function () {
             let str_hr_mensagem = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
             if (dados.id_usuario == id) {
                 // mensagem enviada pelo usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<label class='right' style='margin-left: 1%;margin-top:15px;'>"+moment(str_hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='color: white;margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #3d5afe; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<label class='right' style='color: white;margin-left: 1%;margin-top:15px;'>"+moment(str_hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
             } else {
                 // mensagem enviada por outro usuario
-                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(str_hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
+                $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + dados.nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #e0e0e0; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + dados.ct_mensagem + "<label class='right' style='color:margin-right: 1%;margin-top: 15px;'>"+moment(str_hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
             }
             let objDiv = document.getElementById("chat");
             objDiv.scrollTop = objDiv.scrollHeight;
@@ -75,7 +75,7 @@ function seleciona_tecnologias_pesquisa(id, nm){
 function abre_tecnologias_ideiaChat(){
     
     $.ajax({
-        url: url_api + "/tecnologia",
+        url: "http://localhost:3000/tecnologia",
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -99,8 +99,9 @@ function altera_dados_ideia_enter(tipo){
     }
 }
 
-function mostra_interesse(valor){
-    let url = url_api + "/interesse"
+function mostra_interesse_teste(valor){
+    
+    let url = "http://localhost:3000/interesse"
     $.ajax({
         url: url,
         type: "POST",
@@ -109,7 +110,7 @@ function mostra_interesse(valor){
                 "id_usuario": id
             },
             "ideia": {
-                "id_ideia": id_ideia_original
+                "id_ideia": id_ideia_pagina
             }
         }),
         contentType: "application/json"
@@ -117,9 +118,15 @@ function mostra_interesse(valor){
         if(res.err){
             alert("Erro na inserção do interesse")
         }else{
+            let dados_notificacao = {
+                id_usuario: id,
+                id_ideia: id_ideia_pagina,
+                acao: 3
+            }
+            socket.emit('notification', dados_notificacao)
             window.location.reload()
         }
-    })
+    })    
 }
 
 // Muda icones dos comentarios
@@ -131,7 +138,7 @@ function mudaIcone2(){
 }
 
 function mostra_ideia(id_ideia) {
-    let url = url_api + "/ideia/" + id_ideia + "&" + id
+    let url = "http://localhost:3000/ideia/" + id_ideia + "&" + id
     $.ajax({
         url: url,
         type: "GET",
@@ -178,7 +185,7 @@ function mostra_ideia(id_ideia) {
                     <h6 align="center">${nm_ideia_original}</h6>
                 `)
                 let elemento_interesse = `<div class="col s2">
-                <a class='btn' onclick='mostra_interesse(1)' style='margin-top:15%; margin-left: -15px;'><i class='material-icons white-text'></i>Interesse</a></div>
+                <a class='btn' onclick='mostra_interesse_teste(1)' style='margin-top:15%; margin-left: -15px;'><i class='material-icons white-text'></i>Interesse</a></div>
                 </div>
                 
                 `
@@ -198,7 +205,7 @@ function mostra_ideia(id_ideia) {
                     if(res.ideia.membros[i].id_usuario == id && res.ideia.membros[i].status_solicitacao == 0 && res.ideia.membros[i].idealizador == 0){
                         elemento_interesse = `
                         <div class="col s2">
-                            <a class='btn-floating' onclick='mostra_interesse(0)' style='margin-top:15%; margin-left: 45px;'><i class='material-icons white-text'>done</i></a></div>
+                            <a class='btn-floating' onclick='mostra_interesse_teste(0)' style='margin-top:15%; margin-left: 45px;'><i class='material-icons white-text'>done</i></a></div>
                             </div></div>
                             `
                     }
@@ -262,7 +269,7 @@ function mostra_ideia(id_ideia) {
     
             // membros
             for(let i = 0; i < res.ideia.membros.length; i++){
-                if(res.ideia.membros[i].id_usuario != id){
+                if(res.ideia.membros[i].id_usuario != id && res.ideia.membros[i].status_solicitacao == 1){
                     $("#campo_ideia").append(`
                     <h6>
                         <div class="row>
@@ -278,7 +285,7 @@ function mostra_ideia(id_ideia) {
                     
                     
                     `)
-                }else{
+                }else if(res.ideia.membros[i].id_usuario == id){
                     $("#campo_ideia").append(`
                 <h6>
                     <div class="row">
@@ -395,7 +402,7 @@ function mostra_ideia(id_ideia) {
     
             // membros
             for(let i = 0; i < res.ideia.membros.length; i++){
-                if(res.ideia.membros[i].id_usuario != id){
+                if(res.ideia.membros[i].id_usuario != id && res.ideia.membros[i].status_solicitacao == 1){
                     $("#campo_ideia").append(`
                     <h6>
                         <div class="row">
@@ -411,7 +418,7 @@ function mostra_ideia(id_ideia) {
                     
                     
                     `)
-                }else{
+                }else if(res.ideia.membros[i].id_usuario == id){
                     $("#campo_ideia").append(`
                 <h6>
                     <div class="row">
@@ -604,7 +611,7 @@ function mostra_ideia(id_ideia) {
                     <div class="row" id="tags_ideia">
                         `)
                         for(let i = 0; i < tags_ideia.length; i++){
-                            $("#campo_ideia").append(`{${tags_ideia[i].nm_tag}}`)
+                            $("#campo_ideia").append(`<i class="material-icons">local_offer</i>${tags_ideia[i].nm_tag}`)
                         }
     
                 $("#campo_ideia").append(`
@@ -613,11 +620,11 @@ function mostra_ideia(id_ideia) {
                         <div  class='input-field col s10'>  
                             <input id='texto_tags' type='text' onKeyDown="coloca_tag()">
                             <label style='font-size: 18px; color:#404f65;' for='texto_tags'>
-                                Digite uma tag (max de 20 caracteres)
+                                Digite uma tag (max de 20 caracteres) e pressione enter
                             </label>
                         </div>
                         <div class="col s2">
-                            <button style="margin-top:30px;" class="btn-floating btn-small" onclick="add_tag()"><i class="material-icons">add</i></button>
+                            <button style="margin-top:30px;" class="btn-floating btn-small" onclick="add_tag()"><i class="material-icons">edit</i></button>
                         </div>
                     </div>
                     <div class="row" id="tags_mostradas_ideia">
@@ -687,7 +694,7 @@ function mostra_ideia(id_ideia) {
     
             // membros
             for(let i = 0; i < res.ideia.membros.length; i++){
-                if(res.ideia.membros[i].id_usuario != id){
+                if(res.ideia.membros[i].id_usuario != id && res.ideia.membros[i].status_solicitacao == 1){
                     $("#membros_passa_ideia").append(`
     
                     <p>
@@ -718,7 +725,7 @@ function mostra_ideia(id_ideia) {
                     
                     
                     `)
-                }else{
+                }else if(res.ideia.membros[i].id_usuario == id){
                     $("#campo_ideia").append(`
                 <h6>
                     <div class="row">
@@ -779,7 +786,7 @@ function confere_nome_ideia(){
 }
 
 function apaga_ideia(){
-    let url = url_api + "/ideia/deletar"
+    let url = "http://localhost:3000/ideia/deletar"
     $.ajax({
         url: url,
         type: "DELETE",
@@ -806,7 +813,7 @@ function seta_idealizador(valor){
 }
 
 function sair_ideia(){
-    let url = url_api + "/ideia/sair"
+    let url = "http://localhost:3000/ideia/sair"
     $.ajax({
         url: url,
         type: "DELETE",
@@ -832,7 +839,7 @@ function sair_ideia(){
 
 function passa_ideia(){
     if(id_novo_idealizador != null){
-        let url = url_api + "/ideia/passar"
+        let url = "http://localhost:3000/ideia/passar"
         $.ajax({
             url: url,
             type: "PUT",
@@ -881,7 +888,7 @@ function configura_delete_tecnologia(id_tecnologia){
 }
 
 function deleta_tecnologia(id_tecnologia){
-    let url = url_api + "/tecnologia/ideia"
+    let url = "http://localhost:3000/tecnologia/ideia"
 
     $.ajax({
         url: url,
@@ -912,7 +919,7 @@ function deleta_tecnologia(id_tecnologia){
 }
 
 function deleta_comentario(id_mensagem){
-    let url = url_api + "/comentario" 
+    let url = "http://localhost:3000/comentario" 
     $.ajax({
         url: url,
         type: "DELETE",
@@ -942,7 +949,7 @@ function deleta_comentario(id_mensagem){
 }
 
 function remove_usuario(id_usuario_xxx, id_ideia_xxx){
-    let url = url_api + "/ideia/remover"
+    let url = "http://localhost:3000/ideia/remover"
     $.ajax({
         url: url,
         type: "DELETE",
@@ -992,7 +999,7 @@ function envia_mensagem(){
 
 function mostra_chat(id_ideia) {
 
-    let url = url_api + "/chat/" + id + "&" + id_ideia
+    let url = "http://localhost:3000/chat/" + id + "&" + id_ideia
     $.ajax({
         url: url,
         type: "GET",
@@ -1005,10 +1012,10 @@ function mostra_chat(id_ideia) {
             for (let i = 0; i < mensagens.length; i++) {
                 if (mensagens[i].id_usuario == id) {
                     // mensagem enviada pelo usuario
-                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-left: 1%;margin-top:15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
+                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 right' style='margin-left: -2%;'><p style='color: white;margin-top:-0.5%;padding:3%; background-color: #3d5afe; border-radius:20px;border-top-right-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='color: white;margin-left: 1%;margin-top:15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
                 } else {
                     // mensagem enviada por outro usuario
-                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #C9CAFF; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
+                    $("#chat").append("<div class='row'><div class='col s12'><div class='col s9 left' style='margin-right: -2%;'><label>" + mensagens[i].nm_usuario + "</label><p style='margin-top:-0.5%;padding:3%; background-color: #e0e0e0; border-radius:20px;border-top-left-radius: 0px; font-family: Arial, Helvetica, sans-serif;'>" + mensagens[i].ct_mensagem + "<label class='right' style='margin-right: 1%;margin-top: 15px;'>"+moment(mensagens[i].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()+"</label><br></p></div></div></div>")
                 }
             }
             let objDiv = document.getElementById("chat");

@@ -1,7 +1,7 @@
 function projetos_atuais(){
     $("#projetos_atuais_lateral").html("")
     $("#projetos_atuais").html("")
-    let url = url_api + "/ideia/projetos_atuais/" + id
+    let url = "http://localhost:3000/ideia/projetos_atuais/" + id
     $.ajax({
         url: url,
         type: "GET",
@@ -40,7 +40,7 @@ function projetos_atuais_perfil_usuario(id_user){
       <div class="material-icons">code</div> Projetos Atuais
   </h5>
 </li>`)
-  let url = url_api + "/ideia/projetos_atuais/" + id_user
+  let url = "http://localhost:3000/ideia/projetos_atuais/" + id_user
   $.ajax({
       url: url,
       type: "GET",
@@ -143,7 +143,7 @@ function projetos_atuais_perfil(id_user){
       <div class="material-icons">code</div> Projetos Atuais
   </h5>
 </li>`)
-  let url = url_api + "/ideia/projetos_atuais/" + id_user
+  let url = "http://localhost:3000/ideia/projetos_atuais/" + id_user
   $.ajax({
       url: url,
       type: "GET",
@@ -253,7 +253,7 @@ function projetos_atuais_perfil(id_user){
 
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-  let url = url_api + "/interesse"
+  let url = "http://localhost:3000/interesse"
   $.ajax({
       url: url,
       type: "POST",

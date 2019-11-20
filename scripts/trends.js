@@ -9,7 +9,7 @@ function carrega_trends(){
         <div class='divider'></div>`)
 
 
-    let url = url_api + "/trends" 
+    let url = "http://localhost:3000/trends" 
     $.ajax({
         url: url,
         type: "GET",
@@ -102,7 +102,7 @@ function carrega_trends(){
 /**mostra interesse na parte dos trends*/
 function mostra_interesse_trends(id_elemento, id_icone, id_ideia) {
 
-    let url = url_api + "/interesse"
+    let url = "http://localhost:3000/interesse"
     $.ajax({
         url: url,
         type: "POST",

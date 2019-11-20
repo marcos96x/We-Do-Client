@@ -17,7 +17,7 @@ function pega_token(){
     });
     token_recuperacao = data.token
     if(token_recuperacao){
-        let url = url_api + "/usuario/saber_id"
+        let url = "http://localhost:3000/usuario/saber_id"
         $.ajax({
             url: url,
             type: "POST",
@@ -43,7 +43,7 @@ function recupera_senha(){
     if(email_recupera == ""){
         M.toast({html: "Email vazio!"})
     }else{
-        let url = url_api + "/usuario/recuperar_senha"
+        let url = "http://localhost:3000/usuario/recuperar_senha"
         $.ajax({
             url: url,
             type: "POST",
@@ -72,24 +72,28 @@ function troca_senha(){
         if(senha != senha_confirm){
             M.toast({html: "As senhas devem ser iguais!"})
         }else{
-            let url = url_api + "/usuario/troca_senha"
-            $.ajax({
-                url: url,
-                type: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    usuario: {
-                        id_usuario: id_usuario,
-                        senha_nova: senha
+            if(senha.length < 6){
+                M.toast({html: "A senha precisa ter no mínimo 6 digitos."})
+            }else{
+                let url = "http://localhost:3000/usuario/troca_senha"
+                $.ajax({
+                    url: url,
+                    type: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        usuario: {
+                            id_usuario: id_usuario,
+                            senha_nova: senha
+                        }
+                    })
+                }).done((res) => {
+                    if(res.err){
+                        alert(res.err)
+                    }else{
+                        window.location.href = "http://127.0.0.1:5500/index.html?msg=3"
                     }
                 })
-            }).done((res) => {
-                if(res.err){
-                    alert(res.err)
-                }else{
-                    window.location.href = "http://127.0.0.1:5500/index.html?msg=3"
-                }
-            })
+            }            
         }
     }
 }
@@ -149,7 +153,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: url_api + "/tecnologia",
+        url: "http://localhost:3000/tecnologia",
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -239,7 +243,7 @@ function login() {
     let email = $("#email_login").val()
     let senha = $("#senha_login").val()
 
-    let url = url_api + "/usuario/login"
+    let url = "http://localhost:3000/usuario/login"
     $.ajax({
         url: url,
         type: "POST",
@@ -277,60 +281,65 @@ function cadastrar() {
         let email = $("#email_cad").val()
         let senha = $("#senha_cad").val()
         let dt_nascimento = $("#dt_nascimento").val()
-        dt_nascimento = dt_nascimento.split("/")
-        dt_nascimento = dt_nascimento[2] + "-" + dt_nascimento[1] + "-" + dt_nascimento[0]
-        let id_tecnologias_usuario = []
-
-        // Receber todos os ID de tecnologias que o usuário selecionou
-        for (let i = 0; i < tecnologias.length; i += 2) {
-            id_tecnologias_usuario.push(tecnologias[i])
-        }
-
-        let url = url_api + "/usuario/cadastro"
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: JSON.stringify({
-                "usuario": {
-                    "email_usuario": email,
-                    "senha_usuario": senha,
-                    "nm_usuario": nome,
-                    "dt_nascimento": dt_nascimento,
-                    "tecnologias_usuario": id_tecnologias_usuario
-                }
-            }),
-            contentType: 'application/json'
-        }).done(function (res) {
-            console.log(res)
-            if (res.err) {
-                M.toast({ html: res.err })
-            } else {
-                $.ajax({
-                    url: url_api + "/tecnologia",
-                    type: "GET",
-                    contentType: 'application/json'
-                }).done(function (res2) {
-
-                    let id_tecnologia, nm_tecnologia
-                    $("ul").html("")
-                    for (let i = 0; i < res2.tecnologias.length; i++) {
-                        id_tecnologia = res2.tecnologias[i].id_tecnologia
-                        nm_tecnologia = "" + res2.tecnologias[i].nm_tecnologia + ""
-
-                        $("ul").append("<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='checkbox'  ><span onClick='insere_tecnologias_cadastro(" + id_tecnologia + ", \"" + nm_tecnologia + "\" )'>" + nm_tecnologia + "</span></label></span></li>")
-                    }
-                    $("#nome_cad").val("")
-                    $("#sobre_cad").val("")
-                    $("#email_cad").val("")
-                    $("#senha_cad").val("")
-                    $("#confirma_senha_cad").val("")
-                    $("#dt_nascimento").val("")
-                    document.getElementById("lista_interesses").innerHTML = ""
-                    M.toast({ html: res.msg })
-                })
-
+        if(senha.length < 6){
+            M.toast({html: "A senha precisa ter no mínimo 6 digitos."})
+        }else{
+            dt_nascimento = dt_nascimento.split("/")
+            dt_nascimento = dt_nascimento[2] + "-" + dt_nascimento[1] + "-" + dt_nascimento[0]
+            let id_tecnologias_usuario = []
+    
+            // Receber todos os ID de tecnologias que o usuário selecionou
+            for (let i = 0; i < tecnologias.length; i += 2) {
+                id_tecnologias_usuario.push(tecnologias[i])
             }
-        })
+    
+            let url = "http://localhost:3000/usuario/cadastro"
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: JSON.stringify({
+                    "usuario": {
+                        "email_usuario": email,
+                        "senha_usuario": senha,
+                        "nm_usuario": nome,
+                        "dt_nascimento": dt_nascimento,
+                        "tecnologias_usuario": id_tecnologias_usuario
+                    }
+                }),
+                contentType: 'application/json'
+            }).done(function (res) {
+                console.log(res)
+                if (res.err) {
+                    M.toast({ html: res.err })
+                } else {
+                    $.ajax({
+                        url: "http://localhost:3000/tecnologia",
+                        type: "GET",
+                        contentType: 'application/json'
+                    }).done(function (res2) {
+    
+                        let id_tecnologia, nm_tecnologia
+                        $("ul").html("")
+                        for (let i = 0; i < res2.tecnologias.length; i++) {
+                            id_tecnologia = res2.tecnologias[i].id_tecnologia
+                            nm_tecnologia = "" + res2.tecnologias[i].nm_tecnologia + ""
+    
+                            $("ul").append("<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='checkbox'  ><span onClick='insere_tecnologias_cadastro(" + id_tecnologia + ", \"" + nm_tecnologia + "\" )'>" + nm_tecnologia + "</span></label></span></li>")
+                        }
+                        $("#nome_cad").val("")
+                        $("#sobre_cad").val("")
+                        $("#email_cad").val("")
+                        $("#senha_cad").val("")
+                        $("#confirma_senha_cad").val("")
+                        $("#dt_nascimento").val("")
+                        document.getElementById("lista_interesses").innerHTML = ""
+                        M.toast({ html: res.msg })
+                    })
+    
+                }
+            })
+        }
+        
     } else {
         M.toast({ html: "As senhas devem ser iguais" })
     }

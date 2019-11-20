@@ -35,7 +35,7 @@ function denuncia(){
     if(desc_denuncia == ""){
         M.toast({html: "Descrição da denuncia vazia!"})
     }else{
-        let url = url_api + "/usuario/denuncia"
+        let url = "http://localhost:3000/usuario/denuncia"
         $.ajax({
             url: url,
             type: "POST",
@@ -64,7 +64,7 @@ function denuncia(){
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-    let url = url_api + "/interesse"
+    let url = "http://localhost:3000/interesse"
     $.ajax({
         url: url,
         type: "POST",

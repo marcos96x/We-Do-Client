@@ -1,5 +1,5 @@
 function portifolio(id_usuario) {
-    let url = url_api + "/ideia/portifolio/" + id_usuario
+    let url = "http://localhost:3000/ideia/portifolio/" + id_usuario
 
     $.ajax({
         url: url,
@@ -63,7 +63,7 @@ function portifolio(id_usuario) {
                     <li>
                         <div class="collapsible-header">${res.ideias[i].nm_ideia}</div>
                         <div class="collapsible-body">                
-    
+                            ${div_linguagens}
                             <blockquote class='black-text' style='font-family: Arial, Helvetica, sans-serif;'>${res.ideias[i].ds_ideia}</blockquote>
     
                             <p>

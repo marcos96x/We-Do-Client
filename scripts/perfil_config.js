@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-    let url = url_api + "/interesse"
+    let url = "http://localhost:3000/interesse"
     $.ajax({
         url: url,
         type: "POST",
@@ -152,7 +152,7 @@ function altera_dados_usuario(){
             tecnologias_alterar.push(checkbox_tecnologia[i].value)
     }
     // troca os dados do usuario
-    let url = url_api + "/usuario/alterar/" + id
+    let url = "http://localhost:3000/usuario/alterar/" + id
     $.ajax({
         url: url,
         type: "PUT",
@@ -170,6 +170,8 @@ function altera_dados_usuario(){
         if(res.err){
             alert(res.err)
         }else{
+            localStorage.setItem("nome_we_do", novo_nome)
+            $("#nm_usuario").html(novo_nome)
             if(senha_antiga != "" && nova_senha != "" && nova_senha_confirm != ""){
                 // muda senha
                 if(nova_senha != nova_senha_confirm){
@@ -178,7 +180,7 @@ function altera_dados_usuario(){
                     $("#visualizacao_perfil_usuario").html("")
                     visualiza_usuario(id)
                 }else{
-                    url = url_api + "/usuario/alterar_senha/" + id
+                    url = "http://localhost:3000/usuario/alterar_senha/" + id
                     $.ajax({
                         url: url,
                         type: "PUT",
@@ -244,7 +246,7 @@ function aparece_deletar_conta(){
 }
 
 function deleta_conta(){
-    let url = url_api + "/usuario"
+    let url = "http://localhost:3000/usuario"
 
     $.ajax({
         url: url,
