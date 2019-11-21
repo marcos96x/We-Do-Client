@@ -24,6 +24,38 @@ $(document).ready(() => {
     portifolio(id_perfil)    
 })
 
+function renderiza_denuncia(nome){
+    let url = "http://localhost:3000/usuario/saber_denuncia"
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+            denuncia: {
+                id_usuario_acusador: id,
+                id_usuario_denunciado: id_perfil
+            }
+        })
+    }).done((res) => {
+        if(res.err){
+            M.toast({html: res.err})
+        }else{
+            if(res.denuncia == true){
+                // renderiza a denuncia para poder remover
+                $("#btn_denuncia").html(`
+                    <h5>${nome}<a class="modal-trigger" id="botao_denuncia" href="#modal_remover_denuncia"><i class="material-icons small blue-text" style="float: right;">report</i></a></h5>
+                `)
+            }else{
+                // renderiza a denuncia para poder denunciar
+                $("#btn_denuncia").html(`
+                    <h5>${nome}<a class="modal-trigger" id="botao_denuncia" href="#modal_denuncia"><i class="material-icons small red-text" style="float: right;">report</i></a></h5>
+                `)
+            }
+        }
+    })
+}
+
 
 function visualiza_usuario(id_user){
     let url = "http://localhost:3000/usuario/perfil/"+id+"&"+id_user
@@ -81,10 +113,12 @@ function visualiza_usuario(id_user){
 
               $("#label_descricao").text(ds_bio_usuario)
               $("#label_tel").text(tel_usuario)
+
             $("#visualizacao_perfil").append(`
             <div class="col s10">
-                <div class="row" style="margin-top: 2%;">
-                    <h5>${res.perfil_usuario.nm_usuario}<a  class="modal-trigger" href="#modal_denuncia"><i class="material-icons small red-text" style="float: right;">report</i></a></h5>
+                <div class="row" style="margin-top: 2%;" id="btn_denuncia">
+                    
+                    
                 </div>
                 <div class="row" style="margin-top: -3%;">
                     ${div_chips_tecnologias}
@@ -107,6 +141,9 @@ function visualiza_usuario(id_user){
                 </div>
             </div>
             `)
+
+            renderiza_denuncia(res.perfil_usuario.nm_usuario)
+
             $("#visualizacao_perfil_usuario").append(`
             <div class="col s10">
                 <div class="row" style="margin-top: -9%;">

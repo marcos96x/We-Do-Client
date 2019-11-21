@@ -285,7 +285,7 @@ function mostra_ideia(id_ideia) {
                     
                     
                     `)
-                }else if(res.ideia.membros[i].id_usuario == id){
+                }else if(res.ideia.membros[i].id_usuario == id && res.ideia.membros[i].status_solicitacao == 1){
                     $("#campo_ideia").append(`
                 <h6>
                     <div class="row">
@@ -418,7 +418,7 @@ function mostra_ideia(id_ideia) {
                     
                     
                     `)
-                }else if(res.ideia.membros[i].id_usuario == id){
+                }else if(res.ideia.membros[i].id_usuario == id && res.ideia.membros[i].status_solicitacao == 1){
                     $("#campo_ideia").append(`
                 <h6>
                     <div class="row">

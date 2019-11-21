@@ -29,37 +29,6 @@ $(document).ready(function () {
    
 })
 
-function denuncia(){
-    let desc_denuncia = $("#desc_denuncia").val().trim()
-    
-    if(desc_denuncia == ""){
-        M.toast({html: "Descrição da denuncia vazia!"})
-    }else{
-        let url = "http://localhost:3000/usuario/denuncia"
-        $.ajax({
-            url: url,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                denuncia: {
-                    descricao_denuncia: desc_denuncia,
-                    id_usuario_acusador: id,
-                    id_usuario_denunciado: id_perfil
-                }
-            })
-        }).done((res) => {
-            if(res.err){
-                alert(res.err)
-            }else{
-                if(res.msg == 1)
-                    M.toast({html: "Denuncia realizada!"})
-                else if (res.msg == 2)
-                    M.toast({html: "Denuncia retirada!"})
-            }
-        })
-    }
-    
-}
 
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
