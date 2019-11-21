@@ -142,7 +142,7 @@ function carrega_feed(){
                         if(membros[i2].status_solicitacao == 1){
                             // ja faz parte
                             verificacao_interesse = 2
-                        }else{
+                        }else if (membros[i2].status_solicitacao == 0){
                             // ja se interessou
                             verificacao_interesse = 1
                         }
