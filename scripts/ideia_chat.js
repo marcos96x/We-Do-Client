@@ -1109,5 +1109,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 function sair(){
     localStorage.clear()
-    window.location.href = url_web + "index.html"
+    window.location.href = url_web + "/index.html"
 }

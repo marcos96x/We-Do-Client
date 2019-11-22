@@ -169,5 +169,5 @@ function pesquisa_ideias(){
 }
 
 function acessa_ideia(id_ideia){
-    window.location.href = url_web + "ideia_chat.html?ideia=" + id_ideia
+    window.location.href = url_web + "/ideia_chat.html?ideia=" + id_ideia
 }
