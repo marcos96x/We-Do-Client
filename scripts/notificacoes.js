@@ -91,9 +91,9 @@ $(document).ready(() => {
                 
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
-                            <button class='btn blue' onclick="visualiza_perfil(${dados.id_usuario_acao})">Visitar</button>
-                            <button class='btn green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Aceitar</button>
-                            <button class='btn red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Recusar</button>
+                            <button class='btn-floating blue' onclick="visualiza_perfil(${dados.id_usuario_acao})"><i class="material-icons" style="margin-bottom: 3%;">person</i></button>
+                            <button class='btn-floating green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})"><i class="material-icons">check</i></button>
+                            <button class='btn-floating red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})"><i class="material-icons">close</i></button>
                         <br>
                         <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>
@@ -103,9 +103,9 @@ $(document).ready(() => {
                 
                     <li class="collection-item" style='line-height:100%; padding:10%;'>${dados.msg_notificacao}
                         <br>
-                            <button class='btn blue' onclick="visualiza_perfil(${dados.id_usuario_acao})">Visitar</button>
-                            <button class='btn green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Aceitar</button>
-                            <button class='btn red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})">Recusar</button>
+                            <button class='btn-floating blue' onclick="visualiza_perfil(${dados.id_usuario_acao})"><i class="material-icons">person</i></button>
+                            <button class='btn-floating green' onclick="aceita_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})"><i class="material-icons">check</i></button>
+                            <button class='btn-floating red' onclick="recusa_participacao(${dados.id_usuario}, ${dados.id_usuario_acao}, ${dados.id_ideia})"><i class="material-icons">close</i></button>
                         <br>
                         <label>${moment(dados.momento_notificacao, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label>
                     </li>

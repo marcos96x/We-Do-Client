@@ -127,7 +127,9 @@ function projetos_atuais_perfil_usuario(id_user){
                            mode_comment
                        </i> ${res.ideias[i].comentarios.length}
                    </div>&nbsp&nbsp &nbsp&nbsp
-
+                </p>
+                <br>
+                <a href="${url_web}/ideia_chat.html?ideia=${res.ideias[i].id_ideia}">Visitar ${res.ideias[i].nm_ideia}</a>
            </div>
            </li>
            `)
@@ -242,7 +244,9 @@ function projetos_atuais_perfil(id_user){
                            mode_comment
                        </i> ${res.ideias[i].comentarios.length}
                    </div>&nbsp&nbsp &nbsp&nbsp
-
+                </p>
+                <br>
+                <a href="${url_web}/ideia_chat.html?ideia=${res.ideias[i].id_ideia}">Visitar ${res.ideias[i].nm_ideia}</a>
            </div>
            </li>
            `)

@@ -7,7 +7,7 @@ var tags = [];
 var tags_para_add = []
 var tecnologias_insere_ideia = []
 function coloca_tag(){
-    if(event.keyCode == "13" || event.keyCode == "32"){
+    if(event.keyCode == "32"){
         if($("#texto_tags").val().trim() != ""){
             
             // verifica se ja existe a tag na inserção
@@ -29,16 +29,17 @@ function coloca_tag(){
                     for(let i = 0; i < tags_para_add.length; i++){
                         $("#tags_mostradas_ideia").append(`{${tags_para_add[i]}}, `)
                     }
+                    $("#btn_add_tag1").show()
                 }else{
                     M.toast({html: "Esta tag existe na sua ideia!"})
                 }
                 
             }else{
                 M.toast({html: "Esta tag já foi inserida!"})
+                $("#texto_tags").val($("#texto_tags").val().trim())
             }
             
-        }
-        
+        }        
     }
 }
 

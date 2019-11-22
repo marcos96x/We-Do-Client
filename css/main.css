@@ -14,6 +14,27 @@ body{
 
 }
 
+#teste:hover{
+  background-color: #e0e0e0;
+  transition-duration: 0.3s;
+}
+#teste{
+  background-color: white;
+  transition-duration: 0.3s;
+  margin-left: -1.9%;
+  margin-right: -1.2%;
+}
+
+.gold-text{
+  color: #ffd700;
+}
+.silver-text{
+  color: #8a9597;
+}
+.bronze-text{
+  color: #cd7f32;
+}
+
 #img{
   
   font-family: 'bree-serif';

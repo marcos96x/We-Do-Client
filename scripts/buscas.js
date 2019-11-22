@@ -25,7 +25,8 @@ function pesquisa_por_ambos(texto, tecnologia){
                 // inserção do conteudo da busca
                 $("#resultado_pesquisas").append(` 
                 <div onclick="acessa_ideia(${buscas[i].id_ideia})">
-                    <div class="divider"></div>               
+                    <div class="divider"></div>   
+                    <div id="teste">            
                         <div class="col s10">
                             <h6>${buscas[i].nm_ideia}</h6>
                         </div>
@@ -35,7 +36,7 @@ function pesquisa_por_ambos(texto, tecnologia){
                     <div class="col s12 " style="margin-top:-4%;">                        
                         <label>${buscas[i].nm_usuario}</label>
                     </div>
-                
+                    </div>
                     <div class="divider"></div>
                 </div>
                 `)                 
@@ -71,7 +72,8 @@ function pesquisa_por_texto(texto){
                 // inserção do conteudo da busca
                 $("#resultado_pesquisas").append(` 
                 <div onclick="acessa_ideia(${buscas[i].id_ideia})">
-                    <div class="divider"></div>               
+                    <div class="divider"></div>  
+                    <div id="teste">             
                         <div class="col s10">
                             <h6>${buscas[i].nm_ideia}</h6>
                         </div>
@@ -81,7 +83,7 @@ function pesquisa_por_texto(texto){
                     <div class="col s12 " style="margin-top:-4%;">                        
                         <label>${buscas[i].nm_usuario}</label>
                     </div>
-                
+                    </div>
                     <div class="divider"></div>
                 </div>
                 `)                 
@@ -120,7 +122,9 @@ function pesquisa_por_tecnologia(id, nm){
                 // inserção do conteudo da busca
                 $("#resultado_pesquisas").append(` 
                 <div onclick="acessa_ideia(${buscas[i].id_ideia})">
-                    <div class="divider"></div>               
+                    <div class="divider"></div>  
+                    
+                    <div id="teste">                         
                         <div class="col s10">
                             <h6>${buscas[i].nm_ideia}</h6>
                         </div>
@@ -130,7 +134,7 @@ function pesquisa_por_tecnologia(id, nm){
                     <div class="col s12 " style="margin-top:-4%;">                        
                         <label>${buscas[i].nm_usuario}</label>
                     </div>
-                
+                    </div>
                     <div class="divider"></div>
                 </div>
                 `)                 

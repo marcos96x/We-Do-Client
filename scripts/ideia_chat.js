@@ -619,10 +619,10 @@ function mostra_ideia(id_ideia) {
                         <div  class='input-field col s10'>  
                             <input id='texto_tags' type='text' onKeyDown="coloca_tag()">
                             <label style='font-size: 18px; color:#404f65;' for='texto_tags'>
-                                Digite uma tag (max de 20 caracteres) e pressione enter
+                                Digite uma tag (max de 20 caracteres) e pressione espaço
                             </label>
                         </div>
-                        <div class="col s2">
+                        <div class="col s2" id="btn_add_tag1" hidden>
                             <button style="margin-top:30px;" class="btn-floating btn-small" onclick="add_tag()"><i class="material-icons">edit</i></button>
                         </div>
                     </div>
@@ -708,7 +708,7 @@ function mostra_ideia(id_ideia) {
                         <div class="row" id="campo_membro${res.ideia.membros[i].id_usuario}">
                             <div class="col s12 m11 l11">
                                 <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
-                                ${res.ideia.membros[i].nm_usuario}
+                                <a style="color: #404f65;" href="${url_web}/perfil_usuario.html?id_usuario=${res.ideia.membros[i].id_usuario}">${res.ideia.membros[i].nm_usuario}</a>
                             </div>
                             <div class="col s12 m1 l1">
                                 <a class='btn-floating red btn-small right' onclick="remove_usuario(${res.ideia.membros[i].id_usuario}, ${res.ideia.id_ideia})" id='excluir_part' style='margin-left:65.4%;'>
@@ -730,7 +730,7 @@ function mostra_ideia(id_ideia) {
                     <div class="row">
                         <div class="col s12 m11 l11">
                             <!--<img class='circle' src='img/perfil.jpg' width='6%' align='center' style='margin-right:3%'>-->
-                            ${res.ideia.membros[i].nm_usuario}
+                            <a style="color: #404f65;" href="${url_web}/perfil_config.html?id_usuario=${res.ideia.membros[i].id_usuario}">${res.ideia.membros[i].nm_usuario}</a>
                         </div>
                     </div>
                 </h6>
