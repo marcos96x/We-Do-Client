@@ -17,7 +17,7 @@ function pega_token(){
     });
     token_recuperacao = data.token
     if(token_recuperacao){
-        let url = "http://localhost:3000/usuario/saber_id"
+        let url = url_api + "/usuario/saber_id"
         $.ajax({
             url: url,
             type: "POST",
@@ -33,7 +33,7 @@ function pega_token(){
             }
         })
     }else{
-        window.location.href = "127.0.0.1:5500/index.html?msg=2"
+        window.location.href = url_web + "/index.html?msg=2"
     }
 }
 
@@ -43,7 +43,7 @@ function recupera_senha(){
     if(email_recupera == ""){
         M.toast({html: "Email vazio!"})
     }else{
-        let url = "http://localhost:3000/usuario/recuperar_senha"
+        let url = url_api + "/usuario/recuperar_senha"
         $.ajax({
             url: url,
             type: "POST",
@@ -75,7 +75,7 @@ function troca_senha(){
             if(senha.length < 6){
                 M.toast({html: "A senha precisa ter no mínimo 6 digitos."})
             }else{
-                let url = "http://localhost:3000/usuario/troca_senha"
+                let url = url_api + "/usuario/troca_senha"
                 $.ajax({
                     url: url,
                     type: "PUT",
@@ -90,7 +90,7 @@ function troca_senha(){
                     if(res.err){
                         alert(res.err)
                     }else{
-                        window.location.href = "http://127.0.0.1:5500/index.html?msg=3"
+                        window.location.href = url_web + "/index.html?msg=3"
                     }
                 })
             }            
@@ -151,9 +151,9 @@ $(document).ready(function () {
     else {
         $("#edita_nome, #exclui_tec, #btn_add_tecnologia, #edita_desc,#excluir_part,#exclui_coment").hide();
     }
-
+    let url = url_api + "/tecnologia"
     $.ajax({
-        url: "http://localhost:3000/tecnologia",
+        url: url,
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -243,7 +243,7 @@ function login() {
     let email = $("#email_login").val()
     let senha = $("#senha_login").val()
 
-    let url = "http://localhost:3000/usuario/login"
+    let url = url_api + "/usuario/login"
     $.ajax({
         url: url,
         type: "POST",
@@ -268,7 +268,7 @@ function login() {
             localStorage.setItem("nome_we_do", nome)
             localStorage.setItem("token_we_do", token)
 
-            window.location.href = "feed.html"
+            window.location.href = url_web + "/feed.html"
         }
 
     })
@@ -293,7 +293,7 @@ function cadastrar() {
                 id_tecnologias_usuario.push(tecnologias[i])
             }
     
-            let url = "http://localhost:3000/usuario/cadastro"
+            let url = url_api + "/usuario/cadastro"
             $.ajax({
                 url: url,
                 type: "POST",
@@ -312,8 +312,9 @@ function cadastrar() {
                 if (res.err) {
                     M.toast({ html: res.err })
                 } else {
+                    let url2 = url_api + "/tecnologia"
                     $.ajax({
-                        url: "http://localhost:3000/tecnologia",
+                        url: url2,
                         type: "GET",
                         contentType: 'application/json'
                     }).done(function (res2) {
