@@ -2,7 +2,7 @@ var notificacoes_usuario = []
 $(document).ready(() => {
     $("#links_notificacoes").click(() => {
         // muda o estado das notificações para "visto"
-        let url = "http://localhost:3000/notificacoes/" + id
+        let url = url_api + "/notificacoes/" + id
 
         $.ajax({
             url: url,
@@ -24,7 +24,7 @@ $(document).ready(() => {
     
     $("#links_notificacoes2").click(() => {
         // muda o estado das notificações para "visto"
-        let url = "http://localhost:3000/notificacoes/" + id
+        let url = url_api + "/notificacoes/" + id
 
         $.ajax({
             url: url,
@@ -133,7 +133,7 @@ $(document).ready(() => {
 })
 
 function aceita_participacao(id_idealizador, __id_usuario, id_ideia){
-    let url = "http://localhost:3000/ideia/interesse"
+    let url = url_api + "/ideia/interesse"
 
     $.ajax({
         url: url,
@@ -164,7 +164,7 @@ function aceita_participacao(id_idealizador, __id_usuario, id_ideia){
     })
 }
 function recusa_participacao(id_idealizador, id_usuario, id_ideia){
-    let url = "http://localhost:3000/ideia/remover"
+    let url = url_api + "/ideia/remover"
 
     $.ajax({
         url: url,
@@ -192,7 +192,7 @@ function recusa_participacao(id_idealizador, id_usuario, id_ideia){
 function carrega_notificacoes_usuario(id_user){
     
     $("#notifications").html("")
-    let url = "http://localhost:3000/notificacoes/" + id_user
+    let url = url_api + "/notificacoes/" + id_user
 
     $.ajax({
         url: url,
@@ -316,5 +316,5 @@ function carrega_notificacoes_usuario(id_user){
 }
 
 function visualiza_perfil(id_user){
-    window.location.href = "http://127.0.0.1:5500/perfil_usuario.html?id_usuario=" + id_user
+    window.location.href = url_web + "/perfil_usuario.html?id_usuario=" + id_user
 }

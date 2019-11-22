@@ -7,8 +7,6 @@ var id = localStorage.getItem("id_we_do")
 $(document).ready(function () {
     carrega_trends()
 
-
-    
     $('.modal').modal({
  
         dismissible: false, // Modal cannot be closed by clicking anywhere outside
@@ -33,7 +31,7 @@ $(document).ready(function () {
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-    let url = "http://localhost:3000/interesse"
+    let url = url_api + "/interesse"
     $.ajax({
         url: url,
         type: "POST",

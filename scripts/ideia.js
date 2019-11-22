@@ -59,7 +59,7 @@ function add_tag(){
     if(tags_para_add.length == 0){
         M.toast({html: "Sem tag inserida!"})
     }else{
-        let url = "http://localhost:3000/ideia/tags"
+        let url = url_api + "/ideia/tags"
 
         $.ajax({
             url: url,
@@ -118,7 +118,7 @@ function cria_ideia(){
     if(tecnologias.length == 0){
         M.toast({html: "Insira uma tecnologia"})
     }else{
-        let url = "http://localhost:3000/ideia"
+        let url = url_api + "/ideia"
         $.ajax({
             url: url,
             type: "POST",
@@ -164,7 +164,7 @@ function adiciona_tecnologia_na_ideia(){
         return false
     }else{
 
-        let url = "http://localhost:3000/tecnologia/ideia"
+        let url = url_api + "/tecnologia/ideia"
 
         $.ajax({
             url: url,
@@ -252,7 +252,7 @@ function altera_dados_ideia(dado){
         if($("#nm_ideia").val().trim() == ""){
             M.toast({html: "Campo do novo nome da ideia vazio!"})
         }else{
-            let url = "http://localhost:3000/ideia"
+            let url = url_api + "/ideia"
             
             $.ajax({
                 url: url,
@@ -289,7 +289,7 @@ function altera_dados_ideia(dado){
         if($("#desc_ideiaa").val().trim() == ""){
             M.toast({html: "Campo da nova descrição vazio!"})
         }else{
-            let url = "http://localhost:3000/ideia"
+            let url = url_api + "/ideia"
             
             $.ajax({
                 url: url,
@@ -323,7 +323,7 @@ function altera_dados_ideia(dado){
         }
     }else if (dado == "CO"){
         // muda o status da ideia concluída
-        let url = "http://localhost:3000/ideia/status"
+        let url = url_api + "/ideia/status"
 
         $.ajax({
             url: url,
@@ -348,7 +348,7 @@ function altera_dados_ideia(dado){
         })
     }else if (dado == "DE"){
         // muda o status da ideia para em desenvolvimento
-        let url = "http://localhost:3000/ideia/status"
+        let url = url_api + "/ideia/status"
 
         $.ajax({
             url: url,
@@ -373,7 +373,7 @@ function altera_dados_ideia(dado){
         })
     }else if (dado == "AB"){
         // muda o status da ideia para aberta
-        let url = "http://localhost:3000/ideia/status"
+        let url = url_api + "/ideia/status"
 
         $.ajax({
             url: url,

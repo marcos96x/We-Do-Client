@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-    let url = "http://localhost:3000/interesse"
+    let url = url_api + "/interesse"
     $.ajax({
         url: url,
         type: "POST",
@@ -152,7 +152,7 @@ function altera_dados_usuario(){
             tecnologias_alterar.push(checkbox_tecnologia[i].value)
     }
     // troca os dados do usuario
-    let url = "http://localhost:3000/usuario/alterar/" + id
+    let url = url_api + "/usuario/alterar/" + id
     $.ajax({
         url: url,
         type: "PUT",
@@ -180,7 +180,7 @@ function altera_dados_usuario(){
                     $("#visualizacao_perfil_usuario").html("")
                     visualiza_usuario(id)
                 }else{
-                    url = "http://localhost:3000/usuario/alterar_senha/" + id
+                    url = url_api + "/usuario/alterar_senha/" + id
                     $.ajax({
                         url: url,
                         type: "PUT",
@@ -246,7 +246,7 @@ function aparece_deletar_conta(){
 }
 
 function deleta_conta(){
-    let url = "http://localhost:3000/usuario"
+    let url = url_api + "/usuario"
 
     $.ajax({
         url: url,
@@ -268,12 +268,12 @@ function deleta_conta(){
 
 function sair() {
     localStorage.clear()
-    window.location.href = "index.html"
+    window.location.href = url_web + "index.html"
 }
 
 function sair_sistema() {
     localStorage.clear()
     var msg = 5
-    window.location.href = "index.html?msg=" + msg
+    window.location.href = url_web + "index.html?msg=" + msg
     return false
 }

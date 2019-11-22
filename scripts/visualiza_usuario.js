@@ -13,9 +13,9 @@ var id_perfil = data.id_usuario
 if(id_perfil == null){
     sair()
 }else if (id_perfil == id){
-    let url = "http://127.0.0.1:5500/perfil_config.html?id_usuario=" + id
+    let url = url_web + "/perfil_config.html?id_usuario=" + id
     if(window.location.href != url)
-        window.location.href = "http://127.0.0.1:5500/perfil_config.html?id_usuario=" + id
+        window.location.href = url_web + "/perfil_config.html?id_usuario=" + id
 }
 var tecnologias_gosto_usuario = {}
 
@@ -25,7 +25,7 @@ $(document).ready(() => {
 })
 
 function renderiza_denuncia(nome){
-    let url = "http://localhost:3000/usuario/saber_denuncia"
+    let url = url_api + "/usuario/saber_denuncia"
 
     $.ajax({
         url: url,
@@ -58,7 +58,7 @@ function renderiza_denuncia(nome){
 
 
 function visualiza_usuario(id_user){
-    let url = "http://localhost:3000/usuario/perfil/"+id+"&"+id_user
+    let url = url_api + "/usuario/perfil/"+id+"&"+id_user
 
     $.ajax({
         url: url,
@@ -174,9 +174,9 @@ function visualiza_usuario(id_user){
             $("#label_nm_usuario").html(res.perfil_usuario.nm_usuario)
             $("#label_email_usuario").html(res.perfil_usuario.email_usuario)
             $("#label_dt_nascimento").html(moment(res.perfil_usuario.dt_nascimento, 'YYYY-MM-DD', 'pt').format("L"))
-
+            url = url_api + "/tecnologia"
             $.ajax({
-                url: "http://localhost:3000/tecnologia",
+                url: url,
                 type: "GET",
                 contentType: 'application/json'
             }).done(function (res) {
@@ -226,5 +226,5 @@ function seleciona_tecnologias_pesquisa(id, nm){
 }
 function sair() {
     localStorage.clear()
-    window.location.href = "index.html"
+    window.location.href = url_web + "index.html"
 }

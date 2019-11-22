@@ -58,9 +58,9 @@ function seleciona_tecnologias_pesquisa(id, nm){
 
 // -------------------------------- Funções usadas no sistema
 function abre_tecnologias(){
-    
+    let url = url_api + "/tecnologia"
     $.ajax({
-        url: "http://localhost:3000/tecnologia",
+        url: url,
         type: "GET",
         contentType: 'application/json'
     }).done(function (res) {
@@ -83,7 +83,7 @@ function abre_tecnologias(){
 
 function sair(){
     localStorage.clear()
-    window.location.href = "index.html"
+    window.location.href = url_web + "index.html"
 }
 
 
@@ -98,7 +98,7 @@ function carrega_feed(){
     })
     let content
 
-    let url = "http://localhost:3000/feed/" + id
+    let url = url_api + "/feed/" + id
     $.ajax({
         url: url,
         type: "GET",
@@ -257,7 +257,7 @@ function mudaIcone2(classe){
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
-    let url = "http://localhost:3000/interesse"
+    let url = url_api + "/interesse"
     $.ajax({
         url: url,
         type: "POST",
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function deleta_comentario(id_mensagem){
-    let url = "http://localhost:3000/comentario" 
+    let url = url_api + "/comentario" 
     $.ajax({
         url: url,
         type: "DELETE",

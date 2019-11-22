@@ -2,7 +2,7 @@ var id_tecnologia_da_pesquisa = []
 function pesquisa_por_ambos(texto, tecnologia){
     $("#texto_resultado_busca").text(texto + `" e "` + tecnologia[1])
     $("#resultado_pesquisas").html("")
-    let url = "http://localhost:3000/ideia/busca_tecnologia_nome/ " + tecnologia[0] + "&" + texto
+    let url = url_api + "/ideia/busca_tecnologia_nome/ " + tecnologia[0] + "&" + texto
     $.ajax({
         url: url,
         type: "GET",
@@ -48,7 +48,7 @@ function pesquisa_por_ambos(texto, tecnologia){
 function pesquisa_por_texto(texto){
     $("#texto_resultado_busca").text(texto)
     $("#resultado_pesquisas").html("")
-    let url = "http://localhost:3000/ideia/busca_nome/" + texto
+    let url = url_api + "/ideia/busca_nome/" + texto
     $.ajax({
         url: url,
         type: "GET",
@@ -98,7 +98,7 @@ function volta_busca(){
 function pesquisa_por_tecnologia(id, nm){
     $("#texto_resultado_busca").text(nm)
     $("#resultado_pesquisas").html("")
-    let url = "http://localhost:3000/ideia/busca_tecnologia/" + id
+    let url = url_api + "/ideia/busca_tecnologia/" + id
     $.ajax({
         url: url,
         type: "GET",
@@ -169,5 +169,5 @@ function pesquisa_ideias(){
 }
 
 function acessa_ideia(id_ideia){
-    window.location.href = "ideia_chat.html?ideia=" + id_ideia
+    window.location.href = url_web + "ideia_chat.html?ideia=" + id_ideia
 }

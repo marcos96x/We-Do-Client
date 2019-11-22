@@ -1,5 +1,5 @@
 function portifolio(id_usuario) {
-    let url = "http://localhost:3000/ideia/portifolio/" + id_usuario
+    let url = url_api + "/ideia/portifolio/" + id_usuario
 
     $.ajax({
         url: url,

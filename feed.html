@@ -7,15 +7,16 @@
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
   <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
+  <script src="js/url_api.js"></script>
   
   <script src="scripts/autenticacao_usuario.js"></script>
   <script src="js/socket.js"></script>
     <script>
         valida_usuario()
         // Client Side
-        var socket = io.connect('http://localhost:8080/');
+        var socket = io.connect(`${url_socket}`);
         socket.on('connect', function () {
           
         });

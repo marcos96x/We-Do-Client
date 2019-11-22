@@ -8,7 +8,7 @@ function denuncia(valor){
         if(desc_denuncia == ""){
             M.toast({html: "Descrição da denuncia vazia!"})
         }else{
-            let url = "http://localhost:3000/usuario/denuncia"
+            let url = url_api + "/usuario/denuncia"
             $.ajax({
                 url: url,
                 type: "POST",
@@ -39,7 +39,7 @@ function denuncia(valor){
         }
     }else{
         // remove a denuncia        
-        let url = "http://localhost:3000/usuario/denuncia"
+        let url = url_api + "/usuario/denuncia"
         $.ajax({
             url: url,
             type: "POST",
