@@ -226,5 +226,5 @@ function seleciona_tecnologias_pesquisa(id, nm){
 }
 function sair() {
     localStorage.clear()
-    window.location.href = url_web + "index.html"
+    window.location.href = url_web + "/index.html"
 }

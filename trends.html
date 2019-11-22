@@ -409,7 +409,7 @@ var id = localStorage.getItem("id_we_do")
 	<script>
 		$("#nm_usuario").html(nome)
 		$("#email_usuario").html(email)
-		let str_link = `perfil_config.html?id_usuario=${id}`
+		let str_link = url_web + `perfil_config.html?id_usuario=${id}`
 		$("#link_usuario").click(() => {
 			window.location.href = str_link
 		})

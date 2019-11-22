@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     $("#nm_usuario").html(nome)
     $("#email_usuario").html(email)
-    let str_link = url_web + `perfil_config.html?id_usuario=${id}`
+    let str_link = url_web + `/perfil_config.html?id_usuario=${id}`
     $("#link_usuario").click(() => {
         window.location.href= str_link
     })
@@ -48,7 +48,7 @@ $(document).ready(function () {
     });
     id_ideia_pagina = data.ideia
     if(!id_ideia_pagina){
-        window.location.href = url_web + "feed.html"
+        window.location.href = url_web + "/feed.html"
     }else{
         mostra_ideia(data.ideia)
 
@@ -144,7 +144,6 @@ function mostra_ideia(id_ideia) {
         type: "GET",
         contentType: "application/json"
     }).done(function (res) {
-        console.log(res)
         if (res.err) {
             alert("Erro na busca da ideia")
         } else {

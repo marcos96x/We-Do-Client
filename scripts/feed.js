@@ -108,7 +108,6 @@ function carrega_feed(){
             alert("Erro na busca do feed")
         }else{
             let ideias = res.ideias
-            console.log(ideias)
             let nm_ideia, ds_ideia, id_ideia, qtcomentarios, curtidas, tecnologias, membros, idealizador
             let verificacao_interesse, id_icone_interesse_feed, id_icone_curtida_feed, id_texto_curtida_feed, id_texto_comentario_feed
             for(let i = 0; i < ideias.length; i++){
@@ -164,7 +163,7 @@ function carrega_feed(){
                 }
 
                 
-                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - <a href='http://127.0.0.1:5500/perfil_usuario.html?id_usuario="+idealizador.id_usuario+"'>"+idealizador.nm_usuario+"</a></label></h5><div style='width: 101%;' class='divider'></div><br>"
+                content += `<h5><a style="color: #404f65;" onclick="acessa_ideia(${id_ideia})">`+nm_ideia+"</a><label> - <a href='"+url_web+"/perfil_usuario.html?id_usuario="+idealizador.id_usuario+"'>"+idealizador.nm_usuario+"</a></label></h5><div style='width: 101%;' class='divider'></div><br>"
                 
                 for(let i2 = 0; i2 < tecnologias.length; i2++){
                     content += "<div class='chip'>"+tecnologias[i2].nm_tecnologia+"</div>"
@@ -175,12 +174,12 @@ function carrega_feed(){
                 if(membros.length == 1){
                     content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>.<br><br>`
                 }else if (membros.length == 2){
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a> e <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a> e <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>.<br><br>`
                 }else if (membros.length == 3){
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a> e <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[0].id_usuario}">${membros[0].nm_usuario}</a>, <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a> e <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>.<br><br>`
                 }else{
                     let qt_membros = membros.length - 3
-                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>, <a href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${membros[3].id_usuario}">${membros[3].nm_usuario}</a> e +${qt_membros}.<br><br>`
+                    content+= `<p><labeL>Com</labeL> &nbsp&nbsp <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[1].id_usuario}">${membros[1].nm_usuario}</a>, <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[2].id_usuario}">${membros[2].nm_usuario}</a>, <a href="${url_web}/perfil_usuario.html?id_usuario=${membros[3].id_usuario}">${membros[3].nm_usuario}</a> e +${qt_membros}.<br><br>`
                 }
 
                 let teste_curtida = 0
@@ -226,7 +225,7 @@ function carrega_feed(){
                             content += `<div class='row'>
                             <div class='col s11'>
                             <p style='font-family: Arial, Helvetica, sans-serif';><label>${moment(ideias[i].comentarios[i2].hr_mensagem, 'YYYY-MM-DD hh:mm:ss', 'pt').fromNow()}</label></p>
-                            <a style='font-family:'bree-serif';' href="http://127.0.0.1:5500/perfil_usuario.html?id_usuario=${ideias[i].comentarios[i2].id_usuario}">${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
+                            <a style='font-family:'bree-serif';' href="${url_web}/perfil_usuario.html?id_usuario=${ideias[i].comentarios[i2].id_usuario}">${ideias[i].comentarios[i2].nm_usuario} &nbsp;</a>${ideias[i].comentarios[i2].ct_mensagem}
                             </div>`
                             content += `</div>`
                             content += `</div>`
