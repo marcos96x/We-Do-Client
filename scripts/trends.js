@@ -3,7 +3,7 @@ function carrega_trends(){
 
     $("#trends").html("")
     $("#trends").append(`          
-        <h5><# Trends</h5>
+        <h5># Trends</h5>
 
         <div class='divider'></div>
         <div class='divider'></div>`)
