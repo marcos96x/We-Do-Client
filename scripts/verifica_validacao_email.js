@@ -11,8 +11,6 @@ partes.forEach(function (parte) {
 if(data.token){
     let token = data.token
 
-    console.log(token)
-
     
     let url = url_api + "/usuario/valida_conta"
     $.ajax({

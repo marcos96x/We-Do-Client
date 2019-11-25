@@ -268,12 +268,12 @@ function deleta_conta(){
 
 function sair() {
     localStorage.clear()
-    window.location.href = url_web + "index.html"
+    window.location.href = url_web + "/index.html"
 }
 
 function sair_sistema() {
     localStorage.clear()
     var msg = 5
-    window.location.href = url_web + "index.html?msg=" + msg
+    window.location.href = url_web + "/index.html?msg=" + msg
     return false
 }

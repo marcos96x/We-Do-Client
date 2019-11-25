@@ -7,7 +7,7 @@
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
   <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
-  <!--Let browser know website is optimized for mobile-->  
+  <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="js/url_api.js"></script>
   <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
@@ -16,7 +16,7 @@
   <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
   <script src="scripts/verifica_validacao_email.js"></script>
 
-  
+
 
 </head>
 
@@ -47,17 +47,17 @@
             <label for="email_login">Email</label>
           </div>
           <div class="input-field col s12 m4 l5">
-            <input id="senha_login" type="password" class="validate"  on="login()">
+            <input id="senha_login" type="password" class="validate" on="login()">
             <label for="senha_login">Senha</label>
             <br>
             <a style="color: white;" class="modal-trigger" href="#modal_recupera_senha">Esqueceu sua senha?</a>
           </div>
           <div class="col s12 m12 l2 center-align " onclick="login()">
             <br>
-            <button type="submit" class="white btn black-text">Entrar</button>  
+            <button type="submit" class="white btn black-text">Entrar</button>
           </div>
         </form>
-       
+
 
         <div class="row">
           <div class="col s12 m12 l12">
@@ -69,7 +69,7 @@
           <input id="nome_cad" type="text" class="validate">
           <label for="nome_cad">Nome</label>
         </div>
-        
+
         <div class="input-field col s12 m6 l6">
           <input id="email_cad" type="email" class="validate">
           <label for="email_cad">Email</label>
@@ -96,14 +96,14 @@
           </select>
 
         </div>
-        <div class="col s12 m12 l12" onchange="termos_validate();">
+        <div class="col s1 m1 l1" onchange="termos_validate();">
           <label>
             <input type="checkbox" class="filled-in" id='termos' checked="checked" />
-            <span>Aceito os termos de uso</span>
+            <span></span>
           </label>
-          <br>
-          <br>
-  
+        </div>
+        <div class="col s11 m11 l11" style="margin-left: -4%;">
+          Aceito os <a class="modal-trigger" href="#termos_de_uso">Termos de uso</a>
         </div>
 
 
@@ -113,7 +113,7 @@
 
       </div>
       <br>
-      
+
 
       <div id="botaoValidacao" onclick="cadastrar()">
 
@@ -129,35 +129,242 @@
   </div>
 
   <div id="modal_recupera_senha" class="modal">
-      <div class="modal-content">
-        <h4>Recupere sua senha</h4>
-        <h5>Enviaremos um link para seu email para recuperar sua senha</h5>
-        <div class="row">
-          <form class="col s12" id="alt_dados">
-            <div class="row">
-              <div class="input-field col s12 black-text">
-                <input id="email_recupera_senha" type="text">
-                <label for="email_recupera_senha">Insira seu email</label>
-              </div> 
+    <div class="modal-content">
+      <h4>Recupere sua senha</h4>
+      <h5>Enviaremos um link para seu email para recuperar sua senha</h5>
+      <div class="row">
+        <form class="col s12" id="alt_dados">
+          <div class="row">
+            <div class="input-field col s12 black-text">
+              <input id="email_recupera_senha" type="text">
+              <label for="email_recupera_senha">Insira seu email</label>
             </div>
-            <div class="row center">
-              <a class="btn modal-close" onclick="recupera_senha()">Enviar</a>
-              <a class="btn modal-close" id="cancela">Cancela</a>
-            </div>
-          </form>
-        </div>
-
+          </div>
+          <div class="row center">
+            <a class="btn modal-close" onclick="recupera_senha()">Enviar</a>
+            <a class="btn modal-close" id="cancela">Cancela</a>
+          </div>
+        </form>
       </div>
+    </div>
+  </div>
 
+  <div id="termos_de_uso" class="modal">
+    <div class="modal-content">
+      <h4>Termos de uso - We Do</h4>
+      <div class="divider"></div>
+      <div class="divider"></div>
+      <h6>TERMOS DE SERVIÇO</h6>
+      <br><br>
+      
+      VISÃO GERAL
+      <br><br>
+      Esse site é operado pelo We Do. Em todo o site, os termos “nós”, “nos” e “nosso” se referem ao We Do. O We Do
+      proporciona esse site, incluindo todas as informações, ferramentas e serviços disponíveis deste site para você, o
+      usuário, com a condição da sua aceitação de todos os termos, condições, políticas e avisos declarados aqui.
+      <br>
+      Ao visitar nosso site e/ou criar conta, você está utilizando nossos “Serviços”. Consequentemente, você concorda com
+      os seguintes termos e condições (“Termos de serviço”, “Termos”), incluindo os termos e condições e políticas
+      adicionais mencionados neste documento e/ou disponíveis por hyperlink. Esses Termos de serviço se aplicam a todos
+      os usuários do site, incluindo, sem limitação, os usuários que são navegadores, criadores, colaboradores e/ou
+      contribuidores de conteúdo. 
+      <br>
+      Por favor, leia esses Termos de serviço cuidadosamente antes de acessar ou utilizar o nosso site. Ao acessar ou usar
+      qualquer parte do site, você concorda com os Termos de serviço. Se você não concorda com todos os termos e
+      condições desse acordo, então você não pode acessar o site ou usar quaisquer serviços. Se esses Termos de serviço
+      são considerados uma oferta, a aceitação é expressamente limitada a esses Termos de serviço.
+      Você pode revisar a versão mais atual dos Termos de serviço quando quiser nesta página. Reservamos o direito de
+      atualizar, alterar ou trocar qualquer parte desses Termos de serviço ao publicar atualizações e/ou alterações no nosso
+      site. É sua responsabilidade verificar as alterações feitas nesta página periodicamente. Seu uso contínuo ou acesso ao
+      site após a publicação de quaisquer alterações constitui aceitação de tais alterações.
+      <br><br><br>
+      SEÇÃO 1 - TERMOS DE USO
+      <br><br>
+      Você não deve usar nossos produtos para qualquer fim ilegal ou não autorizado. Você também não pode, ao usufruir
+      deste Serviço, violar quaisquer leis em sua jurisdição (incluindo, mas não limitado, a leis de direitos autorais e
+      intelectuais).
+      <br>
+      Você não deve transmitir nenhum vírus ou qualquer código de natureza destrutiva.
+      <br>
+      Violar qualquer um dos Termos tem como consequência a rescisão imediata dos seus Serviços.
+      <br><br><br>
+      SEÇÃO 2 - CONDIÇÕES GERAIS
+      <br><br>
+      Reservamos o direito de recusar o serviço a qualquer pessoa por qualquer motivo a qualquer momento.
+      Você entende que o seu conteúdo (não incluindo informações de senha individual), pode ser transferido sem
+      criptografia e pode: (a) ser transmitido por várias redes; e (b) sofrer alterações para se adaptar e se adequar às
+      exigências técnicas de conexão de redes ou dispositivos. As informações de senha sempre são criptografadas durante
+      a transferência entre redes.
+      <br>
+      Você concorda em não reproduzir, duplicar, copiar, vender, revender ou explorar qualquer parte do Serviço, uso do
+      Serviço, acesso ao Serviço, ou qualquer contato no site através do qual o serviço é fornecido, sem nossa permissão
+      expressa por escrito.
+      <br>
+      Os títulos usados nesse acordo são incluídos apenas por conveniência e não limitam ou afetam os Termos.
+      <br><br><br>
+      SEÇÃO 3 - PRECISÃO, INTEGRIDADE E ATUALIZAÇÃO DAS INFORMAÇÕES
+      <br><br>
+      Não somos responsáveis por informações disponibilizadas nesse site que não sejam precisas, completas ou atuais. O
+      material desse site é fornecido apenas para fins informativos e não deve ser usado como a única base para tomar
+      decisões sem consultar fontes de informações primárias, mais precisas, mais completas ou mais atuais. Qualquer
+      utilização do material desse site é por sua conta e risco.
+      <br>
+      As informações históricas podem não ser atuais e são fornecidas apenas para sua referência. Reservamos o direito de
+      modificar o conteúdo desse site a qualquer momento, mas nós não temos obrigação de atualizar nenhuma informação
+      em nosso site. Você concorda que é de sua responsabilidade monitorar alterações no nosso site.
+      <br><br><br>
+      SEÇÃO 4 - LINKS DE TERCEIROS
+      <br><br>
+      Certos produtos, conteúdos e serviços disponíveis pelo nosso Serviço podem incluir materiais de terceiros.
+      <br>
+      Os links de terceiros nesse site podem te direcionar para sites de terceiros que não são afiliados a nós. Não nos
+      responsabilizamos por examinar ou avaliar o conteúdo ou precisão. Não garantimos e nem temos obrigação ou
+      responsabilidade por quaisquer materiais ou sites de terceiros, ou por quaisquer outros materiais, produtos ou
+      serviços de terceiros.
+      <br>
+      Não somos responsáveis por quaisquer danos ou prejuízos relacionados com a compra ou uso de mercadorias,
+      serviços, recursos, conteúdo, ou quaisquer outras transações feitas em conexão com quaisquer sites de terceiros. Por
+      favor, revise com cuidado as políticas e práticas de terceiros e certifique-se que você as entende antes de efetuar 
+      qualquer transação. As queixas, reclamações, preocupações ou questões relativas a produtos de terceiros devem ser
+      direcionadas ao terceiro.
+      <br><br><br>
+      SEÇÃO 5 - COMENTÁRIOS, FEEDBACK, ETC. DO USUÁRIO
+      <br><br>
+      Se, a nosso pedido, você enviar certos itens específicos, ou sem um pedido nosso, você enviar ideias criativas,
+      sugestões, propostas, planos, ou outros materiais, seja online, por e-mail, pelo correio, ou de outra forma (em
+      conjunto chamados de 'comentários'), você concorda que podemos, a qualquer momento, sem restrição, editar,
+      copiar, publicar, distribuir, traduzir e de outra forma usar quaisquer comentários que você encaminhar para nós. Não
+      nos responsabilizamos por: (1) manter quaisquer comentários em sigilo; (2) indenizar por quaisquer comentários; ou
+      (3) responder quaisquer comentários.
+      <br>
+      Iremos monitorar, editar ou remover conteúdo que nós determinamos a nosso próprio critério ser contra a lei,
+      ofensivo, ameaçador, calunioso, difamatório, pornográfico, obsceno ou censurável ou que viole a propriedade
+      intelectual de terceiros ou estes Termos de serviço.
+      <br>
+      Você concorda que seus comentários não violarão qualquer direito de terceiros, incluindo direitos autorais, marcas
+      registradas, privacidade, personalidade ou outro direito pessoal ou de propriedade. Você concorda que os seus
+      comentários não vão conter material difamatório, ilegal, abusivo ou obsceno. Eles também não conterão nenhum
+      vírus de computador ou outro malware que possa afetar a operação do Serviço ou qualquer site relacionado. Você
+      não pode usar um endereço de e-mail falso, fingir ser alguém diferente de si mesmo, ou de outra forma enganar a nós
+      ou terceiros quanto à origem de quaisquer comentários. Você é o único responsável por quaisquer comentários que
+      você faz e pela veracidade deles. Nós não assumimos qualquer responsabilidade ou obrigação por quaisquer
+      comentários publicados por você ou por qualquer terceiro.
+      <br><br><br>
+      SEÇÃO 6 - INFORMAÇÕES PESSOAIS
+      <br><br>
+      O envio de suas informações pessoais através da plataforma é regido pela nossa Política de privacidade. Ver nossa
+      Política de privacidade.
+      <br><br><br>
+      SEÇÃO 7 – ERROS E IMPRECISÕES
+      <br><br>
+      Ocasionalmente, pode haver informações no nosso site ou no Serviço que contém erros tipográficos, imprecisões ou
+      omissões que possam relacionar-se a descrições de ideias, comentários, descrições, nomes de usuário. Não
+      corrigiremos quaisquer erros de grafia produzido pelo usuário idealizador ou colaborador.
+      <br><br><br>
+      SEÇÃO 8 - USOS PROIBIDOS
+      <br><br>
+      Além de outras proibições, conforme estabelecido nos Termos de serviço, você está proibido de usar o site ou o
+      conteúdo para: (a) fins ilícitos; (b) solicitar outras pessoas a realizar ou participar de quaisquer atos ilícitos; (c) violar
+      quaisquer regulamentos internacionais, provinciais, estaduais ou federais, regras, leis ou regulamentos locais; (d)
+      infringir ou violar nossos direitos de propriedade intelectual ou os direitos de propriedade intelectual de terceiros; (e)
+      para assediar, abusar, insultar, danificar, difamar, caluniar, depreciar, intimidar ou discriminar com base em gênero,
+      orientação sexual, religião, etnia, raça, idade, nacionalidade ou deficiência; (f) apresentar informações falsas ou
+      enganosas; (g) fazer o envio ou transmitir vírus ou qualquer outro tipo de código malicioso que será ou poderá ser
+      utilizado para afetar a funcionalidade ou operação do Serviço ou de qualquer site relacionado, outros sites, ou da
+      Internet; (h) coletar ou rastrear as informações pessoais de outras pessoas; (i) para enviar spam, phishing, pharm,
+      pretext, spider, crawl, ou scrape; (j) para fins obscenos ou imorais; ou (k) para interferir ou contornar os recursos de
+      segurança do Serviço ou de qualquer site relacionado, outros sites, ou da Internet. Reservamos o direito de rescindir
+      o seu uso do Serviço ou de qualquer site relacionado por violar qualquer um dos usos proibidos.
+      <br><br><br>
+      SEÇÃO 9 - ISENÇÃO DE RESPONSABILIDADE DE GARANTIAS; LIMITAÇÃO DE RESPONSABILIDADE
+      <br><br>
+      Nós não garantimos, representamos ou justificamos que o seu uso do nosso serviço será pontual, sem erros ou
+      interrupções.
+      <br>
+      Não garantimos que os resultados que possam ser obtidos pelo uso do serviço serão precisos ou confiáveis.
+      Você concorda que de tempos em tempos, podemos remover o serviço por períodos indefinidos de tempo ou cancelar
+      a qualquer momento, sem te notificar.br 
+      <br>
+      Você concorda que o seu uso ou incapacidade de usar o serviço é por sua conta e risco.
+      <br>
+      Em nenhuma circunstância o We Do, nossos diretores, oficiais, funcionários, afiliados, agentes, contratantes,
+      estagiários, fornecedores, prestadores de serviços ou licenciadores serão responsáveis por qualquer prejuízo, perda,
+      reclamação ou danos diretos, indiretos, incidentais, punitivos, especiais ou consequentes de qualquer tipo, incluindo, 
+      responsabilidade objetiva ou de outra forma, decorrentes do seu uso de qualquer um dos serviços para qualquer outra
+      reclamação relacionada de alguma forma ao seu uso do serviço, incluindo, mas não limitado a, quaisquer erros ou
+      omissões em qualquer conteúdo, ou qualquer perda ou dano de qualquer tipo como resultado do uso do serviço ou
+      qualquer conteúdo publicado, transmitido ou de outra forma disponível através do serviço, mesmo se alertado de tal
+      possibilidade. Como alguns estados ou jurisdições não permitem a exclusão ou a limitação de responsabilidade por
+      danos consequentes ou incidentais, em tais estados ou jurisdições, a nossa responsabilidade será limitada à extensão
+      máxima permitida por lei.
+      <br><br><br>
+      SEÇÃO 10 – INDENIZAÇÃO
+      <br><br>
+      Você concorda em indenizar, defender e isentar We Do e nossos subsidiários, afiliados, parceiros, funcionários,
+      diretores, agentes, contratados, licenciantes, prestadores de serviços, subcontratados, fornecedores, estagiários e
+      funcionários, de qualquer reclamação ou demanda, incluindo honorários de advogados, por quaisquer terceiros
+      devido à violação destes Termos de serviço ou aos documentos que incorporam por referência, ou à violação de
+      qualquer lei ou os direitos de um terceiro.
+      <br><br><br>
+      SEÇÃO 11 – INDEPENDÊNCIA
+      <br><br>
+      No caso de qualquer disposição destes Termos de serviço ser considerada ilegal, nula ou ineficaz, tal disposição deve,
+      contudo, ser aplicável até ao limite máximo permitido pela lei aplicável, e a porção inexequível será considerada
+      separada desses Termos de serviço. Tal determinação não prejudica a validade e aplicabilidade de quaisquer outras
+      disposições restantes.
+      <br><br><br>
+      SEÇÃO 12 - ACORDO INTEGRAL
+      <br><br>
+      Caso não exerçamos ou executemos qualquer direito ou disposição destes Termos de serviço, isso não constituirá uma
+      renúncia de tal direito ou disposição.
+      <br>
+      Estes Termos de serviço e quaisquer políticas ou normas operacionais postadas por nós neste site ou no que diz
+      respeito ao serviço constituem a totalidade do acordo entre nós. Estes termos regem o seu uso do Serviço,
+      substituindo quaisquer acordos anteriores ou contemporâneos, comunicações e propostas, sejam verbais ou escritos,
+      entre você e nós (incluindo, mas não limitado a quaisquer versões anteriores dos Termos de serviço).
+      <br>
+      Quaisquer ambiguidades na interpretação destes Termos de serviço não devem ser interpretadas contra a parte que
+      os redigiu.
+      <br><br><br>
+      SEÇÃO 13 - LEGISLAÇÃO APLICÁVEL
+      <br><br>
+      Esses Termos de serviço e quaisquer acordos separados em que nós lhe fornecemos os Serviços devem ser regidos e
+      interpretados de acordo com as leis de Rua Guadalajara, 941 - Guilhermina, Praia Grande, SP, 11702-210, Brazil.
+      <br><br><br>
+      SEÇÃO 14 - ALTERAÇÕES DOS TERMOS DE SERVIÇO
+      <br><br>
+      Você pode rever a versão mais atual dos Termos de serviço a qualquer momento nessa página.
+      <br>
+      Reservamos o direito, a nosso critério, de atualizar, modificar ou substituir qualquer parte destes Termos de serviço
+      ao publicar atualizações e alterações no nosso site. É sua responsabilidade verificar nosso site periodicamente. Seu
+      uso contínuo ou acesso ao nosso site ou ao Serviço após a publicação de quaisquer alterações a estes Termos de
+      serviço constitui aceitação dessas alterações.
+      <br><br><br>
+      SEÇÃO 15 – DADOS
+      <br><br>
+      As informações dos usuários, como idade, região de acesso, frequência do uso, frequência de colaboração,
+      preferências registradas e acessadas e relacionamentos internos, serão utilizadas para fins de análise estrutural, para
+      melhorias da plataforma e fins comerciais. Todo dado cedido a nós é de acordo com sua concordância com todos os
+      termos citados.
+      <br><br><br>
+      SEÇÃO 16 - INFORMAÇÕES DE CONTATO
+      <br><br>
+      As perguntas sobre os Termos de serviço devem ser enviadas para nós através do wedo.suporte@gmail.com.
+      <br><br>
+      <div class="divider"></div>
+      <br>
+      <button class="btn modal-close" onclick="termos_validate2(1)">Li e concordo com os termos</button>
+      <button class="btn modal-close" onclick="termos_validate2(2)">Cancelar</button>
 
     </div>
+  </div>
 
   <script>
     $(function () {
       $.mask.definitions['~'] = "[+-]";
       $("#dt_nascimento").mask("99/99/9999")
 
-      $("#formulario_login").submit(function(e){
+      $("#formulario_login").submit(function (e) {
         e.preventDefault()
       })
     });
@@ -170,6 +377,26 @@
       else {
         document.getElementById("botaoValidacao").innerHTML = "<a class='btn disabled white black-text col s12 m6 l6 offset-l3'>Cadastre-se</a> ";
       }
+    }
+    function termos_validate2(valor) {
+      if(valor == 1){
+        termos.checked = true
+        if (termos.checked) {
+          document.getElementById("botaoValidacao").innerHTML = "<a class='btn white black-text col s12 m6 l6 offset-l3'>Cadastre-se</a> ";
+        }
+        else {
+          document.getElementById("botaoValidacao").innerHTML = "<a class='btn disabled white black-text col s12 m6 l6 offset-l3'>Cadastre-se</a> ";
+        }
+      }else{
+        termos.checked = false
+        if (termos.checked) {
+          document.getElementById("botaoValidacao").innerHTML = "<a class='btn white black-text col s12 m6 l6 offset-l3'>Cadastre-se</a> ";
+        }
+        else {
+          document.getElementById("botaoValidacao").innerHTML = "<a class='btn disabled white black-text col s12 m6 l6 offset-l3'>Cadastre-se</a> ";
+        }
+      }
+      
     }
 
     /**select */

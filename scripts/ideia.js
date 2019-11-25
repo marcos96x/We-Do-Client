@@ -108,9 +108,8 @@ function cria_ideia(){
     let nm_ideia = document.getElementById("titulo_ideia").value
 
     let ideia_quebrada = []
-    ideia_quebrada.push(nm_ideia.split(" "))
-    
-    
+    ideia_quebrada = nm_ideia.split(" ")
+
     let desc = $("#textarea2").val()
     let tecnologias = []
     for(let i = 0; i < tecnologias_insere_ideia.length; i+= 2){
@@ -145,6 +144,7 @@ function cria_ideia(){
             }
         })
     }
+    
 
 }
 
@@ -152,7 +152,7 @@ function insere_tecnologia_ideia(id, nm) {
     arrayDadosTecnologia = [id, nm]
 
     $("#lista_tecnologias_add").html(`
-        <h3>Deseja adicionar <text style="color: red;">"${arrayDadosTecnologia[1]}"</text> à lista de técnologias ligadas à sua ideia? </h3>
+        <h5>Deseja adicionar <text style="color: red;">"${arrayDadosTecnologia[1]}"</text> à lista de técnologias ligadas à sua ideia? </h5>
     `)
 }
 

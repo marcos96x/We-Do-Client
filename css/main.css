@@ -24,6 +24,9 @@ body{
   margin-left: -1.9%;
   margin-right: -1.2%;
 }
+#termos_de_uso{
+  text-align: justify;
+}
 
 .gold-text{
   color: #ffd700;
@@ -60,29 +63,6 @@ body{
 ::-webkit-scrollbar-thumb {
   background: #404f65;
 }
-/*
-input{
-    font-family: 'bree-serif';
-   
-}
-
-
-*/
-/* label focus color */
-/*
-.input-field input:focus + label {
-    color: white !important;
-  }
-  /* label underline focus color */
-  /*
-  .row .input-field input:focus {
-    border-bottom: 1px solid white !important;
-    box-shadow: 0 1px 0 0 white !important;
-    color: white;
-  }
-
-
-*/
 
 #wedo{
     background-color: #404f65;
@@ -174,9 +154,6 @@ input{
    visibility: visible !important;
    }
    .add_ideia{
-    display: none !important;
-   }
-   #trends{
     display: none !important;
    }
    #projetos_atuais{

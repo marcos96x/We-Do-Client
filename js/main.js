@@ -262,7 +262,6 @@ function login() {
             let id = res.usuario.id_usuario
             let token = res.token
             let nome = res.usuario.nm_usuario
-
             localStorage.setItem("id_we_do", id)
             localStorage.setItem("email_we_do", email)
             localStorage.setItem("nome_we_do", nome)
@@ -308,7 +307,6 @@ function cadastrar() {
                 }),
                 contentType: 'application/json'
             }).done(function (res) {
-                console.log(res)
                 if (res.err) {
                     M.toast({ html: res.err })
                 } else {
