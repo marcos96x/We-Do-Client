@@ -12,7 +12,7 @@ function projetos_atuais(){
         }else if(res.msg){
             $("#projetos_atuais_lateral").append(`<a class='black-text' style='padding-left:10%;' href='#!'>${res.msg}</a><br>`)
             $("#projetos_atuais").append(`<li class="collection-item tooltipped" data-position="top">
-            <div>${res.msg}
+            <div style="font-size: 20px;">${res.msg}
               <a href="#!" class="secondary-content">
               </a>
             </div>

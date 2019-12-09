@@ -129,7 +129,7 @@ function visualiza_usuario(id_user){
             <div class="row">
                 <div class="col s11">
                     <blockquote class='black-text'
-                        style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
+                        style='font-family: Arial, Helvetica, sans-serif;text-align: justify;font-size:20px;' id='desc_ideia'>
                             ${ds_bio_usuario}
                         </blockquote>
                 </div>
@@ -147,7 +147,7 @@ function visualiza_usuario(id_user){
             $("#visualizacao_perfil_usuario").append(`
             <div class="col s10">
                 <div class="row" style="margin-top: -9%;">
-                    <h5>${res.perfil_usuario.nm_usuario}</h5>
+                    <h5 style="font-size:35px;">${res.perfil_usuario.nm_usuario}</h5>
                 </div>
                 <div class="row" style="margin-top: -3%;">
                     ${div_chips_tecnologias}
@@ -158,13 +158,13 @@ function visualiza_usuario(id_user){
             <div class="row">
                 <div class="col s11">
                     <blockquote class='black-text'
-                        style='font-family: Arial, Helvetica, sans-serif;text-align: justify;' id='desc_ideia'>
+                        style='font-family: Arial, Helvetica, sans-serif;text-align: justify; font-size:20px;' id='desc_ideia'>
                             ${ds_bio_usuario}
                         </blockquote>
                 </div>
             </div>
             <div class="row">
-                <div class="col s11">
+                <div class="col s11" style="font-size:20px;">
                     <i class="material-icons">call</i> ${tel_usuario}
                 </div>
             </div>
