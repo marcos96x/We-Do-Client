@@ -3,16 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    
+
     <link rel="icon" href="img/logo.png">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
-    
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://kit.fontawesome.com/45a4a8a0c5.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/45a4a8a0c5.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
@@ -30,15 +30,14 @@
     <script src="js/moment-with-locales.js">
 
     </script>
+    
+    <script src="scripts/projetos_atuais.js"></script>
+    <script src="scripts/trends.js"></script>
     <script src="scripts/ideia_chat.js"></script>
     <script src="scripts/notificacoes.js"></script>
     <script src="scripts/ideia.js"></script>
     <script src="scripts/buscas.js"></script>
     <script src="scripts/envia_comentario.js"></script>
-    <script src="scripts/projetos_atuais.js"></script>
-    <script>
-
-    </script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -62,7 +61,7 @@
                             </i></a>
                     </li>
                     <li>
-                        <a href="feed.html"> 
+                        <a href="feed.html">
                             <i class="material-icons">home</i>
                         </a>
                     </li>
@@ -86,10 +85,11 @@
 
                 </ul>
                 <div class="row" id="search_ideia">
-                    <div class="col s4">
+                    <div class="col s3">
 
                         <div class="input-field col s12">
-                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate" onkeydown="verifica_enter_busca()">
+                            <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate"
+                                onkeydown="verifica_enter_busca()">
                         </div>
                     </div>
 
@@ -115,20 +115,21 @@
 
     <ul id="slide-out" class="sidenav ">
         <li>
-            <div class="user-view"  id="link_usuario">
+            <div class="user-view" id="link_usuario">
                 <div class="background">
-                  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0HBw0HBw0HBwcHBw0HBwcHCA8ICQcNFREWFhURExMYHSggGBopGxMTJ0khJSk3Li4uFys/ODMuNygtLisBCgoKDQ0NDw0NEjcZFRk3Ky0rNC0tKysrKysuKys4Kzc3KysrNysrKysrKystNysrLSsrKysrKys3LSssKysrLf/AABEIAKgBLAMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAACAAEDBAcG/8QAGxABAQEBAQEBAQAAAAAAAAAAAAECERIhUTH/xAAbAQADAQEBAQEAAAAAAAAAAAABAgMABAcGBf/EABkRAQEBAQEBAAAAAAAAAAAAAAABEQISIf/aAAwDAQACEQMRAD8A+F4vi+L4+jx+hYPF8XxfGxKwOJw+K4OI9QOK404rjYh1A4rh8TjY5+oHE4fE42OfqBxfC4vjYh1BkKRfFyNiNSQ5FSHI2JVcODIcgYnSjTISNMtiVPLTIZaZDEq0y0yzy0y2JdNMtMs8tMhiVaRpllDlLiVaxpKylOVsTsaynGUpyjidjSLGVbYSkiltgPPURa2PYbEXxFjidiuJwk42I9QeJw+JwcQ65Z8TjTiuNiHXLPicacTjY5uuQ4nGnE4OOfqBIUhcXI2OfqDIUhSLkDEekkKRJCkbEauQ4qQo2JU4cCHAxOtIcCHGxOtMtIyhwMSrWHKylOUuJ2NZTlZSlKGEsbSnKxlOUMTsbSlKylKVsJY0lWEpdHCY89lKVl0pVnsdaSlGcpSjhLDhBKUHEuoScSLHEeonE4tfGxDrkeJw+Jwcc/XI8Th8Xxsc3fIcXwuL42ObrkZFyFwuNjm6gyFIvi5GxDqJIUSRcjYjVw4MKBidOFBhRsTpw4EKBidaQ5WcKUuErSUpWcpShhbGkpyspSlLhLGspysZSlbCWNpS6ylX1sJY88mimmE0U0ePX9dE0c05po5o0LXRKcrCaOaMStpSlZTRSmxKxrCjOUpRxHqHFjKUbEOuVr4kXBxz98pxfFxbY5e+VcXxa2xzd8q4vi1tjm6ipCiLjY5+okKKhRsSq4UGFAxKlCgQoGErSLgQoGFp9KUIsuFOUpWfV9DC40lKVn1coYFjaVfplKvoYWx5zNFNOeaKaJOnqvp0zRzTmmimjytrqmjmnNNHnSkoWumaaTTlmmk0eErpmjmnNNHNGTrolOVzzRzQ4j1G8pSsZo5occ/UawoylKUcc3fLSLgSlK2Obvk1jKuVscvcWQrbHL1Ci4JQMQ6XCgrjYlShQYuBhKcXBi4XC04sYsMKSKQMAur6KFwGkq+s+r6GBjzSaKaY9XK4p09M9N5o5pzylNKc9N6dE00mnNNFNLToddU0c05Zo5pSUNdWdtJpyzZzakpK6ps5pyzZzZ4nXVNHNOWbaTZkuo6Zo5pzTZzRsc/UdE0c055oppsc3cdEq5WM0U0OOXuNpVyspoppscncayrlZylKGOfqNJSjOUpQxGw4QSrlDCWHCgSrlDCU1isuFJFIGASKQMAk6pAxnmHVyh1Ovx509F1pKUrLq5VJ02tpoppjKUqvPTa3mimmE0U0tz02uiaOac00c0tOg10zZzblmjmlJS2uqbObcs2c2pKnXVNnNuSbObPEenXNnNuSbObO5+o65sptyzZTY45u465sppyzZzbY5e46Zo5pyzbSbbHP1y6ZoppzzRzQYjeXRKUrCaOaLiV5bSrlZTRTQYWxrKuVnKuUuEsadX0JV9DC4fUHqdLgYaD1OhgY8vWK34Er0HVrlFDShp9XKC+qTptadXKz6uVXnptazRTTHpSrc9hraaOaYTRTS3PYWt5o5pzzS5padEtdM2U25po5pWdJ10zZTbmmymzyo9OqbObck2U2pKh1HXNnNuSbKbM5+uXZNtJtx52edsh1y7M7aTbjztpnbJXh2TZzTkzs5suJXl1zRTTmmzmwxO8uiaKac80c0XCXlvNFKwmimgwt5bdX1jNFNFwt5a9TrOaX0MLjzNFI+afdLWKzRlp1SGlbSX0U6pKGn1codTqk6DWkq5WfV9V57DWsq5pl1fVeey2tppc0y6vq07JW00U0wmlzSs7TromimnPNLmlJ2nY6ZsptzTRTSk6SvLqm2mduSaObN6SvLszs87cc20zs2pXh2Z20ztx520ztk7w7Js5tx520mwSvDrmzm3JNlNgS8OubKbcs2U2GEvDqmimnNNlNhhLw6ZpfphNr9BhLy89RfE4+XfZqRfE4LKWnEEEROJw0oItSzSgi+qQ86Aup1SKTotLq+iik7LT6voLUnZafVyguVWdksaSlNMouVWdlsbTRTTGUpVJ2S8t5ppNOaU5VJ2S8umbPO3NNHNGnSd4dU2c25Zo5odTvDqmym3LNHNDpLw6ps5tyTZTbEvDrmzm3JNnNsS8OubL25ZsvYEvD5HwnhEfKvqE8J4RGZPKeUQQTynhEEE8p5RBBPKeVobQTynlENKVPK/KIaUE8r8qQ8tBflflEUlpV+V+VopOqC5FyLRSdUq5CkRFZ1S2FIciIpLS2FCi0PKSwouIhpS2FCi0NpbIUOVEHSWRfqy8k7Pn3v6edWztnn7fn9RA+ksj/2Q==">
+                    <img
+                        src="data:image/jpeg;base64,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">
                 </div>
                 <a href="#user">
-                  <img class="circle" src="https://image.flaticon.com/icons/png/512/74/74472.png">
+                    <img class="circle" src="https://image.flaticon.com/icons/png/512/74/74472.png">
                 </a>
                 <a href="#name">
-                  <span class="name white-text" id="nm_usuario">John Doe</span>
+                    <span class="name white-text" id="nm_usuario">John Doe</span>
                 </a>
                 <a href="#email">
-                  <span class=" email white-text" id="email_usuario">jdandturk@gmail.com</span>
+                    <span class=" email white-text" id="email_usuario">jdandturk@gmail.com</span>
                 </a>
-              </div>
+            </div>
         </li>
         <ul class="collapsible ">
 
@@ -234,6 +235,37 @@
 
     <!--/////-->
     <div class="container">
+        <div id='fixado' class="hide-on-med-and-down" hidden>
+            <ul class="collection with-header s12 m6 l4 z-depth-1 ">
+                <div class='container'>
+                    <h5 style="font-size:35px;">
+                        < /> Projetos Atuais</h5>
+                    <div class='divider'></div>
+                    <div id="projetos_atuais" style="font-size:25px;max-height: 130px;
+                width: 105%;
+                background-color: transparent ;
+                overflow-x: hidden;">
+
+                    </div>
+                </div>
+
+            </ul>
+
+
+            <!--coluna trends -->
+            <div class="col s12 m6 l4 z-depth-1  " id='trends'
+                style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+                <h5>
+                    # Trends</h5>
+
+                <div class='divider'></div>
+                <div class='divider'></div>
+                <!-- Aqui será carregado os trends -->
+                <div>
+
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col s12 m12 l6  z-depth-1"
                 style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px;"
@@ -265,9 +297,11 @@
 
                         </div>
                     </div>
+                    
                     <div id="chat">
 
                     </div>
+
 
 
                     <div class="container">
@@ -295,6 +329,7 @@
 
 
         </div>
+        
         <div class="row" id="div_comentarios">
 
         </div>
@@ -322,7 +357,7 @@
         <div class="modal-content">
             <h5>Escolha um membro da sua ideia para se tornar o novo idealizador!</h5>
             <div class="row" id="membros_passa_ideia">
-                
+
             </div>
             <div class="row center-align">
                 <a class="btn modal-close" onclick="passa_ideia()">Torna-lo idealizador</a>
@@ -359,99 +394,98 @@
         </div>
     </div>
 
-        <!-- Modal Structure de adicionar tecnologia-->
-        <div id="add_tecnologia_ideia" class="modal">
-            <div class="modal-content">
-                <h4>Adicione uma tecnologia à sua ideia!</h4>
-                <div class="row">
-                    <form class="col s12" id="form_add_tecnologia">
-                        <div class="row">
-                            <div class="input-field col s12 m6 l12 ">
-                                <select>
-                                    <option value="" disabled>Adicione as tecnologias necessárias </option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div class=" col s12 m6 l12 center-align" id="lista_tecnologias_add">
-
-                        </div>
-
-                    </form>
-                </div>
-                <br><br><br><br><br>
-                <div class="row center-align">
-                    <a class="btn modal-close" onclick="adiciona_tecnologia_na_ideia()">Adicionar</a>
-
-                    <a class="btn modal-close" id="cancela_tecnologia">cancelar</a>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <!-- Modal Structure de ADICIONAR UMA IDEIA-->
-        <div id="add_ideia" class="modal">
-            <div class="modal-content">
-                <h4>Adicionar uma ideia</h4>
-                <div class="row">
-                    <form class="col s12" id="alt_dados">
-                        <div class="row">
-                            <div class="input-field col s12 black-text">
-                                <input id="titulo_ideia" type="text">
-                                <label for="titulo_ideia">Titulo da ideia</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
-                                <label for="textarea2">Descrição da ideia</label>
-                            </div>
-                            <div class="input-field col s12 m6 l12 ">
-                                <select multiple id='tecnologias_select'>
-                                    <option value="" disabled>Adicione as tecnologias necessárias </option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
-
-                        </div>
-                        <div class="row center">
-                            <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
-                            <a class="btn modal-close" id="cancela">Cancela</a>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-
-        </div>
-        <!-- Resultado das buscas -->
-
-        <div id="pesquisas" hidden>
+    <!-- Modal Structure de adicionar tecnologia-->
+    <div id="add_tecnologia_ideia" class="modal">
+        <div class="modal-content">
+            <h4>Adicione uma tecnologia à sua ideia!</h4>
             <div class="row">
-                <div class="col s12 m8 l8">
-                    <div class="col s12  z-depth-1 "
-                        style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
-
-                        <h5>
-                            <i class="material-icons">search</i>Resultados para "<span
-                                id="texto_resultado_busca"></span>"
-                        </h5>
-                        <div class="divider"></div>
-
-                        <div id="resultado_pesquisas">
-
-
+                <form class="col s12" id="form_add_tecnologia">
+                    <div class="row">
+                        <div class="input-field col s12 m6 l12 ">
+                            <select>
+                                <option value="" disabled>Adicione as tecnologias necessárias </option>
+                            </select>
 
                         </div>
+                    </div>
+
+                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias_add">
+
+                    </div>
+
+                </form>
+            </div>
+            <br><br><br><br><br>
+            <div class="row center-align">
+                <a class="btn modal-close" onclick="adiciona_tecnologia_na_ideia()">Adicionar</a>
+
+                <a class="btn modal-close" id="cancela_tecnologia">cancelar</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal Structure de ADICIONAR UMA IDEIA-->
+    <div id="add_ideia" class="modal">
+        <div class="modal-content">
+            <h4>Adicionar uma ideia</h4>
+            <div class="row">
+                <form class="col s12" id="alt_dados">
+                    <div class="row">
+                        <div class="input-field col s12 black-text">
+                            <input id="titulo_ideia" type="text">
+                            <label for="titulo_ideia">Titulo da ideia</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="textarea2" class="materialize-textarea" data-length="500"></textarea>
+                            <label for="textarea2">Descrição da ideia</label>
+                        </div>
+                        <div class="input-field col s12 m6 l12 ">
+                            <select multiple id='tecnologias_select'>
+                                <option value="" disabled>Adicione as tecnologias necessárias </option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class=" col s12 m6 l12 center-align" id="lista_tecnologias">
+
+                    </div>
+                    <div class="row center">
+                        <a class="btn modal-close" onclick="cria_ideia()">Prontinho</a>
+                        <a class="btn modal-close" id="cancela">Cancela</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- Resultado das buscas -->
+
+    <div id="pesquisas" hidden>
+        <div class="row">
+            <div class="col s12 m8 l8">
+                <div class="col s12  z-depth-1 "
+                    style=" border-color:rgb(210, 214, 223); border-style: solid; border-width: 1px; border-radius: 2px; padding-left: 20px;">
+
+                    <h5>
+                        <i class="material-icons">search</i>Resultados para "<span id="texto_resultado_busca"></span>"
+                    </h5>
+                    <div class="divider"></div>
+
+                    <div id="resultado_pesquisas">
+
+
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

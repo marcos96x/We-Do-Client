@@ -315,6 +315,11 @@ body{
   border-color: transparent;
 }
 
+.btn_pesquisa:focus {
+  background-color: transparent ;
+}
+
+
 .material-icons {
   cursor:pointer;
 }

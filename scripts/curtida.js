@@ -16,7 +16,16 @@ function curtir(id_feed, id_texto, id_ideia) {
                     "id_ideia": id_ideia
                 }
             }),
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done(function(res){
             if(res.err){
                 alert("Erro na curtida")
@@ -53,7 +62,16 @@ function curtir(id_feed, id_texto, id_ideia) {
                     "id_ideia": id_ideia
                 }
             }),
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done(function(res){
             if(res.err){
                 alert("Erro na curtida")
@@ -87,7 +105,16 @@ function curtir_ideia(id_feed, id_texto, id_ideia) {
                     "id_ideia": id_ideia
                 }
             }),
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done(function(res){
             if(res.err){
                 alert("Erro na curtida")
@@ -124,7 +151,16 @@ function curtir_ideia(id_feed, id_texto, id_ideia) {
                     "id_ideia": id_ideia
                 }
             }),
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done(function(res){
             if(res.err){
                 alert("Erro na curtida")

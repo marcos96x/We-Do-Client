@@ -7,17 +7,24 @@ $(document).ready(() => {
         $.ajax({
             url: url,
             type: "PUT",
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
-            }else{
-                              
+            }else{                              
                 $("#qtd_notificacoes").fadeOut()
                 $("#qtd_notificacoes2").fadeOut()
                 $("#qtd_notificacoes").val("")                
-                $("#qtd_notificacoes2").val("")
-                
+                $("#qtd_notificacoes2").val("")                
             }
         })
     })
@@ -132,22 +139,30 @@ $(document).ready(() => {
     })
 })
 
-function aceita_participacao(id_idealizador, __id_usuario, id_ideia){
-    let url = url_api + "/ideia/interesse"
-
+function aceita_participacao(id_idealizador, id_usuario, id_ideia){
+    let url = url_api + "/ideia/interesse/" + id
     $.ajax({
         url: url,
         type: "PUT",
         contentType: "application/json",
         data: JSON.stringify({
             ideia: {
-                id_usuario: id_idealizador,
+                id_usuario: id_usuario,
                 id_ideia: id_ideia
             },
             usuario: {
-                id_usuario: __id_usuario
+                id_usuario: id
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)
@@ -155,7 +170,7 @@ function aceita_participacao(id_idealizador, __id_usuario, id_ideia){
             M.toast({html: "Solicitação aceita com sucesso!"})
             carrega_notificacoes_usuario(id_idealizador)
             let dados_notificacao = {
-                id_usuario: __id_usuario,
+                id_usuario: id_usuario,
                 id_ideia: id_ideia,
                 acao: 4
             }
@@ -172,13 +187,22 @@ function recusa_participacao(id_idealizador, id_usuario, id_ideia){
         contentType: "application/json",
         data: JSON.stringify({
             ideia: {
-                id_usuario: id_idealizador,
+                id_usuario: id_usuario,
                 id_ideia: id_ideia
             },
             usuario: {
-                id_usuario: id_usuario
+                id_usuario: id_idealizador
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)

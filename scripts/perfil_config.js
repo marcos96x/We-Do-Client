@@ -43,6 +43,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 })
 
+$(document).ready(() => {
+    var query = location.search.slice(1);
+    var partes = query.split('&');
+    var data = {};
+    partes.forEach(function (parte) {
+        var chaveValor = parte.split('=');
+        var chave = chaveValor[0];
+        var valor = chaveValor[1];
+        data[chave] = valor;
+    });
+    var id_perfil = data.id_usuario
+
+    if(id_perfil != id){
+        window.location.href = url_web + "/perfil_usuario.html?id_usuario=" + id_perfil
+    }
+})
+
 /** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
@@ -58,11 +75,21 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
                 "id_ideia": id_ideia
             }
         }),
-        contentType: "application/json"
+        contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function(res){
         if(res.err){
             alert("Erro na inserção do interesse")
         }else{
+            localStorage.setItem("token_we_do", res.token)
             if ($(id_elemento).attr('value') == 1) {
                 $(id_icone).text(" ")
                 $(id_elemento).attr('value', 0).attr('class', 'btn')
@@ -110,6 +137,12 @@ function xablau(id, nm){
     }  
 }
 
+function altera_dados_usuario_key(){
+    if(event.keyCode == 13){
+        altera_dados_usuario()
+    }
+}
+
 
 function altera_dados_usuario(){
     let nova_data
@@ -128,18 +161,25 @@ function altera_dados_usuario(){
     }
 
     if($("#campo_tel").val().trim() == ""){
-        novo_tel = $("#label_tel").text()
+        novo_tel = $("#label_tel").text().replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
     }else{
-        novo_tel = $("#campo_tel").val()
+        novo_tel = $("#campo_tel").val().replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
     }
-
 
     if($("#campo_dt_nascimento").val().trim() == ""){
         let data_cortada = $("#label_dt_nascimento").text().split("/")
         nova_data = data_cortada[2] + "-" + data_cortada[1] + "-" + data_cortada[0]
     }
-    else
-        nova_data = $("#campo_dt_nascimento").val()
+    else{
+        let data_cortada = $("#campo_dt_nascimento").val().split("/")
+        let data_atual = new Date()
+        if(data_cortada[2] > data_atual.getFullYear() || data_cortada[1] > 12 || data_cortada[0] > 31){
+            M.toast({html: "Data inválida"})
+            return false
+        }else
+            nova_data = data_cortada[2] + "-" + data_cortada[1] + "-" + data_cortada[0]
+
+    }
 
     if($("#campo_nm_usuario").val().trim() == "")
         novo_nome = $("#label_nm_usuario").text().trim()
@@ -165,11 +205,21 @@ function altera_dados_usuario(){
                 tel_usuario: novo_tel
             },
             tecnologias: tecnologias_alterar
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)
         }else{
+            localStorage.setItem("token_we_do", res.token)
             localStorage.setItem("nome_we_do", novo_nome)
             $("#nm_usuario").html(novo_nome)
             if(senha_antiga != "" && nova_senha != "" && nova_senha_confirm != ""){
@@ -190,14 +240,23 @@ function altera_dados_usuario(){
                                 senha_antiga: senha_antiga,
                                 senha_nova: nova_senha
                             }
-                        })
+                        }),
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+                        }
+                    })
+                    .fail((err) => {
+                        if(err.status == 401){
+                            localStorage.clear()
+                            window.location.href = "index.html?msg=4"
+                        }
                     }).done((res2) => {
                         if(res2.err){
                             M.toast({html: res2.err})
                         }else{
                             M.toast({html: "Seus dados e sua senha foram atualizados com sucesso!"})
 
-            $               ("#visualizacao_perfil_usuario").html("")
+                            $("#visualizacao_perfil_usuario").html("")
                             visualiza_usuario(id)
                         }
                     })
@@ -220,7 +279,6 @@ function abre_nome(){
 
 function abre_data(){
     $("#campo_dt_nascimento").attr("disabled", false)
-    $("#campo_dt_nascimento").attr("type", "date")
     $("#campo_dt_nascimento").focus()
 }
 
@@ -256,7 +314,16 @@ function deleta_conta(){
             usuario: {
                 id_usuario: id
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)

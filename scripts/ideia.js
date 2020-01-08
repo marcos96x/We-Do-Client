@@ -74,11 +74,21 @@ function add_tag(){
                     id_ideia: id_ideia_original,
                     tags_ideia: tags_para_add
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
             }else{
+                localStorage.setItem("token_we_do", res.token)
                 mostra_ideia(id_ideia_original)
                 if(tags_para_add.length < 2){
                     M.toast({html: "Tag inserida com sucesso"})
@@ -133,11 +143,21 @@ function cria_ideia(){
                 usuario: {
                     id_usuario: id
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
-            }else{                
+            }else{           
+                localStorage.setItem("token_we_do", res.token)     
                 M.toast({html: "Ideia criada com sucesso!"})
                 carrega_feed(id)
                 projetos_atuais()
@@ -181,13 +201,23 @@ function adiciona_tecnologia_na_ideia(){
                 "tecnologia": {
                     "id_tecnologia": arrayDadosTecnologia[0]    
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
             }else{
                 if(res.msg){
                     M.toast({html: res.msg})
+                    localStorage.setItem("token_we_do", res.token)
                     
                     mostra_ideia(id_ideia_pagina)
                     return false
@@ -269,14 +299,24 @@ function altera_dados_ideia(dado){
                     "usuario": {
                         "id_usuario": id
                     }
-                })
+                }),
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+                }
+            })
+            .fail((err) => {
+                if(err.status == 401){
+                    localStorage.clear()
+                    window.location.href = "index.html?msg=4"
+                }
             }).done((res) => {
                 if(res.err){
                     M.toast({html: res.err})
                     return false
                 }else{
                     if(res.msg == "OK"){
-                        M.toast({html: "Nome da ideia atualizado com sucesso!"})                        
+                        M.toast({html: "Nome da ideia atualizado com sucesso!"})  
+                        localStorage.setItem("token_we_do", res.token)                      
                         mostra_ideia(id_ideia_pagina)
                     }else{
                         M.toast({html: res.msg})
@@ -306,14 +346,24 @@ function altera_dados_ideia(dado){
                     "usuario": {
                         "id_usuario": id
                     }
-                })
+                }),
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+                }
+            })
+            .fail((err) => {
+                if(err.status == 401){
+                    localStorage.clear()
+                    window.location.href = "index.html?msg=4"
+                }
             }).done((res) => {
                 if(res.err){
                     M.toast({html: res.err})
                     return false
                 }else{
                     if(res.msg == "OK"){
-                        M.toast({html: "Descrição da ideia atualizada com sucesso!"})                        
+                        M.toast({html: "Descrição da ideia atualizada com sucesso!"}) 
+                        localStorage.setItem("token_we_do", res.token)                       
                         mostra_ideia(id_ideia_pagina)
                     }else{
                         M.toast({html: res.msg})
@@ -338,12 +388,22 @@ function altera_dados_ideia(dado){
                 usuario: {
                     id_usuario: id
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
             }else{
                 M.toast({html: "Sua ideia foi marcada como concluída!"})
+                localStorage.setItem("token_we_do", res.token)
                 mostra_ideia(id_ideia_original)
             }
         })
@@ -363,11 +423,21 @@ function altera_dados_ideia(dado){
                 usuario: {
                     id_usuario: id
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
             }else{
+                localStorage.setItem("token_we_do", res.token)
                 M.toast({html: "Sua ideia foi marcada como em desenvolvimento!"})
                 mostra_ideia(id_ideia_original)
             }
@@ -388,12 +458,22 @@ function altera_dados_ideia(dado){
                 usuario: {
                     id_usuario: id
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
             }else{
                 M.toast({html: "Sua ideia foi marcada como Aberta à participações!"})
+                localStorage.setItem("token_we_do", res.token)
                 mostra_ideia(id_ideia_original)
             }
         })

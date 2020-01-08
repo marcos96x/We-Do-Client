@@ -18,7 +18,16 @@ function envia_comentario_ideia(){
                     "id_ideia": id_ideia_original
                 }
             }),
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done(function(res){
             if(res.err){
                 alert("Erro na inserção do comentario")
@@ -69,7 +78,16 @@ function envia_comentario(id_comentario, id_ideia, id_texto_comentario_feed, div
                     "id_ideia": id_ideia
                 }
             }),
-            contentType: "application/json"
+            contentType: "application/json",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done(function(res){
             if(res.err){
                 alert("Erro na inserção do comentario")

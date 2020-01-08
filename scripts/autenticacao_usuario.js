@@ -7,7 +7,7 @@ function valida_usuario(){
         !localStorage.getItem("id_we_do")){
             localStorage.clear()
             var msg = 1
-            //window.location.href = url_web + "/index.html?msg=" + msg
+            window.location.href = url_web + "/index.html?msg=" + msg
             return false
     }else{
         return true

@@ -97,16 +97,26 @@ function carrega_feed(){
         window.location.href= str_link
     })
     let content
-
     let url = url_api + "/feed/" + id
     $.ajax({
         url: url,
         type: "GET",
-        contentType: 'application/json'
-    }).done(function(res){
+        contentType: 'application/json',
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
+    })
+    .done(function(res){
         if(res.err){
             alert("Erro na busca do feed")
         }else{
+            localStorage.setItem("token_we_do", res.token)
             let ideias = res.ideias
             let nm_ideia, ds_ideia, id_ideia, qtcomentarios, curtidas, tecnologias, membros, idealizador
             let verificacao_interesse, id_icone_interesse_feed, id_icone_curtida_feed, id_texto_curtida_feed, id_texto_comentario_feed
@@ -269,10 +279,17 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
             }
         }),
         contentType: "application/json"
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function(res){
         if(res.err){
             alert("Erro na inserção do interesse")
         }else{
+            localStorage.setItem("token_we_do", res.token)
             if ($(id_elemento).attr('value') == 1) {
                 $(id_icone).text(" ")
                 $(id_elemento).attr('value', 0).attr('class', 'btn')
@@ -367,13 +384,23 @@ function deleta_comentario(id_mensagem){
             comentario: {
                 id_mensagem: id_mensagem
             }
-        })
+        }),
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function(res){
         if(res.err){
             alert(res.err)
         }else if (res.msg_erro){
             M.toast({html: res.msg_erro})
         }else{
+            localStorage.setItem("token_we_do", res.token)
             let nome_da_div_do_comentario_a_ser_excluido = "#div_do_comentario" + id_mensagem
             $(nome_da_div_do_comentario_a_ser_excluido).hide()
             M.toast({html: "Comentário excluido com sucesso!"})

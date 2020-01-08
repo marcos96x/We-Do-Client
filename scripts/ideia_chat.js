@@ -80,8 +80,8 @@ function abre_tecnologias_ideiaChat(){
         contentType: 'application/json'
     }).done(function (res) {
         let id_tecnologia, nm_tecnologia
-        let select_ideia = document.getElementsByTagName("ul")[9]
-        let select_add_tecnologia = document.getElementsByTagName("ul")[8]
+        let select_ideia = document.getElementsByTagName("ul")[10]
+        let select_add_tecnologia = document.getElementsByTagName("ul")[9]
         let select_tecnologias = document.getElementsByTagName("ul")[2]
         for (let i = 0; i < res.tecnologias.length; i++) {
             id_tecnologia = res.tecnologias[i].id_tecnologia
@@ -142,12 +142,20 @@ function mostra_ideia(id_ideia) {
     $.ajax({
         url: url,
         type: "GET",
-        contentType: "application/json"
+        contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function (res) {
         if (res.err) {
             alert("Erro na busca da ideia")
         } else {
-
             $("#campo_ideia").html("")
             if(res.msg){
                 window.location.href = url_web + "/feed.html?msg=2"
@@ -175,7 +183,7 @@ function mostra_ideia(id_ideia) {
                 ds_ideia_original = res.ideia.ds_ideia
                 tags_ideia = res.ideia.tags
                 membros_da_ideia = res.membros
-                let nm_idealizador
+                let nm_idealizador, id_idealizador
                 let verificacao_idealizador = 0
                 let verificacao_membro = 0
                 let verificacao_visitante = 0
@@ -192,6 +200,7 @@ function mostra_ideia(id_ideia) {
                 for (let i = 0; i < res.ideia.membros.length; i++) {
                     if (res.ideia.membros[i].idealizador == 1) {
                         nm_idealizador = res.ideia.membros[i].nm_usuario
+                        id_idealizador = res.ideia.membros[i].id_usuario
                         if(res.ideia.membros[i].id_usuario == id){
                             verificacao_idealizador = 1
                             verificacao_membro = 0
@@ -216,6 +225,10 @@ function mostra_ideia(id_ideia) {
                 // verificação pro tipo de exibição
                 if(verificacao_visitante == 1){
                     //------------------------------------------------------------------------VISITANTE
+                                    
+                    carrega_trends()
+                    projetos_atuais()
+                    $("#fixado").show()
                     $("#campo_ideia").append(` 
     
                     <div class="col s10">
@@ -228,7 +241,7 @@ function mostra_ideia(id_ideia) {
             
             <br>
             <br>
-            <p>Por ${nm_idealizador}</p>
+            <p>Por <a href="${url_web}/perfil_usuario.html?id_usuario=${id_idealizador}"> ${nm_idealizador}</a></p>
             <hr>
             <div class='row'>
                 <div class='col s12'>
@@ -361,7 +374,7 @@ function mostra_ideia(id_ideia) {
            
             <br>
             <br>
-            <p>Por ${nm_idealizador}</p>
+            <p>Por <a href="${url_web}/perfil_usuario.html?id_usuario=${id_idealizador}"> ${nm_idealizador}</a></p>
             <hr>
             <div class='row'>
                 <div class='col s12'>
@@ -518,7 +531,7 @@ function mostra_ideia(id_ideia) {
                 </div>
             </div>
     
-            <p style="margin-top:-20px;">Por ${nm_idealizador}</p>
+            <p style="margin-top: -20px;">Por <a href="${url_web}/perfil_usuario.html?id_usuario=${id_idealizador}"> ${nm_idealizador}</a></p>
             <hr>
             <div class="row">
                 <div class="col s12">
@@ -790,6 +803,9 @@ function apaga_ideia(){
         url: url,
         type: "DELETE",
         contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        },
         data: JSON.stringify({
             ideia: {
                 id_ideia: id_ideia_original
@@ -798,6 +814,12 @@ function apaga_ideia(){
                 id_usuario: id
             }
         })
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)
@@ -824,7 +846,16 @@ function sair_ideia(){
             ideia: {
                 id_ideia: id_ideia_original
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)
@@ -851,7 +882,16 @@ function passa_ideia(){
                 usuario: {
                     id_usuario: id_novo_idealizador
                 }
-            })
+            }),
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+            }
+        })
+        .fail((err) => {
+            if(err.status == 401){
+                localStorage.clear()
+                window.location.href = "index.html?msg=4"
+            }
         }).done((res) => {
             if(res.err){
                 alert(res.err)
@@ -903,7 +943,16 @@ function deleta_tecnologia(id_tecnologia){
             "tecnologia": {
                 "id_tecnologia": id_tecnologia   
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done((res) => {
         if(res.err){
             alert(res.err)
@@ -933,13 +982,24 @@ function deleta_comentario(id_mensagem){
             ideia: {
                 id_ideia: id_ideia_original
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function(res){
         if(res.err){
             alert(res.err)
         }else if (res.msg_erro){
             M.toast({html: res.msg_erro})
         }else{
+                
+            localStorage.setItem("token_we_do", res.token)
             let nome_da_div_do_comentario_a_ser_excluido = "#div_do_comentario" + id_mensagem
             $(nome_da_div_do_comentario_a_ser_excluido).hide()
             M.toast({html: "Comentário excluido com sucesso!"})
@@ -956,16 +1016,27 @@ function remove_usuario(id_usuario_xxx, id_ideia_xxx){
         data: JSON.stringify({
             ideia: {
                 id_ideia: id_ideia_xxx,
-                id_usuario: id
+                id_usuario: id_usuario_xxx
             },
             usuario: {
-                id_usuario: id_usuario_xxx
+                id_usuario: id
             }
-        })
+        }),
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        console.log(err)
+        /*if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }*/
     }).done((res) => {
         if(res.err){
             M.toast({html: res.err})
         }else{
+            localStorage.setItem("token_we_do", res.token)
             let campo_deletar = "#campo_membro" + id_usuario_xxx
             $(campo_deletar).hide()
             M.toast({html: "Usuario removido da ideia"})
@@ -1002,12 +1073,22 @@ function mostra_chat(id_ideia) {
     $.ajax({
         url: url,
         type: "GET",
-        contentType: "application/json"
+        contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function (res) {
         if (res.err) {
             alert("Erro na busca do chat")
         } else {
             let mensagens = res.chat[0]
+            localStorage.setItem("token_we_do", res.token)
             for (let i = 0; i < mensagens.length; i++) {
                 if (mensagens[i].id_usuario == id) {
                     // mensagem enviada pelo usuario
@@ -1046,7 +1127,6 @@ function aparece_opcao_editar() {
 
 /**edita nome da ideia*/
 function edita_nome_ideia() {
-    console.log($("#iconezinho4").attr('value'));
     if ($("#iconezinho4").attr('value') == 1) {
         $("#label_projeto").attr("class", "active")
         $("#iconezinho4").attr('value', 0)

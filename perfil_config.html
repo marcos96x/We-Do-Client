@@ -13,14 +13,29 @@
     
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/45a4a8a0c5.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js//jquery-3.4.1.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
     <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
     <script src="js/url_api.js"></script>
     <script src="scripts/autenticacao_usuario.js"></script>
     <script>
         valida_usuario()
-        
+        $(document).ready(() => {
+            var query = location.search.slice(1);
+            var partes = query.split('&');
+            var data = {};
+            partes.forEach(function (parte) {
+                var chaveValor = parte.split('=');
+                var chave = chaveValor[0];
+                var valor = chaveValor[1];
+                data[chave] = valor;
+            });
+            var id_perfil = data.id_usuario
+
+            if(id_perfil != localStorage.getItem("id_we_do")){
+                window.location.href = url_web + "/perfil_usuario.html?id_usuario=" + id_perfil
+            }
+        })
     </script>
     
     <script src="scripts/ideia.js"></script>
@@ -97,7 +112,7 @@
 
                 </ul>
                 <div class="row" id="search_ideia">
-                    <div class="col s4">
+                    <div class="col s3">
 
                         <div class="input-field col s12">
                             <input placeholder="Pesquisa por ideia" id="texto_pesquisa" type="text" class="validate"
@@ -142,19 +157,6 @@
                 </a>
             </div>
         </li>
-        <ul class="collapsible">
-            <li>
-                <a href='#!'>
-                    <i class="material-icons">code</i>
-                    <div class="collapsible-header black-text" style='padding-left:0%;font-size:20px;'>Projetos Atuais</div>
-
-                    <div class="collapsible-body" id="projetos_atuais_lateral">
-                        <a class='black-text' href='#!'></a>
-                    </div>
-                </a>
-            </li>
-
-        </ul>
 
         <li>
             <a href="#!" class="dropdown-trigger" data-target="notifications2" id="links_notificacoes2" style="font-size:20px;">
@@ -350,7 +352,7 @@
 
                             <div class="col s6">
                                 <div class="input-field col s12">
-                                    <input id="campo_nm_usuario" disabled type="text">
+                                    <input id="campo_nm_usuario" disabled type="text" onkeydown="altera_dados_usuario_key()">
                                     <label for="campo_nm_usuario" class='label_modal truncate'
                                         id="label_nm_usuario">Paula</label>
                                 </div>
@@ -364,7 +366,7 @@
 
                             <div class="col s4">
                                 <div class="input-field col s12 m6 l12">
-                                    <input id="campo_dt_nascimento" disabled type="text">
+                                    <input id="campo_dt_nascimento" disabled type="text" onkeydown="altera_dados_usuario_key()">
                                     <label for="campo_dt_nascimento" id="label_dt_nascimento">12/02/2000</label>
                                 </div>
                             </div>
@@ -379,7 +381,7 @@
                         <div class="row">
                             <div class="input-field col s12 m5 l5">
                                 <div class="input-field col s12 m6 l12">
-                                    <input id="campo_descricao" disabled type="text">
+                                    <input id="campo_descricao" disabled type="text" onkeydown="altera_dados_usuario_key()">
                                     <label for="campo_descricao" id="label_descricao">Descrição</label>
                                 </div>
                             </div>
@@ -391,7 +393,7 @@
 
                             <div class="input-field col s12 m5 l5">
                                 <div class="input-field col s12 m6 l12">
-                                    <input id="campo_tel" disabled type="text">
+                                    <input id="campo_tel" disabled type="text" onkeydown="altera_dados_usuario_key()">
                                     <label for="campo_tel" id="label_tel">Telefone</label>
                                 </div>
                             </div>
@@ -410,9 +412,6 @@
 
                             </div>
                         </div>
-
-
-
                         <div class="divider"></div>
                         <div class="row center">
                             <h6>
@@ -423,7 +422,7 @@
 
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="senha_antiga" disabled type="password">
+                                <input id="senha_antiga" disabled type="password" onkeydown="altera_dados_usuario_key()">
                                 <label for="senha_antiga">Senha atual</label>
                             </div>
                         </div>
@@ -431,11 +430,11 @@
                             <!-- fazer um script que faça o usuario confirmar senha atual dele -->
 
                             <div class="input-field col s6">
-                                <input id="nv_senha" disabled type="password">
+                                <input id="nv_senha" disabled type="password" onkeydown="altera_dados_usuario_key()">
                                 <label for="nv_senha">Nova Senha</label>
                             </div>
                             <div class="input-field col s5">
-                                <input id="nv_senha_confirm" disabled type="password">
+                                <input id="nv_senha_confirm" disabled type="password" onkeydown="altera_dados_usuario_key()">
                                 <label for="nv_senha_confirm">Confirme a nova senha</label>
                             </div>
                             <div class="col s1">
@@ -452,7 +451,7 @@
                             </h6>
                             <div id="deletar_conta" hidden>
                                 <h6>Tem certeza que deseja apagar sua conta? Esta ação não poderá ser desfeita!</h6>
-                                <button onclick="deleta_conta()" class="btn red">Sim</button>
+                                <a onclick="deleta_conta()" class="btn red">Sim</a>
                             </div>
                         </div>
 
@@ -497,13 +496,14 @@
 
 $       ("#nm_usuario").html(localStorage.getItem("nome_we_do"))
         $("#email_usuario").html(localStorage.getItem("email_we_do"))
-        let str_link = url_api + `/perfil_config.html?id_usuario=${localStorage.getItem("id_we_do")}`
+        let str_link = url_web + `/perfil_config.html?id_usuario=${localStorage.getItem("id_we_do")}`
         $("#link_usuario").click(() => {
             window.location.href = str_link
         })
         $(function () {
             $.mask.definitions['~'] = "[+-]";
-            $("#dt_nascimento").mask("99/99/9999")
+            $("#campo_dt_nascimento").mask("99/99/9999")
+            $("#campo_tel").mask("(99) 99999-9999")
         });
 
 

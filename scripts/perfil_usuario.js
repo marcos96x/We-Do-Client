@@ -28,7 +28,6 @@ $(document).ready(function () {
 })
 
 
-/** mostra interesse no feed */
 function mostra_interesse(id_elemento, id_icone, id_ideia) {
 
     let url = url_api + "/interesse"
@@ -43,11 +42,21 @@ function mostra_interesse(id_elemento, id_icone, id_ideia) {
                 "id_ideia": id_ideia
             }
         }),
-        contentType: "application/json"
+        contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem("token_we_do"))
+        }
+    })
+    .fail((err) => {
+        if(err.status == 401){
+            localStorage.clear()
+            window.location.href = "index.html?msg=4"
+        }
     }).done(function(res){
         if(res.err){
             alert("Erro na inserção do interesse")
         }else{
+            localStorage.setItem("token_we_do", res.token)
             if ($(id_elemento).attr('value') == 1) {
                 $(id_icone).text(" ")
                 $(id_elemento).attr('value', 0).attr('class', 'btn')

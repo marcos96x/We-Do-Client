@@ -12,6 +12,7 @@ function pesquisa_por_ambos(texto, tecnologia){
             alert(res.err)
         }else{            
             $("#feed").hide()
+            $("#final_feed").hide()
             $("#div_do_trends").hide()
             $("#div_adicionar_ideia").hide()
 
@@ -25,7 +26,6 @@ function pesquisa_por_ambos(texto, tecnologia){
                 // inserção do conteudo da busca
                 $("#resultado_pesquisas").append(` 
                 <div onclick="acessa_ideia(${buscas[i].id_ideia})">
-                    <div class="divider"></div>   
                     <div id="teste">            
                         <div class="col s10">
                             <h6>${buscas[i].nm_ideia}</h6>
@@ -37,7 +37,6 @@ function pesquisa_por_ambos(texto, tecnologia){
                         <label>${buscas[i].nm_usuario}</label>
                     </div>
                     </div>
-                    <div class="divider"></div>
                 </div>
                 `)                 
             }
@@ -59,6 +58,7 @@ function pesquisa_por_texto(texto){
             alert(res.err)
         }else{            
             $("#feed").hide()
+            $("#final_feed").hide()
             $("#div_adicionar_ideia").hide()
 
             $("#div_do_chat").hide()
@@ -72,7 +72,6 @@ function pesquisa_por_texto(texto){
                 // inserção do conteudo da busca
                 $("#resultado_pesquisas").append(` 
                 <div onclick="acessa_ideia(${buscas[i].id_ideia})">
-                    <div class="divider"></div>  
                     <div id="teste">             
                         <div class="col s10">
                             <h6>${buscas[i].nm_ideia}</h6>
@@ -84,7 +83,6 @@ function pesquisa_por_texto(texto){
                         <label>${buscas[i].nm_usuario}</label>
                     </div>
                     </div>
-                    <div class="divider"></div>
                 </div>
                 `)                 
             }
@@ -110,6 +108,7 @@ function pesquisa_por_tecnologia(id, nm){
             alert(res.err)
         }else{            
             $("#feed").hide()
+            $("#final_feed").hide()
             $("#div_adicionar_ideia").hide()
             $("#div_do_chat").hide()
             $("#campo_ideia").hide()
@@ -122,7 +121,6 @@ function pesquisa_por_tecnologia(id, nm){
                 // inserção do conteudo da busca
                 $("#resultado_pesquisas").append(` 
                 <div onclick="acessa_ideia(${buscas[i].id_ideia})">
-                    <div class="divider"></div>  
                     
                     <div id="teste">                         
                         <div class="col s10">
@@ -135,7 +133,6 @@ function pesquisa_por_tecnologia(id, nm){
                         <label>${buscas[i].nm_usuario}</label>
                     </div>
                     </div>
-                    <div class="divider"></div>
                 </div>
                 `)                 
             }

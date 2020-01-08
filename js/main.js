@@ -4,7 +4,7 @@ var tecnologias = []
 var token_recuperacao
 var id_usuario
 
-function pega_token(){
+function pega_token() {
     // pega o parametro ideia na url
     var query = location.search.slice(1);
     var partes = query.split('&');
@@ -16,7 +16,7 @@ function pega_token(){
         data[chave] = valor;
     });
     token_recuperacao = data.token
-    if(token_recuperacao){
+    if (token_recuperacao) {
         let url = url_api + "/usuario/saber_id"
         $.ajax({
             url: url,
@@ -26,55 +26,29 @@ function pega_token(){
                 token: token_recuperacao
             })
         }).done((res) => {
-            if(res.err){
+            if (res.err) {
                 alert(res.err)
-            }else{
+            } else {
                 id_usuario = res.id_usuario
             }
         })
-    }else{
+    } else {
         window.location.href = url_web + "/index.html?msg=2"
     }
 }
 
-
-function recupera_senha(){
-    let email_recupera = $("#email_recupera_senha").val().trim()
-    if(email_recupera == ""){
-        M.toast({html: "Email vazio!"})
-    }else{
-        let url = url_api + "/usuario/recuperar_senha"
-        $.ajax({
-            url: url,
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                usuario: {
-                    email_usuario: email_recupera
-                }
-            })
-        }).done((res) => {
-            if(res.err){
-                M.toast({html: res.err})
-            }else{
-                M.toast({html: res.msg})
-            }
-        })
-    }
-}
-
-function troca_senha(){
+function troca_senha() {
     let senha = $("#nv_senha").val().trim()
     let senha_confirm = $("#nv_senha_confirm").val().trim()
-    if(senha == "" || senha_confirm == ""){
-        M.toast({html: "Campos de senha vazios!"})
-    }else{
-        if(senha != senha_confirm){
-            M.toast({html: "As senhas devem ser iguais!"})
-        }else{
-            if(senha.length < 6){
-                M.toast({html: "A senha precisa ter no mínimo 6 digitos."})
-            }else{
+    if (senha == "" || senha_confirm == "") {
+        M.toast({ html: "Campos de senha vazios!" })
+    } else {
+        if (senha != senha_confirm) {
+            M.toast({ html: "As senhas devem ser iguais!" })
+        } else {
+            if (senha.length < 6) {
+                M.toast({ html: "A senha precisa ter no mínimo 6 digitos." })
+            } else {
                 let url = url_api + "/usuario/troca_senha"
                 $.ajax({
                     url: url,
@@ -87,13 +61,13 @@ function troca_senha(){
                         }
                     })
                 }).done((res) => {
-                    if(res.err){
+                    if (res.err) {
                         alert(res.err)
-                    }else{
+                    } else {
                         window.location.href = url_web + "/index.html?msg=3"
                     }
                 })
-            }            
+            }
         }
     }
 }
@@ -132,12 +106,14 @@ $(document).ready(function () {
         let msg = data.msg
         if (msg == 1) {
             M.toast({ html: "Você tentou acessar uma pagina restrita!" })
-        }else if (msg == 2){
+        } else if (msg == 2) {
             M.toast({ html: "Para recuperar sua senha você deve solicitar o recurso clicando em 'Esqueceu sua senha'!" })
-        }else if (msg == 3){
-            M.toast({ html: "Sua senha foi alterada com sucesso!"})
-        }else if (msg == 5){
-            M.toast({html: "Agradecemos pela sua presença em nossa plataforma!"})
+        } else if (msg == 3) {
+            M.toast({ html: "Sua senha foi alterada com sucesso!" })
+        }else if (msg == 4){
+            M.toast({ html: "Erro de autenticação. Favor logar-se novamente" })
+        } else if (msg == 5) {
+            M.toast({ html: "Agradecemos pela sua presença em nossa plataforma!" })
         }
 
 
@@ -280,18 +256,23 @@ function cadastrar() {
         let email = $("#email_cad").val()
         let senha = $("#senha_cad").val()
         let dt_nascimento = $("#dt_nascimento").val()
-        if(senha.length < 6){
-            M.toast({html: "A senha precisa ter no mínimo 6 digitos."})
-        }else{
+        if (senha.length < 6) {
+            M.toast({ html: "A senha precisa ter no mínimo 6 digitos." })
+        } else {
             dt_nascimento = dt_nascimento.split("/")
-            dt_nascimento = dt_nascimento[2] + "-" + dt_nascimento[1] + "-" + dt_nascimento[0]
+            let data_atual = new Date()
+            if (dt_nascimento[2] > data_atual.getFullYear() || dt_nascimento[1] > 12 || dt_nascimento[0] > 31) {
+                M.toast({ html: "Data inválida" })
+                return false
+            } else
+                dt_nascimento = dt_nascimento[2] + "-" + dt_nascimento[1] + "-" + dt_nascimento[0]
             let id_tecnologias_usuario = []
-    
+
             // Receber todos os ID de tecnologias que o usuário selecionou
             for (let i = 0; i < tecnologias.length; i += 2) {
                 id_tecnologias_usuario.push(tecnologias[i])
             }
-    
+
             let url = url_api + "/usuario/cadastro"
             $.ajax({
                 url: url,
@@ -316,15 +297,17 @@ function cadastrar() {
                         type: "GET",
                         contentType: 'application/json'
                     }).done(function (res2) {
-    
+
                         let id_tecnologia, nm_tecnologia
                         $("ul").html("")
                         for (let i = 0; i < res2.tecnologias.length; i++) {
                             id_tecnologia = res2.tecnologias[i].id_tecnologia
                             nm_tecnologia = "" + res2.tecnologias[i].nm_tecnologia + ""
-    
+
                             $("ul").append("<li tabindex='0' id='select-options-65a86874-15b3-944b-dd42-68baf34ae3bb" + id_tecnologia + "'><span class='tec' value='" + id_tecnologia + "' ><label><input type='checkbox'  ><span onClick='insere_tecnologias_cadastro(" + id_tecnologia + ", \"" + nm_tecnologia + "\" )'>" + nm_tecnologia + "</span></label></span></li>")
                         }
+                        $("#email_login").val($("#email_cad").val())
+                        $("#senha_login").val($("#senha_cad").val())
                         $("#nome_cad").val("")
                         $("#sobre_cad").val("")
                         $("#email_cad").val("")
@@ -332,13 +315,13 @@ function cadastrar() {
                         $("#confirma_senha_cad").val("")
                         $("#dt_nascimento").val("")
                         document.getElementById("lista_interesses").innerHTML = ""
-                        M.toast({ html: res.msg })
+                        login()
                     })
-    
+
                 }
             })
         }
-        
+
     } else {
         M.toast({ html: "As senhas devem ser iguais" })
     }
