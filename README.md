@@ -11,11 +11,21 @@ We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com
 
 Para utilizar essa versão pública você deve executar alguns passos: 
 
-1. Preparar o ambiente
+1. Preparar o ambiente  
+
+
 Você deve instalar as seguintes ferramentas:
 
 - Node JS
 - NPM
-- Mysql
+- Mysql  
+
+2. Realizar o download da base de dados do sistema We Do  
+
+Para baixar os scripts de criação do banco, clique [aqui](https://github.com/marcos96x/we-do-database).  
+
+3. Realizar o download da API do sistema  
+
+Para baixar a API, clique [aqui](https://github.com/marcos96x/we-do-api) e siga os passos indicados no repositório da API para o uso correto.
 
 
