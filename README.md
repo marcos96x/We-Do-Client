@@ -10,6 +10,7 @@ We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com
 
 
 Para utilizar essa versão pública você deve ter algumas ferramentas instaladas em seu computador: 
--Node JS
--NPM
--Mysql
+
+- Node JS
+- NPM
+- Mysql
