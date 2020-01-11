@@ -29,5 +29,5 @@ Para baixar os scripts de criação do banco, clique [aqui](https://github.com/m
 
 Para baixar a API, clique [aqui](https://github.com/marcos96x/we-do-api) e siga os passos indicados no repositório da API para o uso correto.  
 
->Por conta da política de privacidade do modulo CORS usado na API, é necessário que o client esteja em um servidor local. O sistema está configurado para ser usado no live server encontrado no Visual studio code. Caso utilize outro tipo de servidor local, insira a url do localhost no arquivo js/url_api.js.
+>Por conta da política de privacidade do módulo CORS usado na API, é necessário que o client esteja em um servidor local. O sistema está configurado para ser usado no live server encontrado no Visual studio code. Caso utilize outro tipo de servidor local, insira a url do localhost no arquivo js/url_api.js.
 
