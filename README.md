@@ -9,8 +9,13 @@ We Do é uma plataforma gratuita para que pessoas que tem ideias de projetos mas
 We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com).  
 
 
-Para utilizar essa versão pública você deve ter algumas ferramentas instaladas em seu computador: 
+Para utilizar essa versão pública você deve executar alguns passos: 
+
+1. Preparar o ambiente
+Você deve instalar as seguintes ferramentas:
 
 - Node JS
 - NPM
 - Mysql
+
+
