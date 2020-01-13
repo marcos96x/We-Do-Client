@@ -2,10 +2,9 @@
 
 # We Do - Plataforma de ideias  
 
-![](img/tela%20inicial.png)
-
-
 We Do é uma plataforma gratuita para que pessoas que tem ideias de projetos mas que não tem o conhecimento técnico para desenvolver encontre pessoas com o conhecimento em questão, trazendo uma comunicação efetiva entre os membros da equipe formada pelo We Do.  
+
+![](img/tela%20inicial.png)  
 
 
 We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com/Luuck4s/We-Do-Mobile).  
