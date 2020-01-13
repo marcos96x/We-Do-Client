@@ -1,4 +1,4 @@
-![](img/we-do.jpeg)
+![](img/we-do2.jpeg)
 
 # We Do - Plataforma de ideias  
 
