@@ -12,7 +12,7 @@ Ao se cadastrar, você será redirecionado à página do feed, onde será possí
 
 Ao fazer parte de uma ideia, o usuário terá acesso ao chat em tempo real interno da ideia, onde apenas membros da mesma poderão conversar entre si sobre o projeto.  
 
-![](img/Chat.png)  
+![](img/Chat.PNG)  
 
 We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com/Luuck4s/We-Do-Mobile).  
 
