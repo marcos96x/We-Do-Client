@@ -1,4 +1,4 @@
-![](img/we-do2.jpeg)
+![](img/we-do.jpeg)
 
 # We Do - Plataforma de ideias  
 
@@ -25,11 +25,9 @@ Ao fazer parte de uma ideia, o usuário terá acesso ao chat em tempo real inter
 
 We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com/Luuck4s/We-Do-Mobile).  
 
-
 Para utilizar essa versão pública você deve executar alguns passos: 
 
 1. Preparar o ambiente  
-
 
 Você deve instalar as seguintes ferramentas:
 
@@ -54,5 +52,5 @@ const url_socket = "http://localhost:8080"
 const url_web = "http://127.0.0.1:5500" // aqui será o endereço conforme seu localhost
 ```
 
-
+#### Para mais detalhes, consulte nossa [documentação oficial](https://google.com)
 
