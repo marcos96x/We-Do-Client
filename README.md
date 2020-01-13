@@ -1,4 +1,4 @@
-![](img/logo.png)
+![](img/we-do.jpeg)
 
 # We Do - Plataforma de ideias  
 
