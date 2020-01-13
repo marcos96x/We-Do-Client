@@ -4,6 +4,7 @@
 
 We Do é uma plataforma gratuita para que pessoas que tem ideias de projetos mas que não tem o conhecimento técnico para desenvolver encontre pessoas com o conhecimento em questão, trazendo uma comunicação efetiva entre os membros da equipe formada pelo We Do.  
 
+#### Tela inicial
 ![](img/tela%20inicial.png)  
 
 Ao se cadastrar, você será redirecionado à página do feed, onde será possível você visualizar ideias postadas na plataforma que tem como tecnologias de desenvolvimento alguma na qual o usuário também tenha. É possível interagir com essas ideias, podendo curtir, comentar e/ou solicitar interesse para participar da ideia, de forma que o idealizador da ideia receba em tempo real sua solicitação. Caso o idealizador não esteja online, a solicitação ficará armazenada em suas notificações.  
