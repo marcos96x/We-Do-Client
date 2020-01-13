@@ -6,6 +6,13 @@ We Do é uma plataforma gratuita para que pessoas que tem ideias de projetos mas
 
 ![](img/tela%20inicial.png)  
 
+Ao se cadastrar, você será redirecionado à página do feed, onde será possível você visualizar ideias postadas na plataforma que tem como tecnologias de desenvolvimento alguma na qual o usuário também tenha. É possível interagir com essas ideias, podendo curtir, comentar e/ou solicitar interesse para participar da ideia, de forma que o idealizador da ideia receba em tempo real sua solicitação. Caso o idealizador não esteja online, a solicitação ficará armazenada em suas notificações.  
+
+![](img/feed.png)  
+
+Ao fazer parte de uma ideia, o usuário terá acesso ao chat em tempo real interno da ideia, onde apenas membros da mesma poderão conversar entre si sobre o projeto.  
+
+![](img/chat.png)  
 
 We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com/Luuck4s/We-Do-Mobile).  
 
