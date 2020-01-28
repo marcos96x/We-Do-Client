@@ -1,4 +1,4 @@
-![](img/we-do.jpeg)
+![](img/readme.png)
 
 # Widea - Plataforma de ideias  
 
