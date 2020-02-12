@@ -1,8 +1,8 @@
-![](img/readme.png)
+![](https://github.com/marcos96x/We-Do-Client/blob/master/img/we-do.jpeg)  
 
-# Widea - Plataforma de ideias  
+# We Do - Plataforma de ideias  
 
-Widea é uma plataforma gratuita para que pessoas que tem ideias de projetos mas que não tem o conhecimento técnico para desenvolver encontre pessoas com o conhecimento em questão, trazendo uma comunicação efetiva entre os membros da equipe formada pelo We Do.  
+We Do é uma plataforma gratuita para que pessoas que tem ideias de projetos mas que não tem o conhecimento técnico para desenvolver encontre pessoas com o conhecimento em questão, trazendo uma comunicação efetiva entre os membros da equipe formada pelo We Do.  
 
 #### Tela inicial
 ![](img/tela%20inicial.png)  
@@ -23,7 +23,7 @@ Ao fazer parte de uma ideia, o usuário terá acesso ao chat em tempo real inter
 #### Chat
 ![](img/Chat.PNG)  
 
-Widea também tem sua versão mobile. Confira clicando [aqui](https://github.com/Luuck4s/We-Do-Mobile).  
+We Do também tem sua versão mobile. Confira clicando [aqui](https://github.com/Luuck4s/We-Do-Mobile).  
 
 Para utilizar essa versão pública você deve executar alguns passos: 
 
@@ -36,7 +36,7 @@ Você deve instalar as seguintes ferramentas:
 - [Mysql](https://www.mysql.com/);
 - Algum servidor local ([WampServer](http://www.wampserver.com/en/), [xampp](https://www.apachefriends.org/pt_br/download.html), [live server(Plugin do vscode)](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), [usbwebserver](https://www.usbwebserver.net/webserver/) etc).
 
-2. Realizar o download da base de dados do sistema Widea  
+2. Realizar o download da base de dados do sistema We Do  
 
 Para baixar os scripts de criação do banco, clique [aqui](https://github.com/marcos96x/we-do-database).  
 
